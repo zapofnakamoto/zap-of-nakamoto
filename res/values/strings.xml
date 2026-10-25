@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Zap of Nakamoto speaks to people who just want to send and receive: no protocol words. The party holding the funds
+  is a "service" (the brand-term strings, see docs/WHITE_LABEL.md), and the slogan and a few first-run texts are its own.
+-->
+<resources>
+    <!-- Brand term -->
+    <string name="claim_home_mint">On %1$s, your service</string>
+    <string name="notes_home_mint">Your service</string>
+    <string name="onboarding_service">Service</string>
+    <string name="onboarding_service_custom_host">Service address</string>
+    <string name="onboarding_custody">Your bitcoin is kept for you by a Lightning service, like cash in your pocket. Keep amounts small.</string>
+    <string name="settings_home_mint">Your service</string>
+    <string name="settings_mints">Services</string>
+    <string name="addresses_home_mint">Service: %1$s</string>
+
+    <!-- Slogan and first-run texts -->
+    <string name="onboarding_tagline">Bitcoin, as easy as a zap.</string>
+    <string name="onboarding_username">Pick your name</string>
+    <string name="claimed_body">This is your Lightning address. Anyone can send you bitcoin with it, even while your phone is off.</string>
+    <string name="home_empty">Nothing here yet. Share your address to receive your first bitcoin.</string>
+</resources>

@@ -1,0 +1,70 @@
+# Daily: when White Wallet has a newer release than white-wallet.version, open (or refresh) a pull request that moves
+# to it, with the new version and a CHANGELOG.md section. Merging it releases (release.yml).
+name: Update White Wallet
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  update:
+    # Until the GitHub App is set up (README.md, "Set up once"), there's nothing to open pull requests with.
+    if: vars.UPDATE_APP_ID != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # The pull request must come from an app, not GITHUB_TOKEN: pull requests opened with that don't run CI.
+      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        id: token
+        with:
+          app-id: ${{ vars.UPDATE_APP_ID }}
+          private-key: ${{ secrets.UPDATE_APP_KEY }}
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          token: ${{ steps.token.outputs.token }}
+      - name: Latest White Wallet release
+        id: latest
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: |
+          pinned="$(tr -d '[:space:]' < white-wallet.version)"
+          tag="$(gh release view -R zapofnakamoto/white-wallet --json tagName --jq .tagName)"
+          if [[ "$tag" == "$pinned" || "$(printf '%s\n%s\n' "$pinned" "$tag" | sort -V | tail -1)" != "$tag" ]]; then
+            echo "Up to date at $pinned (latest release: $tag)."
+          else
+            echo "tag=$tag" >> "$GITHUB_OUTPUT"
+            gh release view -R zapofnakamoto/white-wallet "$tag" --json body --jq .body > "$RUNNER_TEMP/notes.md"
+          fi
+      - name: Open the pull request
+        if: steps.latest.outputs.tag
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+          TAG: ${{ steps.latest.outputs.tag }}
+        run: |
+          name="${TAG#v}"
+          code=$(( $(grep -E '^versionCode=' brand.properties | cut -d= -f2- | tr -d ' ') + 1 ))
+          echo "$TAG" > white-wallet.version
+          sed -i -E "s/^versionCode=.*/versionCode=$code/; s/^versionName=.*/versionName=$name/" brand.properties
+          { printf '## [%s]\n\nOn White Wallet %s.\n\n' "$name" "$TAG"; cat "$RUNNER_TEMP/notes.md"; printf '\n\n'; } > "$RUNNER_TEMP/section.md"
+          awk -v f="$RUNNER_TEMP/section.md" '!done && /^## \[/ { while ((getline l < f) > 0) print l; done = 1 } { print }' \
+            CHANGELOG.md > "$RUNNER_TEMP/CHANGELOG.md"
+          mv "$RUNNER_TEMP/CHANGELOG.md" CHANGELOG.md
+
+          git config user.name "zap-of-nakamoto-bot"
+          git config user.email "zap-of-nakamoto-bot@users.noreply.github.com"
+          git switch -C update/white-wallet
+          git commit -qam "White Wallet $TAG"
+          git push -f origin update/white-wallet
+          body="$(printf 'Moves to White Wallet %s and releases %s (versionCode %s) when merged.\n\n%s' "$TAG" "$name" "$code" "$(cat "$RUNNER_TEMP/notes.md")")"
+          if gh pr view update/white-wallet --json state --jq .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit update/white-wallet --title "White Wallet $TAG" --body "$body"
+          else
+            gh pr create --head update/white-wallet --title "White Wallet $TAG" --body "$body"
+          fi

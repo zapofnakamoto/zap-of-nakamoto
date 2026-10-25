@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher mark: a coin ring with a lightning bolt, in one color so Android's themed (monochrome) icons show it too.
+     Kept inside the adaptive icon's central 66dp safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Ring: outer radius 26, inner 22, centred. -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M54,28a26,26 0 1,0 0.01,0z M54,32a22,22 0 1,1 -0.01,0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M57.5,35L42,56h9.5l-3.5,17L66,51h-9.5l3.5,-16z" />
+</vector>

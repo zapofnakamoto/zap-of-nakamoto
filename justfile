@@ -1,0 +1,55 @@
+# Zap of Nakamoto, built from a White Wallet checkout next to this one (or WHITE_WALLET=<dir>) at the tag in
+# white-wallet.version. `just` lists the tasks; README.md explains updates and releases.
+
+set shell := ["bash", "-euo", "pipefail", "-c"]
+
+ww := env("WHITE_WALLET", justfile_directory() / ".." / "white-wallet")
+brand := justfile_directory()
+pinned := trim(read("white-wallet.version"))
+
+# List the tasks
+default:
+    @just --list --unsorted
+
+# Switch the White Wallet checkout to the pinned tag (it must have no local changes)
+[group('white wallet')]
+checkout:
+    git -C {{ ww }} fetch --tags --quiet
+    git -C {{ ww }} switch --detach {{ pinned }}
+
+# Build the debug APK
+[group('build')]
+build: pinned-check
+    just -f {{ ww }}/justfile build {{ brand }}
+
+# Build the release APK (signed with keystore.properties in the White Wallet checkout or WW_KEYSTORE*)
+[group('build')]
+release: pinned-check
+    just -f {{ ww }}/justfile release {{ brand }}
+
+# Install the debug build on the emulator or chosen device (ANDROID_SERIAL=<id>) and open it
+[group('build')]
+run: pinned-check
+    just -f {{ ww }}/justfile run {{ brand }}
+
+# Install the debug build on the connected phone and open it
+[group('build')]
+phone: pinned-check
+    just -f {{ ww }}/justfile phone {{ brand }}
+
+# What CI checks: no brand values in White Wallet's code, and the release build with lint
+[group('checks')]
+check: pinned-check
+    {{ ww }}/dev/check-brand.sh {{ brand }}
+    {{ ww }}/gradlew -p {{ ww }} :app:assembleRelease :app:lintDebug -PbrandDir={{ brand }}
+
+# Delete build outputs (they live in the White Wallet checkout)
+[group('housekeeping')]
+clean: pinned-check
+    just -f {{ ww }}/justfile clean
+
+# Warn when the White Wallet checkout isn't at the pinned tag (a build from another version is fine for trying out)
+[private]
+pinned-check:
+    @[[ -d "{{ ww }}" ]] || { echo "No White Wallet checkout at {{ ww }}; clone it there or set WHITE_WALLET." >&2; exit 1; }
+    @[[ "$(git -C {{ ww }} describe --tags --exact-match 2>/dev/null)" == "{{ pinned }}" ]] || echo "note: {{ ww }} is not at {{ pinned }} (just checkout)" >&2

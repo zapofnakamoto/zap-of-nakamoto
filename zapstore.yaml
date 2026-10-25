@@ -1,0 +1,32 @@
+# Zapstore listing for Zap of Nakamoto, read by zsp (https://github.com/zapstore/zsp), at the repository root where
+# Zapstore looks for it. Releases are published by .github/workflows/release.yml; zsp takes the APK from the GitHub
+# release that workflow creates. `pubkey` is the publisher's Nostr key: Zapstore's relay reads it from this file on
+# GitHub to verify the publisher before accepting releases, together with the signing certificate's ownership proof
+# (README.md, "First release").
+repository: https://github.com/zapofnakamoto/zap-of-nakamoto
+pubkey: npub1k98clftxkp4tmce4wp7evmczymhl0cqly2qgjwshdv3uxj73d8ysv04zap
+match: ^zap-of-nakamoto-.*\.apk$
+release_notes: ./CHANGELOG.md
+name: Zap of Nakamoto
+summary: Bitcoin, as easy as a zap
+description: |
+  The simplest way to send and receive bitcoin over Lightning. Pick a name, get your Lightning address, and you're
+  ready: no setup, no settings to learn.
+
+  - Your own Lightning address that receives even while your phone is off
+  - Pay any Lightning invoice or address by scanning a QR code
+  - A recovery phrase that stays on your phone
+
+  Your bitcoin is kept by a Lightning service (mint.lnurlcash.com), like cash in your pocket: keep amounts small.
+tags:
+  - bitcoin
+  - lightning
+  - wallet
+license: MIT
+website: https://github.com/zapofnakamoto/zap-of-nakamoto
+# icon: the launcher icon in the APK.
+# images: screenshots in zapstore/ (setup, wallet, receive, send), added before the first release:
+#   - ./zapstore/1-setup.png
+#   - ./zapstore/2-wallet.png
+#   - ./zapstore/3-receive.png
+#   - ./zapstore/4-send.png

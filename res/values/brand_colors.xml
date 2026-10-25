@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Zap of Nakamoto: a burnt Bitcoin orange (white text on it reaches 5:1), a deep rust and a night blue. values-night/
+     holds the dark variants. -->
+<resources>
+    <color name="brand_primary">#C2410C</color>
+    <color name="brand_on_primary">#FFFFFF</color>
+    <color name="brand_secondary">#9A3412</color>
+    <color name="brand_tertiary">#1E3A8A</color>
+    <color name="brand_launcher_background">#F7931A</color>
+</resources>

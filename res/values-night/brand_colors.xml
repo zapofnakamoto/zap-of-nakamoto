@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dark-theme variants. -->
+<resources>
+    <color name="brand_primary">#FDBA74</color>
+    <color name="brand_on_primary">#431407</color>
+    <color name="brand_secondary">#FED7AA</color>
+    <color name="brand_tertiary">#A5B4FC</color>
+</resources>

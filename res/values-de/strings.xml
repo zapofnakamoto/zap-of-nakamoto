@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Markenbegriff -->
+    <string name="claim_home_mint">Bei %1$s, deinem Dienst</string>
+    <string name="notes_home_mint">Dein Dienst</string>
+    <string name="onboarding_service">Dienst</string>
+    <string name="onboarding_service_custom_host">Adresse des Dienstes</string>
+    <string name="onboarding_custody">Deine Bitcoin verwahrt ein Lightning-Dienst für dich, wie Bargeld in der Hosentasche. Halte die Beträge klein.</string>
+    <string name="settings_home_mint">Dein Dienst</string>
+    <string name="settings_mints">Dienste</string>
+    <string name="addresses_home_mint">Dienst: %1$s</string>
+
+    <!-- Slogan und Texte beim ersten Start -->
+    <string name="onboarding_tagline">Bitcoin, so einfach wie ein Zap.</string>
+    <string name="onboarding_username">Wähle deinen Namen</string>
+    <string name="claimed_body">Das ist deine Lightning-Adresse. Damit kann dir jeder Bitcoin schicken, auch wenn dein Handy aus ist.</string>
+    <string name="home_empty">Noch nichts hier. Teile deine Adresse, um deine ersten Bitcoin zu empfangen.</string>
+</resources>
