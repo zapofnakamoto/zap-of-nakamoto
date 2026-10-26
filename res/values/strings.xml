@@ -15,7 +15,7 @@
     <string name="addresses_home_mint">Service: %1$s</string>
 
     <!-- Slogan and first-run texts -->
-    <string name="onboarding_tagline">Bitcoin, as easy as a zap.</string>
+    <string name="onboarding_tagline">Just zap it.</string>
     <string name="onboarding_username">Pick your name</string>
     <string name="claimed_body">This is your Lightning address. Anyone can send you bitcoin with it, even while your phone is off.</string>
     <string name="home_empty">Nothing here yet. Share your address to receive your first bitcoin.</string>

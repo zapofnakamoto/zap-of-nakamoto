@@ -8,7 +8,7 @@ pubkey: npub1k98clftxkp4tmce4wp7evmczymhl0cqly2qgjwshdv3uxj73d8ysv04zap
 match: ^zap-of-nakamoto-.*\.apk$
 release_notes: ./CHANGELOG.md
 name: Zap of Nakamoto
-summary: Bitcoin, as easy as a zap
+summary: Just zap it
 description: |
   The simplest way to send and receive bitcoin over Lightning. Pick a name, get your Lightning address, and you're
   ready: no setup, no settings to learn.

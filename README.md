@@ -21,7 +21,7 @@ app for experts and power users would be a different brand.)
 | Nothing to manage by hand | `notesView=hidden` (no Notes tab or page), `showMints=false`; Note settings disappear by themselves, as there is nothing to choose |
 | One unit, no choice | `defaultAmountUnit=bitcoin` (₿1,000; texts say "bitcoin", never "BTC" or "sats"), `allowUnitChange=false` (no Amounts page) |
 | No developer tools in sight | `developerOptions=hidden`: never in release builds (debug builds unlock them by tapping the version in About seven times) |
-| Plain words | the custodian is "a Lightning service" (`res/values*/strings.xml`), slogan "Bitcoin, as easy as a zap." |
+| Plain words | the custodian is "a Lightning service" (`res/values*/strings.xml`), slogan "Just zap it." |
 
 What users see: setup (pick a name), the wallet (balance, Send, Receive), History, and Settings with their recovery
 phrase, address, security and About.
