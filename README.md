@@ -1,8 +1,9 @@
 # Zap of Nakamoto
 
-The simplest bitcoin wallet built on [White Wallet](https://github.com/zapofnakamoto/white-wallet), by configuration alone:
-this repository is the whole app. It holds no code, only White Wallet's brand files (`brand.properties`, `res/`), the
-Zapstore listing and the workflows that keep it current and publish it.
+The simplest bitcoin wallet built on [White Wallet](https://github.com/zapofnakamoto/white-wallet), by configuration and a
+little design code: this repository is the whole app. It holds White Wallet's brand files (`brand.properties`, `res/`),
+the brand's look in code (`code/`: the living mark and its components, nothing about money), the Zapstore listing and
+the workflows that keep it current and publish it. The design is `../zap-app/DESIGN.md`.
 
 **Who it's for:** absolute beginners who want to send and receive bitcoin, and don't care how LNURLcash works. (An
 app for experts and power users would be a different brand.)
@@ -30,10 +31,13 @@ phrase, address, security and About.
 | File | What |
 |---|---|
 | `brand.properties` | the rules above, name, application ID (`io.github.zapofnakamoto`, final) and version |
-| `res/drawable/ic_brand_logo.xml` | in-app logo: an orange coin with a lightning bolt |
-| `res/drawable/ic_launcher_foreground.xml` | launcher mark in one color (ring and bolt), so themed icons work |
-| `res/values*/brand_colors.xml` | burnt Bitcoin orange, rust, night blue; dark variants |
-| `res/values*/strings.xml` | slogan, first-run texts and the brand term, in English and German |
+| `res/drawable*/ic_brand_logo.xml` | the mark (a bolt with a cut-out face), ink on light and spark on dark; written by `dev/mark.py` |
+| `res/drawable/ic_launcher_foreground.xml` | the mark for the launcher in one colour, so themed icons work; written by `dev/mark.py` |
+| `res/values/zap_colors.xml` | the Spark palette: spark, ink, paper, gold |
+| `res/values*/brand_colors.xml` | the palette mapped onto White Wallet's colour roles: paper and ink on light, ink and spark on dark |
+| `res/font/`, `res/values/zap_type.xml` | Unbounded (balance, headlines) and Figtree (everything else), with their licences in `fonts/` |
+| `res/values*/strings.xml` | slogan, first-run texts, the brand term and Zap's voice, in English and German |
+| `code/` | `ZapDesign`: the living mark (it reacts to the wallet's status and payments), the wordmark, spark pill buttons |
 | `white-wallet.version` | the White Wallet release this app is built from (a tag, e.g. `v0.1.0`) |
 | `zapstore.yaml`, `zapstore/` | the store listing and its screenshots |
 | `CHANGELOG.md` | release notes, one section per version; Zapstore shows the released one |

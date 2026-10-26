@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The wordmark: the name, set in two parts. A name, not translated. -->
+    <string name="wordmark_zap" translatable="false">zap</string>
+    <string name="wordmark_of_nakamoto" translatable="false">of Nakamoto</string>
+</resources>
