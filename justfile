@@ -37,6 +37,20 @@ run: pinned-check
 phone: pinned-check
     just -f {{ ww }}/justfile phone {{ brand }}
 
+# Install the debug build on the running emulator and open it
+[group('build')]
+emulator: pinned-check
+    #!/usr/bin/env bash
+    set -euo pipefail
+    adb="${ADB:-$(command -v adb || echo "$HOME/Android/Sdk/platform-tools/adb")}"
+    mapfile -t emulators < <("$adb" devices | awk 'NR > 1 && $2 == "device" && $1 ~ /^emulator-/ { print $1 }')
+    case ${#emulators[@]} in
+        0) echo "No emulator running. Start one from Android Studio's Device Manager." >&2; exit 1 ;;
+        1) echo "Installing on ${emulators[0]}" ;;
+        *) echo "Several emulators running (${emulators[*]}); pick one: ANDROID_SERIAL=<id> just run" >&2; exit 1 ;;
+    esac
+    ANDROID_SERIAL="${emulators[0]}" just -f {{ ww }}/justfile run {{ brand }}
+
 # What CI checks: no brand values in White Wallet's code, and the release build with lint
 [group('checks')]
 check: pinned-check

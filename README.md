@@ -45,11 +45,15 @@ tag: `just checkout` switches it there.
 
 ```sh
 just phone      # build the debug APK, install it on the connected phone and open it
-just run        # the same on an emulator or a chosen device (ANDROID_SERIAL=<id>)
+just emulator   # the same on the running emulator
+just run        # the same on a chosen device (ANDROID_SERIAL=<id>)
 just build      # only the debug APK
 just release    # the release APK (signed with keystore.properties or WW_KEYSTORE*, see below)
 just check      # brand check and release build, as CI does
 ```
+
+In Android Studio (or IntelliJ), the shared run configurations in `.run/` do the same: "Run on device"
+(`just phone`) and "Run on emulator" (`just emulator`).
 
 The debug build installs as `io.github.zapofnakamoto.debug`, next to a release build and other White Wallet brands.
 
