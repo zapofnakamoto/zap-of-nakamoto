@@ -30,3 +30,4 @@ website: https://github.com/zapofnakamoto/zap-of-nakamoto
 #   - ./zapstore/2-wallet.png
 #   - ./zapstore/3-receive.png
 #   - ./zapstore/4-send.png
+metadata_sources: [github]
