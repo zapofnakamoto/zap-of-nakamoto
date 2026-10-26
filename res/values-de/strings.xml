@@ -20,4 +20,5 @@
     <string name="receive_hint">Jeder kann dir an diese Adresse Bitcoin schicken, aus jeder Lightning-Wallet.</string>
     <string name="receive_invoice_waiting">Warte auf einen Zap …</string>
     <string name="send_paid_title">Gezappt!</string>
+    <string name="receive_success_title">Du wurdest gezappt!</string>
 </resources>

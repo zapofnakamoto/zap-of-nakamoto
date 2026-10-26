@@ -1,6 +1,15 @@
 package io.github.zapofnakamoto.design
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -9,11 +18,27 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.random.Random
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import whitewallet.brand.WalletStatus
 import whitewallet.brand.ui.AmountParams
 import whitewallet.brand.ui.Anchor
 import whitewallet.brand.ui.BrandComponents
@@ -27,7 +52,7 @@ import whitewallet.brand.ui.walletColors
 
 /**
  * Zap of Nakamoto's design in code (../zap-app/DESIGN.md), on top of its resources (palette, fonts, the static mark):
- * the living mark where the wallet shows how things are going, the wordmark for the name, spark pill buttons and the
+ * the living mark where the wallet shows how things are going, a celebration when a payment arrives, the wordmark for the name, spark pill buttons and the
  * balance in Unbounded.
  */
 object ZapDesign : BrandDesign {
@@ -43,12 +68,72 @@ object ZapDesign : BrandDesign {
             else -> null
         }
         when {
+            anchor == Anchor.ReceiveSuccess -> Celebration(context.status, context.reduceMotion)
             mark != null -> ZapMark(context.status, mark, context.reduceMotion, followEvents = anchor == Anchor.HomeHeader)
             anchor == Anchor.OnboardingTitle -> Wordmark(large = true)
             anchor == Anchor.HomeTitle -> Wordmark(large = false)
             else -> default()
         }
     }
+}
+
+/**
+ * A payment arrived (../zap-app/DESIGN.md, Receive, made bigger): the mark drops in and lights up, and as it lands a
+ * burst of little bolts flies out and it hops for joy, twice. With reduced motion: the happy mark, still.
+ */
+@Composable
+private fun Celebration(status: WalletStatus, reduceMotion: Boolean) {
+    val burst = remember { Animatable(0f) }
+    val hop = remember { Animatable(0f) }
+    LaunchedEffect(status) {
+        if (reduceMotion) return@LaunchedEffect
+        burst.snapTo(0f)
+        hop.snapTo(0f)
+        delay(LANDS_AFTER_MILLIS)
+        launch { burst.animateTo(1f, tween(1_100, easing = LinearOutSlowInEasing)) }
+        delay(500)
+        repeat(2) {
+            hop.animateTo(1f, tween(170, easing = FastOutSlowInEasing))
+            hop.animateTo(0f, spring(dampingRatio = 0.45f, stiffness = Spring.StiffnessMedium))
+        }
+    }
+    val colors = listOf(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.primary)
+    Box(Modifier.size(240.dp), contentAlignment = Alignment.Center) {
+        Canvas(Modifier.fillMaxSize()) {
+            val t = burst.value
+            if (t <= 0f || t >= 1f) return@Canvas
+            SPARKS.forEachIndexed { i, spark ->
+                val distance = size.minDimension * (0.18f + spark.reach * 0.32f * t)
+                val fall = size.minDimension * 0.12f * t * t
+                val x = center.x + cos(spark.angle) * distance
+                val y = center.y + sin(spark.angle) * distance + fall
+                rotate(spark.spin * 360f * t, Offset(x, y)) {
+                    translate(x, y) { drawBolt(colors[i % colors.size].copy(alpha = 1f - t * t), spark.size * size.minDimension / 240f) }
+                }
+            }
+        }
+        ZapMark(status, 150.dp, reduceMotion, Modifier.graphicsLayer { translationY = -hop.value * 18.dp.toPx() })
+    }
+}
+
+/** When the mark's drop-in (ZapMark's receive) touches down. */
+private const val LANDS_AFTER_MILLIS = 400L
+
+private class Spark(val angle: Float, val reach: Float, val spin: Float, val size: Float)
+
+/** Twelve bolts around the circle, each a little different, the same every time. */
+private val SPARKS = Random(7).let { r ->
+    List(12) { i -> Spark(angle = (i / 12f + r.nextFloat() * 0.05f) * 2 * PI.toFloat(), reach = 0.6f + r.nextFloat() * 0.4f, spin = r.nextFloat() - 0.5f, size = 14f + r.nextFloat() * 10f) }
+}
+
+/** A little bolt, [height] tall, centred on the origin. */
+private fun DrawScope.drawBolt(color: Color, height: Float) {
+    val u = height / 88f
+    val bolt = Path().apply {
+        moveTo(8f * u, -44f * u); lineTo(-30f * u, 8f * u); lineTo(-2f * u, 8f * u)
+        lineTo(-12f * u, 44f * u); lineTo(30f * u, -12f * u); lineTo(3f * u, -12f * u); close()
+    }
+    drawPath(bolt, color)
 }
 
 /** "zap" in Unbounded over "of Nakamoto": the name as the brand sets it. Screen readers get the app's name instead. */

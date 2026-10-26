@@ -59,7 +59,8 @@ internal fun ZapMark(status: WalletStatus, size: Dp, reduceMotion: Boolean, modi
     val haptics = LocalHapticFeedback.current
     val scope = rememberCoroutineScope()
     motion.reduceMotion = reduceMotion
-    motion.onArrived = { haptics.performHapticFeedback(HapticFeedbackType.Confirm) }
+    // On the wallet tab the mark is what tells of a payment, so it buzzes; elsewhere the screen does.
+    motion.onArrived = { if (followEvents) haptics.performHapticFeedback(HapticFeedbackType.Confirm) }
 
     LaunchedEffect(status) { motion.show(status) }
     if (followEvents) {
