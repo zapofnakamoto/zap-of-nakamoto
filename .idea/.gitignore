@@ -1,3 +1,8 @@
-# Default ignored files
+# Personal IDE state, not shared (JetBrains: "How to manage projects under version control systems")
 /shelf/
 /workspace.xml
+/usage.statistics.xml
+/tasks.xml
+/dictionaries/
+/caches/
+/deviceManager.xml
