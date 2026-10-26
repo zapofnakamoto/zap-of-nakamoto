@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The Spark palette (../zap-app/DESIGN.md). Spark is never text on light: ink goes on spark, spark on ink. -->
+<resources>
+    <color name="zap_spark">#FFD23F</color>
+    <color name="zap_ink">#16182B</color>
+    <color name="zap_paper">#FFF6D6</color>
+    <color name="zap_gold">#F2B705</color>
+
+    <!-- Tints of paper and ink for surfaces that sit on them. -->
+    <color name="zap_paper_deep">#FBEDC0</color>
+    <color name="zap_paper_deeper">#F5E3A6</color>
+    <color name="zap_ink_soft">#4A4C60</color>
+    <color name="zap_ink_raised">#21243A</color>
+    <color name="zap_ink_raised_more">#2B2E47</color>
+    <color name="zap_paper_soft">#D8D2BC</color>
+</resources>

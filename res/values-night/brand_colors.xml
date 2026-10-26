@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Dark-theme variants. -->
+<!-- Dark: ink screens, paper text, spark actions and the mark in spark. -->
 <resources>
-    <color name="brand_primary">#FDBA74</color>
-    <color name="brand_on_primary">#431407</color>
-    <color name="brand_secondary">#FED7AA</color>
-    <color name="brand_tertiary">#A5B4FC</color>
+    <color name="brand_primary">@color/zap_spark</color>
+    <color name="brand_on_primary">@color/zap_ink</color>
+    <color name="brand_primary_container">@color/zap_spark</color>
+    <color name="brand_on_primary_container">@color/zap_ink</color>
+    <color name="brand_secondary">@color/zap_paper</color>
+    <color name="brand_secondary_container">@color/zap_ink_raised_more</color>
+    <color name="brand_on_secondary_container">@color/zap_paper</color>
+    <color name="brand_tertiary">@color/zap_gold</color>
+    <color name="brand_on_tertiary">@color/zap_ink</color>
+
+    <color name="brand_background">@color/zap_ink</color>
+    <color name="brand_on_background">@color/zap_paper</color>
+    <color name="brand_surface">@color/zap_ink</color>
+    <color name="brand_on_surface">@color/zap_paper</color>
+    <color name="brand_surface_variant">@color/zap_ink_raised</color>
+    <color name="brand_on_surface_variant">@color/zap_paper_soft</color>
+    <color name="brand_surface_container_lowest">@color/zap_ink</color>
+    <color name="brand_surface_container_low">@color/zap_ink_raised</color>
+    <color name="brand_surface_container">@color/zap_ink_raised</color>
+    <color name="brand_surface_container_high">@color/zap_ink_raised_more</color>
+    <color name="brand_surface_container_highest">@color/zap_ink_raised_more</color>
+    <color name="brand_surface_tint">@color/zap_ink</color>
+    <color name="brand_outline">@color/zap_paper_soft</color>
+    <color name="brand_outline_variant">@color/zap_ink_raised_more</color>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Unbounded for the balance and big headlines (res/font/brand_font_display), Figtree for everything else. -->
+<resources>
+    <integer name="brand_text_display_large_weight">600</integer>
+    <integer name="brand_text_display_medium_weight">600</integer>
+    <integer name="brand_text_display_small_weight">600</integer>
+    <integer name="brand_text_headline_large_weight">600</integer>
+    <integer name="brand_text_headline_medium_weight">600</integer>
+    <integer name="brand_text_headline_small_weight">600</integer>
+    <integer name="brand_text_title_large_weight">600</integer>
+    <integer name="brand_text_title_medium_weight">600</integer>
+    <integer name="brand_text_label_large_weight">600</integer>
+</resources>

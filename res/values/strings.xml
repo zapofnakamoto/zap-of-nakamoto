@@ -19,4 +19,9 @@
     <string name="onboarding_username">Pick your name</string>
     <string name="claimed_body">This is your Lightning address. Anyone can send you bitcoin with it, even while your phone is off.</string>
     <string name="home_empty">Nothing here yet. Share your address to receive your first bitcoin.</string>
+
+    <!-- Zap's voice (../zap-app/DESIGN.md): short, warm, no protocol words -->
+    <string name="receive_hint">Anyone can send you bitcoin at this address, from any Lightning wallet.</string>
+    <string name="receive_invoice_waiting">Waiting for a zap…</string>
+    <string name="send_paid_title">Zapped!</string>
 </resources>

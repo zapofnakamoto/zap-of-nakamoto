@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Zap of Nakamoto: a burnt Bitcoin orange (white text on it reaches 5:1), a deep rust and a night blue. values-night/
-     holds the dark variants. -->
+<!--
+  Zap of Nakamoto on light: ink text and actions on paper, spark for key surfaces (the main button, the app icon).
+  values-night/ holds ink screens with spark actions. The roles are White Wallet's (docs/WHITE_LABEL.md, "Design").
+-->
 <resources>
-    <color name="brand_primary">#C2410C</color>
-    <color name="brand_on_primary">#FFFFFF</color>
-    <color name="brand_secondary">#9A3412</color>
-    <color name="brand_tertiary">#1E3A8A</color>
-    <color name="brand_launcher_background">#F7931A</color>
+    <color name="brand_primary">@color/zap_ink</color>
+    <color name="brand_on_primary">@color/zap_paper</color>
+    <color name="brand_primary_container">@color/zap_spark</color>
+    <color name="brand_on_primary_container">@color/zap_ink</color>
+    <color name="brand_secondary">@color/zap_ink</color>
+    <color name="brand_secondary_container">@color/zap_paper_deeper</color>
+    <color name="brand_on_secondary_container">@color/zap_ink</color>
+    <color name="brand_tertiary">@color/zap_gold</color>
+    <color name="brand_on_tertiary">@color/zap_ink</color>
+
+    <color name="brand_background">@color/zap_paper</color>
+    <color name="brand_on_background">@color/zap_ink</color>
+    <color name="brand_surface">@color/zap_paper</color>
+    <color name="brand_on_surface">@color/zap_ink</color>
+    <color name="brand_surface_variant">@color/zap_paper_deep</color>
+    <color name="brand_on_surface_variant">@color/zap_ink_soft</color>
+    <color name="brand_surface_container_lowest">@color/zap_paper</color>
+    <color name="brand_surface_container_low">@color/zap_paper_deep</color>
+    <color name="brand_surface_container">@color/zap_paper_deep</color>
+    <color name="brand_surface_container_high">@color/zap_paper_deeper</color>
+    <color name="brand_surface_container_highest">@color/zap_paper_deeper</color>
+    <color name="brand_surface_tint">@color/zap_paper</color>
+    <color name="brand_outline">@color/zap_ink_soft</color>
+    <color name="brand_outline_variant">@color/zap_paper_deeper</color>
+
+    <color name="brand_launcher_background">@color/zap_spark</color>
 </resources>
