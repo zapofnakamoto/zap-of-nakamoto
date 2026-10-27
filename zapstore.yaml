@@ -1,10 +1,7 @@
 # Zapstore listing for Zap of Nakamoto, read by zsp (https://github.com/zapstore/zsp), at the repository root where
-# Zapstore looks for it. Releases are published by .github/workflows/release.yml; zsp takes the APK from the GitHub
-# release that workflow creates. `pubkey` is the publisher's Nostr key: Zapstore's relay reads it from this file on
-# GitHub to verify the publisher before accepting releases, together with the signing certificate's ownership proof
-# (README.md, "First release").
+# Zapstore looks for it. .github/workflows/release.yml creates the GitHub release; Zapstore picks up each new one,
+# signed by the publisher npub1k98clftxkp4tmce4wp7evmczymhl0cqly2qgjwshdv3uxj73d8ysv04zap through its proof.
 repository: https://github.com/zapofnakamoto/zap-of-nakamoto
-pubkey: npub1k98clftxkp4tmce4wp7evmczymhl0cqly2qgjwshdv3uxj73d8ysv04zap
 match: ^zap-of-nakamoto-.*\.apk$
 release_notes: ./CHANGELOG.md
 name: Zap of Nakamoto
@@ -25,9 +22,9 @@ tags:
 license: MIT
 website: https://github.com/zapofnakamoto/zap-of-nakamoto
 # icon: the launcher icon in the APK.
-# images: screenshots in zapstore/ (setup, wallet, receive, send), added before the first release:
-#   - ./zapstore/1-setup.png
-#   - ./zapstore/2-wallet.png
-#   - ./zapstore/3-receive.png
-#   - ./zapstore/4-send.png
+images:
+  - ./zapstore/1-setup.png
+  - ./zapstore/2-wallet.png
+  - ./zapstore/3-receive.png
+  - ./zapstore/4-send.png
 metadata_sources: [github]
