@@ -76,9 +76,9 @@ Everything that ships is decided here; CI only carries it out.
 - **CI** (`ci.yml`) builds and checks every pull request against the pinned White Wallet, and refuses a change to
   what ships (`brand.properties`, `res/`, `white-wallet.version`) without a new version.
 - **Release** (`release.yml`): every push to main whose `v<versionName>` tag doesn't exist yet is released: the signed
-  APK is built, its certificate checked, a GitHub release `v<versionName>` created with the APK and its checksum, and
-  the release published to Zapstore. A push that ships nothing new (a README change) does nothing. If the release job fails
-  (the bunker offline, say), re-run that job in Actions; a new push would skip the version, as its tag exists by then.
+  APK is built, its certificate checked, and a GitHub release `v<versionName>` created with the APK and its checksum.
+  Zapstore picks the release up from there. A push that ships nothing new (a README change) does nothing. If the
+  release job fails, re-run that job in Actions; a new push would skip the version, as its tag exists by then.
 
 ### Set up once
 
@@ -89,24 +89,29 @@ Everything that ships is decided here; CI only carries it out.
    keytool -list -v -keystore zap-release.jks -alias zap | grep SHA256   # the fingerprint for ZAP_CERT_SHA256
    ```
 2. **The publisher's Nostr identity**: a key only for publishing, held by a NIP-46 bunker (nsec.app or a self-hosted
-   nsecbunkerd) that is online whenever main is pushed. Let the CI connection sign zsp's events without asking.
+   nsecbunkerd), here npub1k98clftxkp4tmce4wp7evmczymhl0cqly2qgjwshdv3uxj73d8ysv04zap. Zapstore's relay must admit a
+   new key before it can publish; ask Zapstore if `zsp` says the key isn't allowed.
 3. **GitHub**, in the environment `zapstore`:
    - secrets `ZAP_KEYSTORE_BASE64` (`base64 -w0 zap-release.jks`), `ZAP_KEYSTORE_PASSWORD`, `ZAP_KEY_ALIAS`,
-     `ZAP_KEY_PASSWORD`, `ZAPSTORE_BUNKER` (the `bunker://…` URL);
+     `ZAP_KEY_PASSWORD`;
    - variable `ZAP_CERT_SHA256` (the fingerprint, colons optional).
 
    Repository variable `UPDATE_APP_ID`, with the secret
    `UPDATE_APP_KEY`: a GitHub App allowed to write contents and pull requests here, so the update pull requests run
    CI (pull requests opened with the workflow's own token don't).
 
-   Until then nothing fails: `update.yml` skips without `UPDATE_APP_ID`, and `release.yml` releases nothing while
-   `zapstore.yaml` has no `pubkey`.
+   Until then nothing fails: `update.yml` skips without `UPDATE_APP_ID`.
 
 ### First release
 
 1. Take the screenshots into `zapstore/` and list them under `images:` in `zapstore.yaml`.
-2. Link the signing key to the publisher (NIP-C1), on your machine, as it needs the keystore:
-   `SIGN_WITH=<bunker://…> zsp identity --link-key zap-release.jks`.
-3. Put the publisher's public key under `pubkey:` in `zapstore.yaml`, so the relay can verify this repository as the
-   publisher's. Until then `release.yml` skips releasing, with a notice.
-4. `just check`, then push to main: `release.yml` publishes 0.1.0, and every later version the same way.
+2. `just check`, then push to main: `release.yml` creates the GitHub release with the APK.
+3. On your machine, run `zsp` here with the publisher's bunker and choose "Publish now". It publishes the listing and
+   the release, and the proof (NIP-C1) that ties the signing certificate to the publisher, so Zapstore takes later
+   releases from GitHub as the publisher's. Answer No to saving `.env`: it isn't git-ignored.
+4. After each later release, `zsp check` shows whether Zapstore lists it, and until when the proof is valid; run `zsp`
+   again if a release isn't listed or before the proof expires.
+
+`release.yml` can also publish to Zapstore itself, with the repository variable `ZAPSTORE_PUBLISH=true` and the
+secret `ZAPSTORE_BUNKER` (the bunker's `bunker://…` URL, its CI connection allowed to sign without asking). Its zsp
+step is written for zsp 0.5 and needs moving to zsp v2 first.
