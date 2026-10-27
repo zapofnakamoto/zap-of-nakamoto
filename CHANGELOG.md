@@ -4,6 +4,15 @@ Every release of Zap of Nakamoto, newest first ([Keep a Changelog](https://keepa
 section of the released version as its release notes in Zapstore; the update workflow adds a section for each new
 White Wallet version.
 
+## [0.3.0]
+
+On White Wallet v0.3.0.
+
+### Added
+
+- The app says that it is a beta: a badge beside its name at setup and on the wallet, and a sentence on what that
+  means at setup and in About.
+
 ## [0.2.0]
 
 On White Wallet v0.2.0.
