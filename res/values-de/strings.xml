@@ -15,6 +15,7 @@
     <string name="onboarding_username">Wähle deinen Namen</string>
     <string name="claimed_body">Das ist deine Lightning-Adresse. Damit kann dir jeder Bitcoin schicken, auch wenn dein Handy aus ist.</string>
     <string name="home_empty">Noch nichts hier. Teile deine Adresse, um deine ersten Bitcoin zu empfangen.</string>
+    <string name="home_wallet_empty">Noch nichts hier. Teile deine Adresse, um deinen ersten Zap zu bekommen.</string>
 
     <!-- Zaps Ton (design/DESIGN.md): kurz, freundlich, ohne Protokollwörter -->
     <string name="receive_hint">Jeder kann dir an diese Adresse Bitcoin schicken, aus jeder Lightning-Wallet.</string>

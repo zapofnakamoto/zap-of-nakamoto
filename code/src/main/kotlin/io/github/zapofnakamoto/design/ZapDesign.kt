@@ -4,6 +4,8 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -19,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,13 +66,17 @@ object ZapDesign : BrandDesign {
         val mark = when (anchor) {
             Anchor.OnboardingHeader -> 120.dp
             Anchor.AppLock -> 96.dp
-            Anchor.HomeHeader -> 88.dp
+            // An empty wallet makes the mark bigger, above the hint on how to get the first zap.
+            Anchor.HomeHeader -> if (context.status == WalletStatus.Empty) 128.dp else 88.dp
             Anchor.ReceiveHeader, Anchor.SendHeader, Anchor.ClaimResult -> 72.dp
             else -> null
         }
         when {
             anchor == Anchor.ReceiveSuccess || anchor == Anchor.SendSuccess -> Celebration(context.status, context.reduceMotion)
-            mark != null -> ZapMark(context.status, mark, context.reduceMotion, followEvents = anchor == Anchor.HomeHeader)
+            mark != null -> {
+                val size by animateDpAsState(mark, if (context.reduceMotion) snap() else tween(400, easing = FastOutSlowInEasing), label = "mark size")
+                ZapMark(context.status, size, context.reduceMotion, followEvents = anchor == Anchor.HomeHeader)
+            }
             anchor == Anchor.OnboardingTitle -> Wordmark(large = true)
             anchor == Anchor.HomeTitle -> Wordmark(large = false)
             else -> default()

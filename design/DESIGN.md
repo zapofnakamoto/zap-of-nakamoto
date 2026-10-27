@@ -113,7 +113,9 @@ limited to the bolt's position, squash and one flash ring. Nothing gets added on
 
 **Oops:** the face becomes Worry, then shakes on the x axis (−6 %, 6 %, −4 %, 0) over 420 ms.
 
-**Empty:** the head tilts −9° over 400 ms and the face shows the small smile.
+**Empty:** the head tilts −9° over 400 ms and the face shows the small smile. On the wallet the mark grows from
+88 to 128 dp over the same 400 ms, above "Nothing here yet. Share your address to get your first zap." under the
+balance; it shrinks back once money arrives.
 
 **Reduced motion:** all movement is skipped and only the face changes, instantly.
 
