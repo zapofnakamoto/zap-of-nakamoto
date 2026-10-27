@@ -53,12 +53,20 @@ import whitewallet.brand.ui.LocalWalletEvents
  * to payments anywhere in the app (the wallet tab). With [reduceMotion] nothing moves; only the face changes.
  */
 @Composable
-internal fun ZapMark(status: WalletStatus, size: Dp, reduceMotion: Boolean, modifier: Modifier = Modifier, followEvents: Boolean = false) {
+internal fun ZapMark(
+    status: WalletStatus,
+    size: Dp,
+    reduceMotion: Boolean,
+    modifier: Modifier = Modifier,
+    followEvents: Boolean = false,
+    celebrate: Boolean = false,
+) {
     val color = MaterialTheme.colorScheme.primary
     val motion = remember { MarkMotion() }
     val haptics = LocalHapticFeedback.current
     val scope = rememberCoroutineScope()
     motion.reduceMotion = reduceMotion
+    motion.celebrate = celebrate
     // On the wallet tab the mark is what tells of a payment, so it buzzes; elsewhere the screen does.
     motion.onArrived = { if (followEvents) haptics.performHapticFeedback(HapticFeedbackType.Confirm) }
 
@@ -192,6 +200,9 @@ private fun lerp(a: Float, b: Float, t: Float) = a + (b - a) * t
 /** The mark's moving parts, and the motions of DESIGN.md that drive them. */
 private class MarkMotion {
     var reduceMotion = false
+
+    /** On a success screen: a payment that went out ends happy, not calm. */
+    var celebrate = false
     var onArrived: () -> Unit = {}
 
     var face by mutableStateOf(Face.Rest)
@@ -213,7 +224,10 @@ private class MarkMotion {
         if (status !is WalletStatus.Empty) untilt()
         when (status) {
             is WalletStatus.PaymentReceived -> receive()
-            is WalletStatus.Sent -> send()
+            is WalletStatus.Sent -> {
+                send()
+                if (celebrate) face(Face.Happy, 220)
+            }
             is WalletStatus.Problem -> oops()
             WalletStatus.Empty -> curious()
             WalletStatus.AwaitingPayment -> face(Face.Waiting, 220)

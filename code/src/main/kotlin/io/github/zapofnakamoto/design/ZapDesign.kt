@@ -68,7 +68,7 @@ object ZapDesign : BrandDesign {
             else -> null
         }
         when {
-            anchor == Anchor.ReceiveSuccess -> Celebration(context.status, context.reduceMotion)
+            anchor == Anchor.ReceiveSuccess || anchor == Anchor.SendSuccess -> Celebration(context.status, context.reduceMotion)
             mark != null -> ZapMark(context.status, mark, context.reduceMotion, followEvents = anchor == Anchor.HomeHeader)
             anchor == Anchor.OnboardingTitle -> Wordmark(large = true)
             anchor == Anchor.HomeTitle -> Wordmark(large = false)
@@ -78,20 +78,24 @@ object ZapDesign : BrandDesign {
 }
 
 /**
- * A payment arrived (../zap-app/DESIGN.md, Receive, made bigger): the mark drops in and lights up, and as it lands a
- * burst of little bolts flies out and it hops for joy, twice. With reduced motion: the happy mark, still.
+ * Money moved, made bigger than ../zap-app/DESIGN.md's Receive and Send, and the same on both screens: little bolts
+ * fly and the mark ends happy, hopping twice.
+ * - Arrived: the mark drops in and lights up; as it lands the bolts burst out all around.
+ * - Sent: the mark focuses and rises out with a trail of bolts shooting up after it, then comes back and lights up.
+ * With reduced motion: the happy mark, still.
  */
 @Composable
 private fun Celebration(status: WalletStatus, reduceMotion: Boolean) {
+    val sending = status is WalletStatus.Sent
     val burst = remember { Animatable(0f) }
     val hop = remember { Animatable(0f) }
     LaunchedEffect(status) {
         if (reduceMotion) return@LaunchedEffect
         burst.snapTo(0f)
         hop.snapTo(0f)
-        delay(LANDS_AFTER_MILLIS)
+        delay(if (sending) LIFTS_OFF_AFTER_MILLIS else LANDS_AFTER_MILLIS)
         launch { burst.animateTo(1f, tween(1_100, easing = LinearOutSlowInEasing)) }
-        delay(500)
+        delay(if (sending) BACK_AFTER_MILLIS - LIFTS_OFF_AFTER_MILLIS else 500)
         repeat(2) {
             hop.animateTo(1f, tween(170, easing = FastOutSlowInEasing))
             hop.animateTo(0f, spring(dampingRatio = 0.45f, stiffness = Spring.StiffnessMedium))
@@ -103,21 +107,27 @@ private fun Celebration(status: WalletStatus, reduceMotion: Boolean) {
             val t = burst.value
             if (t <= 0f || t >= 1f) return@Canvas
             SPARKS.forEachIndexed { i, spark ->
-                val distance = size.minDimension * (0.18f + spark.reach * 0.32f * t)
-                val fall = size.minDimension * 0.12f * t * t
-                val x = center.x + cos(spark.angle) * distance
-                val y = center.y + sin(spark.angle) * distance + fall
+                // Sent: the same bolts, narrowed to a fan above the mark and carried up after it instead of falling.
+                val angle = if (sending) -PI.toFloat() / 2 + (spark.angle / PI.toFloat() - 1) * 0.8f else spark.angle
+                val distance = size.minDimension * (if (sending) 0.1f + spark.reach * 0.42f * t else 0.18f + spark.reach * 0.32f * t)
+                val fall = size.minDimension * (if (sending) -0.08f * t else 0.12f * t * t)
+                val x = center.x + cos(angle) * distance
+                val y = center.y + sin(angle) * distance + fall
                 rotate(spark.spin * 360f * t, Offset(x, y)) {
                     translate(x, y) { drawBolt(colors[i % colors.size].copy(alpha = 1f - t * t), spark.size * size.minDimension / 240f) }
                 }
             }
         }
-        ZapMark(status, 150.dp, reduceMotion, Modifier.graphicsLayer { translationY = -hop.value * 18.dp.toPx() })
+        ZapMark(status, 150.dp, reduceMotion, Modifier.graphicsLayer { translationY = -hop.value * 18.dp.toPx() }, celebrate = true)
     }
 }
 
 /** When the mark's drop-in (ZapMark's receive) touches down. */
 private const val LANDS_AFTER_MILLIS = 400L
+
+/** When the mark, after focusing and squashing (ZapMark's send), leaves upwards; and when it is back and happy. */
+private const val LIFTS_OFF_AFTER_MILLIS = 600L
+private const val BACK_AFTER_MILLIS = 2_000L
 
 private class Spark(val angle: Float, val reach: Float, val spin: Float, val size: Float)
 
