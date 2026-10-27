@@ -21,7 +21,7 @@ tags:
   - wallet
 license: MIT
 website: https://github.com/zapofnakamoto/zap-of-nakamoto
-# icon: the launcher icon in the APK.
+icon: ./zapstore/profile.png
 images:
   - ./zapstore/1-setup.png
   - ./zapstore/2-wallet.png
