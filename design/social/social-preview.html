@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- GitHub social preview, 1280×640. Variants: #spark (default), #ink, #paper. Rendered by render.sh. -->
+<meta charset="utf-8">
+<title>Zap of Nakamoto – social preview</title>
+<style>
+  @font-face { font-family: Unbounded; src: url(../../res/font/unbounded.ttf); font-weight: 200 900; }
+  @font-face { font-family: Figtree; src: url(../../res/font/figtree.ttf); font-weight: 300 900; }
+  :root { --bg: #FFD23F; --fg: #16182B; --soft: #16182B; }
+  :root.ink { --bg: #16182B; --fg: #FFD23F; --soft: #FFF6D6; }
+  :root.paper { --bg: #FFF6D6; --fg: #16182B; --soft: #4A4C60; }
+  html, body { margin: 0; }
+  body { width: 1280px; height: 640px; overflow: hidden; background: var(--bg); color: var(--fg);
+         display: flex; align-items: center; justify-content: center; gap: 56px; }
+  svg { width: 360px; height: 360px; flex: none; }
+  .zap { font: 800 220px/0.8 Unbounded; letter-spacing: -0.04em; margin: 0 0 0 -10px; }
+  .of { font: 500 56px/1 Unbounded; letter-spacing: -0.01em; margin: 28px 0 0; color: var(--soft); }
+  .slogan { font: 600 34px/1 Figtree; margin: 44px 0 0; color: var(--soft); opacity: .8; }
+</style>
+<script>document.documentElement.className = location.hash.slice(1) || 'spark'</script>
+<svg viewBox="-10 -10 120 120" aria-hidden="true">
+  <defs><mask id="face" maskUnits="userSpaceOnUse" x="-20" y="-20" width="140" height="140">
+    <rect x="-20" y="-20" width="140" height="140" fill="#fff"/><circle cx="41" cy="47" r="3.8"/><circle cx="58" cy="45" r="3.8"/><path d="M44 55.5Q51 61.5 58 53.5" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/>
+  </mask></defs>
+  <path d="M62 6L16 58H44L34 94L84 38H57L70 6Z" fill="var(--fg)" stroke="var(--fg)" stroke-width="12" stroke-linejoin="round" mask="url(#face)"/>
+</svg>
+<div>
+  <p class="zap">zap</p>
+  <p class="of">of Nakamoto</p>
+  <p class="slogan">Just zap it.</p>
+</div>
