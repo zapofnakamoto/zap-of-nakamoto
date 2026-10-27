@@ -108,7 +108,8 @@ Everything that ships is decided here; CI only carries it out.
 2. `just check`, then push to main: `release.yml` creates the GitHub release with the APK.
 3. On your machine, run `zsp` here with the publisher's bunker and choose "Publish now". It publishes the listing and
    the release, and the proof (NIP-C1) that ties the signing certificate to the publisher, so Zapstore takes later
-   releases from GitHub as the publisher's. Answer No to saving `.env`: it isn't git-ignored.
+   releases from GitHub as the publisher's. Saving `.env` is optional: it is git-ignored, but holds the bunker
+   secret in plain text.
 4. After each later release, `zsp check` shows whether Zapstore lists it, and until when the proof is valid; run `zsp`
    again if a release isn't listed or before the proof expires.
 

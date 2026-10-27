@@ -4,3 +4,6 @@ keystore.properties
 
 # Gradle output of the code/ module
 build/
+
+# zsp's settings: SIGN_WITH is the publisher's key or bunker secret
+.env
