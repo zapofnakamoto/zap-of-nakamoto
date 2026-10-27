@@ -15,6 +15,9 @@
     <string name="addresses_home_mint">Service: %1$s</string>
     <string name="service_change_home">Change service</string>
     <string name="service_make_home">Make this my service</string>
+    <string name="settings_account_mints">Your services</string>
+    <string name="mints_home_of">Service of %1$s</string>
+    <string name="mints_remove">Remove service</string>
 
     <!-- Slogan and first-run texts -->
     <string name="onboarding_tagline">Just zap it.</string>

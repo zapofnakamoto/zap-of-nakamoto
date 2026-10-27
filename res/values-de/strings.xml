@@ -11,6 +11,9 @@
     <string name="addresses_home_mint">Dienst: %1$s</string>
     <string name="service_change_home">Dienst wechseln</string>
     <string name="service_make_home">Zu meinem Dienst machen</string>
+    <string name="settings_account_mints">Deine Dienste</string>
+    <string name="mints_home_of">Dienst von %1$s</string>
+    <string name="mints_remove">Dienst entfernen</string>
 
     <!-- Slogan und Texte beim ersten Start -->
     <string name="onboarding_tagline">Einfach zappen.</string>
