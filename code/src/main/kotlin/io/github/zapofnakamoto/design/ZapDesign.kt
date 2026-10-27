@@ -51,7 +51,7 @@ import whitewallet.brand.ui.Tone
 import whitewallet.brand.ui.walletColors
 
 /**
- * Zap of Nakamoto's design in code (../zap-app/DESIGN.md), on top of its resources (palette, fonts, the static mark):
+ * Zap of Nakamoto's design in code (design/DESIGN.md), on top of its resources (palette, fonts, the static mark):
  * the living mark where the wallet shows how things are going, a celebration when a payment arrives, the wordmark for the name, spark pill buttons and the
  * balance in Unbounded.
  */
@@ -78,7 +78,7 @@ object ZapDesign : BrandDesign {
 }
 
 /**
- * Money moved, made bigger than ../zap-app/DESIGN.md's Receive and Send, and the same on both screens: little bolts
+ * Money moved, made bigger than design/DESIGN.md's Receive and Send, and the same on both screens: little bolts
  * fly and the mark ends happy, hopping twice.
  * - Arrived: the mark drops in and lights up; as it lands the bolts burst out all around.
  * - Sent: the mark focuses and rises out with a trail of bolts shooting up after it, then comes back and lights up.

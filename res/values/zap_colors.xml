@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The Spark palette (../zap-app/DESIGN.md). Spark is never text on light: ink goes on spark, spark on ink. -->
+<!-- The Spark palette (design/DESIGN.md). Spark is never text on light: ink goes on spark, spark on ink. -->
 <resources>
     <color name="zap_spark">#FFD23F</color>
     <color name="zap_ink">#16182B</color>

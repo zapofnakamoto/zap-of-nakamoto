@@ -1,0 +1,351 @@
+<title>Meet Zappy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a character sheet. Neutral chrome; every Zappy on the page is drawn by one script from the
+   chosen body + an expression, so picking a body redraws the whole sheet (icons, screens, stickers, posters). */
+:root {
+  --bg: #F4F4F7; --surface: #FFFFFF; --fg: #17171F; --muted: #5E5E70; --line: #E1E1E8; --focus: #4B5BFF;
+  --spark: #FFD23F; --ink: #16182B; --paper: #FFF6D6; --gold: #F2B705; --ink-soft: #3A3D57;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px }
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 64px }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); line-height: 1; font-weight: 800 }
+h2 { font-size: 1.35rem; font-weight: 700 }
+p { margin: 0; max-width: 65ch }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.muted { color: var(--muted) }
+section { display: grid; gap: 20px }
+.head { display: grid; gap: 8px }
+.z { display: grid; place-items: center }
+.z svg { width: 100%; height: 100%; overflow: visible }
+button { font: inherit; color: inherit }
+button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center }
+.hero-text { display: grid; gap: 16px; min-width: 0 }
+.stage { aspect-ratio: 1; max-width: 100%; border-radius: 32px; background: var(--spark); display: grid; place-items: center; border: 0; cursor: pointer; padding: 0; position: relative; overflow: hidden }
+.stage .z { width: 62%; height: 62%; color: var(--ink) }
+.stage .hint { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font: 600 .78rem var(--body); color: var(--ink); opacity: .6 }
+.stage.hop .z { animation: hop .7s cubic-bezier(.3,1.6,.5,1) }
+@keyframes hop { 0% { transform: none } 25% { transform: translateY(6%) scale(1.06, .92) } 55% { transform: translateY(-14%) rotate(-6deg) } 100% { transform: none } }
+.lockup { display: flex; align-items: center; gap: 14px; color: var(--fg) }
+.lockup .z { width: 64px; height: 64px; color: var(--fg) }
+.wm { font-family: var(--display); display: grid; line-height: .95; gap: 5px }
+.wm b { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em }
+.wm span { font: 600 .78rem var(--body); letter-spacing: .16em; text-transform: uppercase; opacity: .7 }
+
+/* body picker */
+.bodies { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px }
+.opt { background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 16px; display: grid; gap: 10px; text-align: left; cursor: pointer; transition: border-color .2s, transform .2s }
+.opt:hover { transform: translateY(-2px) }
+.opt[aria-pressed="true"] { border-color: var(--fg) }
+.opt .tile { aspect-ratio: 16/10; max-width: 100%; border-radius: 12px; background: var(--paper); display: grid; place-items: center }
+.opt .tile .z { height: 78%; aspect-ratio: 1; color: var(--ink) }
+.opt b { font-size: 1rem }
+.opt p { font-size: .88rem; color: var(--muted) }
+
+/* expressions */
+.faces { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
+.face { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px; display: grid; gap: 6px; justify-items: start }
+.face .z { width: 100%; aspect-ratio: 1; max-width: 100%; border-radius: 14px; background: var(--paper); color: var(--ink); padding: 14% }
+.face b { font-size: .95rem; margin-top: 6px }
+.face span { font-size: .82rem; color: var(--muted) }
+
+/* personality */
+.persona { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 8px; align-content: start }
+.card h3 { font-size: 1rem }
+.card p, .card li { font-size: .92rem; color: var(--muted) }
+.card ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px }
+.card q { quotes: none; color: var(--fg); font-weight: 600 }
+
+/* app moments */
+.screens { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
+.scr { border-radius: 26px; background: var(--paper); color: var(--ink); aspect-ratio: 9/16; max-width: 100%; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; border: 6px solid #0D0D12 }
+.scr .z { width: 46%; aspect-ratio: 1; margin: 18% auto 4px; color: var(--ink) }
+.scr h3 { font-size: 1rem; text-align: center }
+.scr p { font-size: .8rem; text-align: center; opacity: .75; margin: 0 auto }
+.scr .field { margin-top: auto; background: #FFFFFF; border-radius: 12px; padding: 10px 12px; font-size: .82rem; color: var(--ink) }
+.scr .field span { opacity: .5 }
+.scr .btn { background: var(--ink); color: var(--spark); text-align: center; border-radius: 14px; padding: 11px 0; font: 700 .85rem var(--body) }
+.scr .btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--ink) }
+.scr .amt { text-align: center; font: 800 1.8rem var(--display); font-variant-numeric: tabular-nums }
+.scr.spark { background: var(--spark) }
+.scr .words { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font: 500 .72rem ui-monospace, "SF Mono", Menlo, monospace; margin-top: auto }
+.scr .words span { background: #FFFFFF; border-radius: 6px; padding: 4px 6px }
+.scr.top .z { margin-top: 4px; width: 30% }
+.caption { font-size: .82rem; color: var(--muted); margin-top: 8px }
+
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 14px }
+.rules .card h3 { display: flex; align-items: center; gap: 8px }
+.pill { font: 700 .68rem var(--body); letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--spark); color: var(--ink) }
+.pill.no { background: var(--fg); color: var(--bg) }
+
+/* icons */
+.icons { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 18px }
+.irow { display: grid; grid-template-columns: 10rem 1fr; gap: 16px; align-items: center }
+.irow > span { font-size: .85rem; color: var(--muted) }
+.sizes { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap }
+.ic { border-radius: 23%; display: grid; place-items: center; flex: none; background: var(--spark); color: var(--ink) }
+.ic .z { width: 70%; height: 70% }
+.ic.k { background: var(--ink); color: var(--spark) }
+.ic.m { background: #2B2B33; color: #E6E6EA; border-radius: 50% }
+.s20 { width: 20px; height: 20px } .s32 { width: 32px; height: 32px } .s48 { width: 48px; height: 48px } .s96 { width: 96px; height: 96px }
+
+/* marketing */
+.mkt { display: grid; grid-template-columns: 1.15fr 1fr 0.85fr; gap: 14px; align-items: start }
+.stickers { background: var(--ink); border-radius: 20px; padding: 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 10px; aspect-ratio: 1; max-width: 100% }
+.st { display: grid; justify-items: center; gap: 6px; align-content: center }
+.st .z { width: 72%; aspect-ratio: 1; color: var(--spark);
+  filter: drop-shadow(2.5px 0 0 #fff) drop-shadow(-2.5px 0 0 #fff) drop-shadow(0 2.5px 0 #fff) drop-shadow(0 -2.5px 0 #fff) }
+.st span { background: #FFFFFF; color: var(--ink); font: 800 .66rem var(--display); padding: 3px 8px; border-radius: 999px; text-transform: lowercase }
+.st:nth-child(odd) { transform: rotate(-6deg) } .st:nth-child(3n) { transform: rotate(5deg) }
+.social { background: var(--spark); color: var(--ink); border-radius: 20px; aspect-ratio: 1; max-width: 100%; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden }
+.social h3 { font-size: clamp(1.3rem, 3vw, 1.9rem); font-weight: 800; line-height: 1.02 }
+.social .z { width: 52%; aspect-ratio: 1; align-self: flex-end; margin: -8% -4% -4% 0 }
+.social small { font: 700 .72rem var(--body); letter-spacing: .12em; text-transform: uppercase }
+.poster { background: var(--ink); color: var(--paper); border-radius: 20px; aspect-ratio: 4/5; max-width: 100%; padding: 20px; display: flex; flex-direction: column; gap: 10px; overflow: hidden }
+.poster .z { width: 64%; aspect-ratio: 1; margin: 6% auto 0; color: var(--spark) }
+.poster h3 { font-size: 1.15rem; line-height: 1.1; margin-top: auto }
+.poster small { font-size: .74rem; opacity: .7 }
+
+.names { display: flex; gap: 12px; flex-wrap: wrap }
+.name { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; display: grid; gap: 2px; min-width: 0; flex: 1 1 200px }
+.name b { font: 800 1.3rem var(--display) }
+.name span { font-size: .86rem; color: var(--muted) }
+
+.questions { background: var(--fg); color: var(--bg); border-radius: 22px; padding: 28px; display: grid; gap: 14px }
+.questions h2 { color: var(--bg) }
+.questions ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; max-width: 70ch }
+
+@media (max-width: 900px) {
+  .faces, .screens { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .mkt { grid-template-columns: 1fr 1fr } .stickers { grid-column: 1 / -1; aspect-ratio: auto }
+  .persona { grid-template-columns: 1fr }
+}
+@media (max-width: 640px) {
+  .hero, .rules, .bodies { grid-template-columns: 1fr }
+  .stage { max-width: 280px }
+  .mkt { grid-template-columns: 1fr }
+  .irow { grid-template-columns: 1fr; gap: 8px }
+}
+@media (prefers-reduced-motion: reduce) { .stage.hop .z { animation: none } .opt { transition: none } }
+</style>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Zap of Nakamoto · Round 5 · Concept 3</span>
+      <h1>Meet Zappy</h1>
+      <p>A small, quick friend who shows first-timers around their first bitcoin. Zappy turns the scary part, the money, into a moment that feels good, and then gets out of the way.</p>
+      <div class="lockup" aria-label="Lockup"><span class="z" data-e="dot" data-m="smile"></span><div class="wm"><b>Zap</b><span>of Nakamoto</span></div></div>
+      <p class="muted">“Zappy” is a working name. Pick a body below and every Zappy on this page redraws.</p>
+    </div>
+    <button class="stage" id="stage" aria-label="Zap Zappy"><span class="z" id="heroZ" data-e="dot" data-m="smile"></span><span class="hint">Tap to zap</span></button>
+  </header>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">1 · Body</span>
+      <h2>Three builds of the same character</h2>
+    </div>
+    <div class="bodies" id="bodies">
+      <button class="opt" aria-pressed="false" data-body="classic">
+        <div class="tile"><span class="z" data-body="classic" data-e="dot" data-m="smile"></span></div>
+        <b>Classic</b><p>The round 4 drawing. Sharp bolt and clear points. It reads as lightning first and as a character second.</p>
+      </button>
+      <button class="opt" aria-pressed="true" data-body="chubby">
+        <div class="tile"><span class="z" data-body="chubby" data-e="dot" data-m="smile"></span></div>
+        <b>Chubby</b><p>Thicker with soft corners. It feels huggable, like a toy or a sticker, and it matches the round Unbounded wordmark.</p>
+      </button>
+      <button class="opt" aria-pressed="false" data-body="lean">
+        <div class="tile"><span class="z" data-body="lean" data-e="dot" data-m="smile"></span></div>
+        <b>On the move</b><p>Chubby leaning forward, the lean you liked in round 3's D. Zappy is always on the way somewhere.</p>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">2 · Expressions</span>
+      <h2>Eight feelings the app actually needs</h2>
+      <p class="muted">Each one maps to a real moment in the app, so Zappy never shows a face just for decoration.</p>
+    </div>
+    <div class="faces">
+      <div class="face"><span class="z" data-e="dot" data-m="smile"></span><b>Hello</b><span>Welcome, the lock screen</span></div>
+      <div class="face"><span class="z" data-e="wide" data-m="big"></span><b>First bitcoin!</b><span>The very first payment in</span></div>
+      <div class="face"><span class="z" data-e="happy" data-m="big"></span><b>Zapped!</b><span>Every payment in</span></div>
+      <div class="face"><span class="z" data-e="focus" data-m="flat"></span><b>On it</b><span>Sending, in progress</span></div>
+      <div class="face"><span class="z" data-e="look" data-m="o"></span><b>Waiting</b><span>Waiting for a payment</span></div>
+      <div class="face"><span class="z" data-e="sleep" data-m="none"></span><b>Nothing yet</b><span>Empty wallet or history</span></div>
+      <div class="face"><span class="z" data-e="worry" data-m="wobble"></span><b>Oops</b><span>Gentle errors: no signal, wrong code</span></div>
+      <div class="face"><span class="z" data-e="dot" data-m="flat"></span><b>Serious</b><span>Recovery phrase, security</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">3 · Personality</span>
+      <h2>Who Zappy is</h2>
+    </div>
+    <div class="persona">
+      <div class="card"><h3>Quick, warm, a little cheeky</h3><p>Like the friend who sets up your phone for you. Helpful, a bit playful, never smug about knowing more.</p></div>
+      <div class="card"><h3>Says little</h3><ul><li><q>Hi! Let's get you your first bitcoin.</q></li><li><q>Zapped! +₿1,000 from Leo</q></li><li><q>Nothing here yet. Share your address and I'll wait.</q></li><li><q>No signal. I'll try again in a moment.</q></li></ul></div>
+      <div class="card"><h3>Never</h3><ul><li>explains how the tech works</li><li>pushes you to buy or spend</li><li>jokes when money is at stake</li><li>says “sats”, “BTC” or “mint”</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">4 · In the app</span>
+      <h2>Where Zappy shows up</h2>
+      <p class="muted">Playful in the moments, calm in the details. Zappy greets you, celebrates with you and keeps you company when nothing is happening, then steps back whenever you handle money. (Example data.)</p>
+    </div>
+    <div class="screens">
+      <div><div class="scr"><span class="z" data-e="dot" data-m="smile"></span><h3>Hi, I'm Zappy</h3><p>Let's get you your first bitcoin. Pick a name and you're ready.</p><div class="field">mia<span>@mint.lnurlcash.com</span></div><div class="btn">Let's go</div></div><p class="caption">Setup</p></div>
+      <div><div class="scr spark"><span class="z" data-e="wide" data-m="big"></span><h3>Your first bitcoin!</h3><div class="amt">+₿1,000</div><p>from Leo</p><div class="btn" style="margin-top:auto">Nice!</div></div><p class="caption">First payment in</p></div>
+      <div><div class="scr"><span class="z" data-e="sleep" data-m="none"></span><h3>Nothing here yet</h3><p>Share your address and I'll wait right here.</p><div class="btn" style="margin-top:auto">Share my address</div><div class="btn ghost">Show QR code</div></div><p class="caption">Empty wallet</p></div>
+      <div><div class="scr top"><span class="z" data-e="dot" data-m="flat"></span><h3>Keep these 12 words safe</h3><p>They bring your bitcoin back if you lose your phone.</p><div class="words"><span>1 river</span><span>2 orbit</span><span>3 candle</span><span>4 shy</span><span>5 museum</span><span>6 cable</span></div><div class="btn">I wrote them down</div></div><p class="caption">Recovery phrase</p></div>
+    </div>
+    <div class="rules">
+      <div class="card"><h3><span class="pill">Zappy here</span></h3><ul><li>Setup and the lock screen</li><li>Every payment that comes in</li><li>Empty states and gentle errors</li><li>The app icon, notifications, marketing</li></ul></div>
+      <div class="card"><h3><span class="pill no">Not here</span></h3><ul><li>The send confirmation: amount and recipient stay calm and clear</li><li>Never on top of numbers or the recovery words</li><li>Never more than one Zappy on a screen</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">5 · App icon</span>
+      <h2>Zappy on the home screen</h2>
+      <p class="muted">At 20 pixels the face disappears and Zappy becomes a plain bolt. That's fine: it still reads as the same yellow bolt.</p>
+    </div>
+    <div class="icons">
+      <div class="irow"><span>Spark</span><div class="sizes"><div class="ic s20"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic s32"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic s48"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic s96"><span class="z" data-e="dot" data-m="smile"></span></div></div></div>
+      <div class="irow"><span>Dark mode / ink</span><div class="sizes"><div class="ic k s20"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic k s32"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic k s48"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic k s96"><span class="z" data-e="dot" data-m="smile"></span></div></div></div>
+      <div class="irow"><span>Android themed icon</span><div class="sizes"><div class="ic m s20"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic m s32"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic m s48"><span class="z" data-e="dot" data-m="smile"></span></div><div class="ic m s96"><span class="z" data-e="dot" data-m="smile"></span></div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">6 · Out in the world</span>
+      <h2>Stickers, a social post, a poster</h2>
+      <p class="muted">A character spreads by itself. Stickers at meetups, reactions on Nostr, a face people recognise on a poster at the café that accepts bitcoin.</p>
+    </div>
+    <div class="mkt">
+      <div class="stickers" aria-label="Sticker sheet">
+        <div class="st"><span class="z" data-e="happy" data-m="big"></span><span>zapped!</span></div>
+        <div class="st"><span class="z" data-e="wink" data-m="smile"></span><span>zap me</span></div>
+        <div class="st"><span class="z" data-e="dot" data-m="smile"></span><span>gm</span></div>
+        <div class="st"><span class="z" data-e="wide" data-m="big"></span><span>first ₿!</span></div>
+        <div class="st"><span class="z" data-e="sleep" data-m="none"></span><span>brb</span></div>
+        <div class="st"><span class="z" data-e="worry" data-m="wobble"></span><span>oops</span></div>
+      </div>
+      <div class="social" aria-label="Social post"><small>Zap of Nakamoto</small><h3>Got zapped yet?</h3><span class="z" data-e="wink" data-m="smile"></span></div>
+      <div class="poster" aria-label="Poster"><span class="z" data-e="dot" data-m="smile"></span><h3>Your first bitcoin, with a friend.</h3><small>Zap of Nakamoto · free on Zapstore</small></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">7 · A name</span>
+      <h2>What do we call it?</h2>
+    </div>
+    <div class="names">
+      <div class="name"><b>Zappy</b><span>Says what it does. Easy for anyone, a bit generic.</span></div>
+      <div class="name"><b>Nako</b><span>From Nakamoto. Short, warm, and ties back to the app's name.</span></div>
+      <div class="name"><b>Zip</b><span>Fast and tiny, like the payments it makes.</span></div>
+    </div>
+  </section>
+
+  <section class="questions">
+    <span class="eyebrow" style="color:inherit;opacity:.7">Your turn</span>
+    <h2>For round 6</h2>
+    <ol>
+      <li>Which body: Classic, Chubby or On the move?</li>
+      <li>Do the face and expressions feel right? Too cute, not cute enough, any you'd drop or add?</li>
+      <li>A name: Zappy, Nako, Zip, or your own?</li>
+      <li>Do the “here / not here” rules match how playful you want the app?</li>
+      <li>What should I expand next: Zappy's animation (blink, hop, zap), full app screens, or a launch kit (store screenshots, posts, stickers)?</li>
+    </ol>
+  </section>
+</main>
+
+<script>
+(() => {
+  const BOLT = 'M62 6L16 58H44L34 94L84 38H57L70 6Z';
+  const BODIES = {
+    classic: { sw: 4, t: '' },
+    chubby: { sw: 12, t: '' },
+    lean: { sw: 12, t: 'translate(8 0) skewX(-9)' }
+  };
+  const s = 'fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"';
+  const EYES = {
+    dot: '<circle cx="41" cy="48" r="4.6"/><circle cx="58" cy="46" r="4.6"/>',
+    happy: `<path d="M36.5 49Q41 43.5 45.5 49M53.5 47Q58 41.5 62.5 47" ${s}/>`,
+    wink: `<path d="M37 48H45" ${s}/><circle cx="58" cy="46" r="4.6"/>`,
+    sleep: `<path d="M37 47.5Q41 51 45 47.5M54 45.5Q58 49 62 45.5" ${s}/>`,
+    look: '<circle cx="43.5" cy="46.5" r="4.6"/><circle cx="60.5" cy="44.5" r="4.6"/>',
+    wide: '<circle cx="41" cy="48" r="5.6"/><circle cx="58" cy="46" r="5.6"/><circle cx="42.8" cy="46.2" r="1.7" fill="#fff"/><circle cx="59.8" cy="44.2" r="1.7" fill="#fff"/>',
+    worry: `<circle cx="41" cy="48" r="4.6"/><circle cx="58" cy="46" r="4.6"/><path d="M36 42.5L45 40M54 38.5L63 41" ${s}/>`,
+    focus: `<circle cx="41" cy="48" r="4.6"/><circle cx="58" cy="46" r="4.6"/><path d="M36 40L45 42.5M54 41L63 38.5" ${s}/>`
+  };
+  const MOUTHS = {
+    smile: `<path d="M44 56Q51 61.5 58 54" ${s}/>`,
+    big: '<path d="M43.5 54Q51 66 60 52Z"/>',
+    flat: `<path d="M46 57H56" ${s}/>`,
+    o: '<circle cx="51.5" cy="57" r="2.8"/>',
+    wobble: `<path d="M44 58Q47.5 55 51 58Q54.5 61 58 57" ${s}/>`,
+    none: ''
+  };
+  let body = 'chubby', n = 0;
+  const svg = (b, e, m) => {
+    const id = 'zm' + (n++), B = BODIES[b];
+    return `<svg viewBox="-4 -4 108 108" aria-hidden="true"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="120">` +
+      `<rect x="-10" y="-10" width="120" height="120" fill="#fff"/>${EYES[e] || ''}${MOUTHS[m] || ''}</mask></defs>` +
+      `<g transform="${B.t}"><path d="${BOLT}" fill="currentColor" stroke="currentColor" stroke-width="${B.sw}" stroke-linejoin="round" mask="url(#${id})"/></g></svg>`;
+  };
+  const draw = el => { el.innerHTML = svg(el.dataset.body || body, el.dataset.e, el.dataset.m); };
+  const drawAll = () => document.querySelectorAll('.z').forEach(draw);
+  drawAll();
+
+  const bodies = document.getElementById('bodies');
+  bodies.addEventListener('click', e => {
+    const btn = e.target.closest('.opt');
+    if (!btn) return;
+    body = btn.dataset.body;
+    bodies.querySelectorAll('.opt').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+    drawAll();
+  });
+
+  // Hero: Zappy blinks now and then; a tap makes it hop with a happy face.
+  const stage = document.getElementById('stage'), hero = document.getElementById('heroZ');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const face = (e, m) => { hero.dataset.e = e; hero.dataset.m = m; draw(hero); };
+  let busy = false;
+  stage.addEventListener('click', () => {
+    busy = true; face('happy', 'big');
+    stage.classList.remove('hop'); void stage.offsetWidth; stage.classList.add('hop');
+    setTimeout(() => { face('dot', 'smile'); busy = false; }, 1400);
+  });
+  if (!still) setInterval(() => {
+    if (busy) return;
+    face('sleep', 'smile');
+    setTimeout(() => { if (!busy) face('dot', 'smile'); }, 150);
+  }, 3600);
+})();
+</script>

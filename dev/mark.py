@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Writes the Zap mark as Android vector drawables into res/ (the in-app logo and the launcher foreground).
 
-The mark is ../zap-app/DESIGN.md's: a chubby bolt (the path filled and stroked 12 wide with round joins) with a face
+The mark is design/DESIGN.md's: a chubby bolt (the path filled and stroked 12 wide with round joins) with a face
 cut out of it. Vector drawables have no masks, so the face is a clip-path: a square around the mark with the eyes and
 the mouth's outline wound the other way, which the nonzero rule leaves out. Run it after changing the mark:
 `python3 dev/mark.py`.

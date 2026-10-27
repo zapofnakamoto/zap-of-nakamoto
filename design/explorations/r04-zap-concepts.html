@@ -1,0 +1,190 @@
+<title>Zap Mark Concepts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one wide band per concept. Each band shows the mark big, then the same three proofs
+   (icon sizes, a notification, a poster line) so the concepts compare like for like. */
+:root {
+  --bg: #F4F4F7; --surface: #FFFFFF; --fg: #17171F; --muted: #5E5E70; --line: #E1E1E8; --focus: #4B5BFF;
+  --spark: #FFD23F; --ink: #16182B; --paper: #FFF6D6; --gold: #F2B705;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px }
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 48px }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; font-weight: 800 }
+h2 { font-size: 1.6rem; font-weight: 800 }
+p { margin: 0; max-width: 62ch }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.muted { color: var(--muted) }
+
+.intro { display: grid; gap: 14px }
+.ref { display: flex; gap: 16px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; max-width: 620px }
+.ref .ic { width: 52px; height: 52px }
+.ref p { font-size: .92rem; color: var(--muted) }
+
+.concept { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 24px; display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px }
+.big { aspect-ratio: 1; max-width: 100%; border-radius: 22%; background: var(--spark); color: var(--ink); display: grid; place-items: center }
+.big svg { width: 62%; height: 62% }
+.body { display: grid; gap: 16px; align-content: start; min-width: 0 }
+.body h2 small { display: block; font: 700 .75rem var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px }
+.story { font-size: 1.05rem }
+.pros { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+.pros div { display: grid; gap: 2px; font-size: .9rem }
+.pros b { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+
+.proofs { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: stretch }
+.proof { border-radius: 14px; background: var(--bg); padding: 14px; display: flex; align-items: center; gap: 12px; min-width: 0 }
+.sizes { display: flex; align-items: flex-end; gap: 10px }
+.ic { border-radius: 23%; display: grid; place-items: center; flex: none; background: var(--spark); color: var(--ink) }
+.ic svg { width: 64%; height: 64% }
+.ic.mono { background: #2B2B33; color: #E6E6EA; border-radius: 50% }
+.s20 { width: 20px; height: 20px } .s32 { width: 32px; height: 32px } .s48 { width: 48px; height: 48px }
+.notif { display: flex; gap: 10px; align-items: center; min-width: 0; font-size: .82rem; line-height: 1.3 }
+.notif .ic { width: 30px; height: 30px }
+.notif b { display: block; font-size: .84rem }
+.poster { background: var(--ink); color: var(--paper); font: 800 1rem/1.15 var(--display); justify-content: space-between }
+.poster svg { width: 34px; height: 34px; color: var(--spark); flex: none }
+
+.extra { display: flex; gap: 14px; flex-wrap: wrap; align-items: center }
+.extra .face { width: 76px; height: 76px; border-radius: 18px; background: var(--paper); color: var(--ink); display: grid; place-items: center }
+.extra .face svg { width: 64%; height: 64% }
+.extra span { font-size: .8rem; color: var(--muted); max-width: 22ch }
+.extra figure { margin: 0; display: grid; justify-items: center; gap: 6px }
+
+.questions { background: var(--fg); color: var(--bg); border-radius: 22px; padding: 28px; display: grid; gap: 14px }
+.questions h2 { color: var(--bg); font-size: 1.35rem }
+.questions ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; max-width: 70ch }
+
+@media (max-width: 860px) {
+  .concept { grid-template-columns: 1fr }
+  .big { max-width: 220px }
+  .proofs { grid-template-columns: 1fr }
+}
+@media (max-width: 520px) { .pros { grid-template-columns: 1fr } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Round 3 favourite (D), for reference. -->
+    <symbol id="zd" viewBox="0 0 100 100"><path transform="translate(9 0) skewX(-10)" d="M18 16H82V30L58 48H74L44 70H82V84H18V70L42 52H26L56 30H18Z" fill="currentColor"/></symbol>
+
+    <!-- 1 Zap Message: a chat bubble with the bolt cut out, leaning like D. -->
+    <symbol id="c1" viewBox="0 0 100 100"><path transform="translate(5 0) skewX(-6)" fill-rule="evenodd" fill="currentColor"
+      d="M30 14H72A18 18 0 0 1 90 32V52A18 18 0 0 1 72 70H44L24 88L28 70A18 18 0 0 1 10 52V32A18 18 0 0 1 28 14Z
+         M57 22L37 47H49L43 64L65 37H53L59 22Z"/></symbol>
+
+    <!-- 2 Between: two people, and the zap that jumps from one to the other. -->
+    <symbol id="c2" viewBox="0 0 100 100"><g fill="currentColor"><circle cx="22" cy="74" r="13"/><circle cx="78" cy="26" r="13"/>
+      <path d="M33 64L52 40L52 54L67 36L48 60L48 46Z"/></g></symbol>
+
+    <!-- 3 Zappy: a chunky bolt with a face, a guide character. -->
+    <mask id="zappy-face" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="41" cy="47" r="4.6" fill="#000"/><circle cx="58" cy="45" r="4.6" fill="#000"/>
+      <path d="M44 56Q51 61 58 54" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/>
+    </mask>
+    <symbol id="c3" viewBox="0 0 100 100"><path mask="url(#zappy-face)" fill="currentColor" stroke="currentColor" stroke-width="4" stroke-linejoin="round"
+      d="M62 6L16 58H44L34 94L84 38H57L70 6Z"/></symbol>
+    <!-- Zappy expressions -->
+    <mask id="zappy-wink" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <rect width="100" height="100" fill="#fff"/>
+      <path d="M37 47H45" stroke="#000" stroke-width="3.6" stroke-linecap="round"/><circle cx="58" cy="45" r="4.6" fill="#000"/>
+      <path d="M43 54Q51 63 60 52" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/>
+    </mask>
+    <symbol id="c3wink" viewBox="0 0 100 100"><path mask="url(#zappy-wink)" fill="currentColor" stroke="currentColor" stroke-width="4" stroke-linejoin="round"
+      d="M62 6L16 58H44L34 94L84 38H57L70 6Z"/></symbol>
+    <mask id="zappy-sleep" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <rect width="100" height="100" fill="#fff"/>
+      <path d="M37 47Q41 50 45 47M54 45Q58 48 62 45" fill="none" stroke="#000" stroke-width="3.4" stroke-linecap="round"/>
+      <circle cx="51" cy="56" r="2.6" fill="#000"/>
+    </mask>
+    <symbol id="c3sleep" viewBox="0 0 100 100"><path mask="url(#zappy-sleep)" fill="currentColor" stroke="currentColor" stroke-width="4" stroke-linejoin="round"
+      d="M62 6L16 58H44L34 94L84 38H57L70 6Z"/></symbol>
+  </defs>
+</svg>
+
+<main class="wrap">
+  <header class="intro">
+    <span class="eyebrow">Zap of Nakamoto · Round 4</span>
+    <h1>Three new ideas, each telling a different story</h1>
+    <p>Rounds 2 and 3 only refined a letter. These three start over from what the app means to a first-timer. Each keeps what you liked about D: a solid shape with a forward lean and some energy. Colour and type stay as chosen.</p>
+    <div class="ref"><div class="ic"><svg><use href="#zd"/></svg></div><p><b>Round 3 favourite (D)</b> for comparison. A strong letter, but it only says “Z”.</p></div>
+  </header>
+
+  <article class="concept">
+    <div class="big"><svg><use href="#c1"/></svg></div>
+    <div class="body">
+      <h2><small>Concept 1 · Zap Message</small>Sending bitcoin feels like sending a text</h2>
+      <p class="story">A chat bubble with a bolt cut out of it. Everyone already knows how to send a message, and that's the whole promise: if you can text, you can zap.</p>
+      <div class="pros">
+        <div><b>Strong because</b>The first-timer understands it right away. No bitcoin knowledge needed.</div>
+        <div><b>Watch out</b>Chat bubbles are common, so it needs the bolt and the lean to be ours.</div>
+      </div>
+      <div class="proofs">
+        <div class="proof sizes"><div class="ic s20"><svg><use href="#c1"/></svg></div><div class="ic s32"><svg><use href="#c1"/></svg></div><div class="ic s48"><svg><use href="#c1"/></svg></div><div class="ic mono s32"><svg><use href="#c1"/></svg></div></div>
+        <div class="proof notif"><div class="ic"><svg><use href="#c1"/></svg></div><div><b>Leo zapped you</b>₿1,000 · “for the coffee ☕”</div></div>
+        <div class="proof poster"><span>If you can text, you can zap.</span><svg><use href="#c1"/></svg></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="concept">
+    <div class="big"><svg><use href="#c2"/></svg></div>
+    <div class="body">
+      <h2><small>Concept 2 · Between</small>The zap is what jumps between two people</h2>
+      <p class="story">Two dots for two people, and a bolt jumping from one to the other. The brand stops being about bitcoin and becomes about the moment you pay a friend back.</p>
+      <div class="pros">
+        <div><b>Strong because</b>It's the most abstract and the most ownable. The two dots can stand alone as a pattern in the app and in ads.</div>
+        <div><b>Watch out</b>Needs a sentence the first time to explain. It's also the thinnest at very small sizes.</div>
+      </div>
+      <div class="proofs">
+        <div class="proof sizes"><div class="ic s20"><svg><use href="#c2"/></svg></div><div class="ic s32"><svg><use href="#c2"/></svg></div><div class="ic s48"><svg><use href="#c2"/></svg></div><div class="ic mono s32"><svg><use href="#c2"/></svg></div></div>
+        <div class="proof notif"><div class="ic"><svg><use href="#c2"/></svg></div><div><b>Zapped to Mia</b>₿2,500 arrived on her phone</div></div>
+        <div class="proof poster"><span>From you to them. In a zap.</span><svg><use href="#c2"/></svg></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="concept">
+    <div class="big"><svg><use href="#c3"/></svg></div>
+    <div class="body">
+      <h2><small>Concept 3 · Zappy</small>A friendly guide for your first bitcoin</h2>
+      <p class="story">A chunky bolt with a face. Beginners are nervous about money apps. A character makes the app feel like a friend showing you around, the way Duolingo's owl does for learning.</p>
+      <div class="pros">
+        <div><b>Strong because</b>Best for marketing: stickers, social posts, reactions. It can show feelings the app needs (success, waiting, empty).</div>
+        <div><b>Watch out</b>The most playful. If it shows up everywhere, money can feel like a toy.</div>
+      </div>
+      <div class="proofs">
+        <div class="proof sizes"><div class="ic s20"><svg><use href="#c3"/></svg></div><div class="ic s32"><svg><use href="#c3"/></svg></div><div class="ic s48"><svg><use href="#c3"/></svg></div><div class="ic mono s32"><svg><use href="#c3"/></svg></div></div>
+        <div class="proof notif"><div class="ic"><svg><use href="#c3wink"/></svg></div><div><b>You got zapped!</b>+₿1,000 from Leo</div></div>
+        <div class="proof poster"><span>Your first bitcoin, with a friend.</span><svg><use href="#c3"/></svg></div>
+      </div>
+      <div class="extra" aria-label="Zappy's expressions">
+        <figure><div class="face"><svg><use href="#c3"/></svg></div><span>Hello</span></figure>
+        <figure><div class="face"><svg><use href="#c3wink"/></svg></div><span>Zapped!</span></figure>
+        <figure><div class="face"><svg><use href="#c3sleep"/></svg></div><span>Nothing yet</span></figure>
+      </div>
+    </div>
+  </article>
+
+  <section class="questions">
+    <span class="eyebrow" style="color:inherit;opacity:.7">Your turn</span>
+    <h2>Help me aim better</h2>
+    <ol>
+      <li>Which of the three is closer, or which parts would you combine (for example Zappy's face in the Zap Message bubble)?</li>
+      <li>What felt wrong about the Bolt Z rounds? Too much like a letter, too serious, too much like other crypto apps?</li>
+      <li>Is there an app or brand whose feel you'd like to be near, crypto or not?</li>
+      <li>Do Spark yellow and the round Unbounded type still feel right next to these?</li>
+    </ol>
+  </section>
+</main>

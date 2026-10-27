@@ -1,0 +1,312 @@
+<title>Zap Wordmark</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: a wordmark workshop. The word "zap" is drawn from geometry (one stroke weight, one bowl),
+   so every variant and every "of Nakamoto" lockup is built by one script; the chosen pair
+   redraws the hero and every application below. Brand: Spark yellow, ink, paper. */
+:root {
+  --bg: #F4F4F7; --surface: #FFFFFF; --fg: #17171F; --muted: #5E5E70; --line: #E1E1E8; --focus: #4B5BFF;
+  --spark: #FFD23F; --ink: #16182B; --paper: #FFF6D6;
+  --head: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px }
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 60px }
+h1, h2 { font-family: var(--head); font-weight: 800; text-wrap: balance; margin: 0; letter-spacing: -0.02em }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05 }
+h1 em { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: 0 }
+h2 { font-size: 1.4rem }
+p { margin: 0; max-width: 65ch }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.muted { color: var(--muted) }
+section { display: grid; gap: 20px }
+.head { display: grid; gap: 8px }
+button { font: inherit; color: inherit }
+button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px }
+.wmk { display: grid; place-items: center }
+.wmk svg { width: 100%; height: 100%; display: block }
+
+.hero { display: grid; gap: 20px }
+.stage { background: var(--spark); color: var(--ink); border-radius: 28px; aspect-ratio: 16/8; max-width: 100%; padding: 8% 12% }
+.current { display: flex; gap: 8px; flex-wrap: wrap }
+.current span { font-size: .8rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line) }
+
+.cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px }
+.cards.four { grid-template-columns: repeat(4, minmax(0, 1fr)) }
+.opt { background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 14px; display: grid; gap: 8px; align-content: start; text-align: left; cursor: pointer; transition: border-color .2s, transform .2s }
+.opt:hover { transform: translateY(-2px) }
+.opt[aria-pressed="true"] { border-color: var(--fg) }
+.opt .tile { aspect-ratio: 4/3; max-width: 100%; border-radius: 12px; background: var(--paper); color: var(--ink); padding: 14% 12% }
+.opt b { font-size: .98rem }
+.opt p { font-size: .85rem; color: var(--muted) }
+.cards.slogans { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+.opt .line { display: block; background: var(--spark); color: var(--ink); border-radius: 12px; padding: 18px 16px; min-height: 96px; font: 800 1.25rem/1.15 var(--head); letter-spacing: -0.02em; text-wrap: balance }
+
+.apps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px }
+.bgt { border-radius: 18px; aspect-ratio: 4/3; max-width: 100%; padding: 14% 14% }
+.bgt.y { background: var(--spark); color: var(--ink) }
+.bgt.k { background: var(--ink); color: var(--spark) }
+.bgt.p { background: var(--paper); color: var(--ink) }
+
+.row2 { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: start }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 16px; min-width: 0 }
+.panel h3 { margin: 0; font-size: .95rem }
+.sizes { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap }
+.ic { border-radius: 23%; flex: none; background: var(--spark); color: var(--ink); padding: 20% }
+.ic.k { background: var(--ink); color: var(--spark) }
+.ic.m { background: #2B2B33; color: #E6E6EA; border-radius: 50% }
+.ic.word { padding: 24% 14% }
+.s20 { width: 20px; height: 20px; padding: 3px } .s48 { width: 48px; height: 48px } .s72 { width: 72px; height: 72px } .s96 { width: 96px; height: 96px }
+.iclabel { font-size: .8rem; color: var(--muted) }
+.store { display: flex; gap: 14px; align-items: center; padding: 12px; border-radius: 14px; background: var(--bg) }
+.store .ic { width: 60px; height: 60px }
+.store b { display: block }
+.store small { color: var(--muted) }
+
+.posterwrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: start }
+.poster { background: var(--ink); color: var(--spark); border-radius: 18px; aspect-ratio: 4/5; max-width: 100%; padding: 12%; display: flex; flex-direction: column; justify-content: space-between }
+.poster .wmk { width: 100% }
+.poster p { color: var(--paper); font: 700 clamp(1.2rem, 2.6vw, 1.8rem)/1.15 var(--head); letter-spacing: -0.01em }
+.poster p em { font: italic 400 1.1em var(--serif); color: var(--spark) }
+.phone { width: 210px; max-width: 100%; border-radius: 32px; padding: 7px; background: #0D0D12 }
+.screen { border-radius: 26px; aspect-ratio: 9/19; background: var(--paper); color: var(--ink); padding: 18px 16px; display: flex; flex-direction: column; gap: 8px }
+.screen .top { height: 30px; width: 74px }
+.screen .lbl { margin-top: 40px; text-align: center; font: 600 .62rem var(--body); letter-spacing: .12em; text-transform: uppercase; opacity: .6 }
+.screen .amt { text-align: center; font: 800 2rem/1 var(--head); letter-spacing: -0.03em; font-variant-numeric: tabular-nums }
+.screen .row { display: flex; justify-content: space-between; font: 500 .68rem var(--body); padding: 7px 9px; border-radius: 9px; background: rgb(22 24 43 / .06) }
+.screen .row:first-of-type { margin-top: auto }
+.screen .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px }
+.screen .acts span { text-align: center; padding: 10px 0; border-radius: 12px; font: 700 .74rem var(--body); border: 1.5px solid var(--ink) }
+.screen .acts span:first-child { background: var(--ink); color: var(--spark) }
+
+.questions { background: var(--fg); color: var(--bg); border-radius: 22px; padding: 28px; display: grid; gap: 14px }
+.questions h2 { color: var(--bg) }
+.questions ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; max-width: 70ch }
+
+@media (max-width: 900px) { .cards.slogans { grid-template-columns: repeat(2, minmax(0, 1fr)) } .cards { grid-template-columns: repeat(3, minmax(0, 1fr)) } .cards.four { grid-template-columns: repeat(2, minmax(0, 1fr)) } .apps { grid-template-columns: 1fr 1fr } }
+@media (max-width: 640px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .apps, .row2, .posterwrap { grid-template-columns: 1fr }
+  .stage { aspect-ratio: 4/3 }
+  .phone { justify-self: center }
+}
+@media (prefers-reduced-motion: reduce) { .opt { transition: none } }
+</style>
+
+<main class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Zap of Nakamoto · Round 7 · The word is the logo</span>
+    <h1>Just the word <em>zap</em>, drawn with care</h1>
+    <p>No symbol and no character. The three letters are drawn from one stroke weight and one round bowl, and each variant adds one idea to them. “of Nakamoto” gets its own spot so it belongs to the logo when it's there and isn't missed when it's not.</p>
+    <div class="stage wmk" id="hero" data-lock="current" aria-label="Current wordmark"></div>
+    <div class="current" aria-live="polite"><span id="curV">Letters: Plain</span><span id="curL">of Nakamoto: none</span></div>
+  </header>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">1 · The letters</span>
+      <h2>Five versions of “zap”, from quiet to most ownable</h2>
+      <p class="muted">Each step adds one idea to the last. Pick the one that has just enough.</p>
+    </div>
+    <div class="cards" id="variants">
+      <button class="opt" aria-pressed="true" data-v="plain"><div class="tile wmk" data-v="plain" data-lock="none"></div><b>Plain</b><p>Pure geometry: a round a and p, a solid z. The calmest.</p></button>
+      <button class="opt" aria-pressed="false" data-v="bolt"><div class="tile wmk" data-v="bolt" data-lock="none"></div><b>Bolt z</b><p>The z's diagonal steps like a bolt. The only hint of lightning.</p></button>
+      <button class="opt" aria-pressed="false" data-v="lig"><div class="tile wmk" data-v="lig" data-lock="none"></div><b>Shared stem</b><p>The a and p share one stem, so “ap” becomes a single mirrored shape.</p></button>
+      <button class="opt" aria-pressed="false" data-v="lean"><div class="tile wmk" data-v="lean" data-lock="none"></div><b>Shared, leaning</b><p>The shared stem leaning forward, the lean you liked in round 3.</p></button>
+      <button class="opt" aria-pressed="false" data-v="all"><div class="tile wmk" data-v="all" data-lock="none"></div><b>All three</b><p>Bolt z, shared stem and lean together. The most ownable, and the busiest.</p></button>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">2 · of Nakamoto</span>
+      <h2>Where the rest of the name sits</h2>
+      <p class="muted">The p's tail leaves a space under the word. Two lockups put “of Nakamoto” there, so it fits the word's shape instead of trailing behind it.</p>
+    </div>
+    <div class="cards four" id="locks">
+      <button class="opt" aria-pressed="true" data-l="none"><div class="tile wmk" data-lock="none"></div><b>zap alone</b><p>For the icon, small spaces and places where people already know the name.</p></button>
+      <button class="opt" aria-pressed="false" data-l="caps"><div class="tile wmk" data-lock="caps"></div><b>Tucked caps</b><p>Small, spaced capitals that fill the gap exactly up to the p's tail. Neat and Swiss.</p></button>
+      <button class="opt" aria-pressed="false" data-l="serif"><div class="tile wmk" data-lock="serif"></div><b>Tucked italic</b><p>A fine serif italic, like a signature under the bold word. The most elegant contrast.</p></button>
+      <button class="opt" aria-pressed="false" data-l="inline"><div class="tile wmk" data-lock="inline"></div><b>Inline</b><p>On the same line, lighter and smaller. Reads as one sentence: zap of Nakamoto.</p></button>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">3 · The slogan</span>
+      <h2>Six lines, from fast to reassuring</h2>
+      <p class="muted">“Bitcoin, as easy as a zap.” works, but it's long and explains itself. Tap a line to try it on the poster and the store listing below. My pick: <b>Bitcoin in a zap.</b> as the slogan, with <b>Bitcoin for your pocket.</b> as the line that says “small amounts”.</p>
+    </div>
+    <div class="cards slogans" id="slogans">
+      <button class="opt" aria-pressed="true" data-s="Bitcoin, as easy as |a zap."><span class="line">Bitcoin, as easy as a zap.</span><b>Current</b><p>Clear and friendly, but long. The comparison does the work a bolder line wouldn't need.</p></button>
+      <button class="opt" aria-pressed="false" data-s="Bitcoin |in a zap."><span class="line">Bitcoin in a zap.</span><b>Fast</b><p>Four words, poster-ready. Says what happens and how quickly. The most graphic.</p></button>
+      <button class="opt" aria-pressed="false" data-s="Just |zap it."><span class="line">Just zap it.</span><b>The verb</b><p>Calm confidence. Teaches the verb, and works as a button, a sticker and a reply.</p></button>
+      <button class="opt" aria-pressed="false" data-s="Your first bitcoin, |in a zap."><span class="line">Your first bitcoin, in a zap.</span><b>First-timer</b><p>Speaks straight to the beginner. Best for onboarding and launch ads, weaker years later.</p></button>
+      <button class="opt" aria-pressed="false" data-s="Bitcoin for |your pocket."><span class="line">Bitcoin for your pocket.</span><b>Safe</b><p>Says “small amounts, like cash” without a warning. The calmest. Doesn't use the name's zap.</p></button>
+      <button class="opt" aria-pressed="false" data-s="Pocket bitcoin. |Sent in a zap."><span class="line">Pocket bitcoin. Sent in a zap.</span><b>Both</b><p>Safe and fast in two beats. Good as a store summary, too long for an icon caption.</p></button>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">4 · In use</span>
+      <h2>Your choice on every surface</h2>
+    </div>
+    <div class="apps">
+      <div class="bgt y wmk" data-lock="current" aria-label="On yellow"></div>
+      <div class="bgt k wmk" data-lock="current" aria-label="On ink"></div>
+      <div class="bgt p wmk" data-lock="current" aria-label="On paper"></div>
+    </div>
+    <div class="row2">
+      <div class="panel">
+        <h3>App icon: the z alone, or the whole word</h3>
+        <div class="sizes">
+          <div class="ic s20 wmk" data-glyph="z"></div><div class="ic s48 wmk" data-glyph="z"></div><div class="ic s96 wmk" data-glyph="z"></div>
+          <div class="ic k s72 wmk" data-glyph="z"></div><div class="ic m s72 wmk" data-glyph="z"></div>
+        </div>
+        <div class="sizes">
+          <div class="ic word s48 wmk" data-lock="none"></div><div class="ic word s96 wmk" data-lock="none"></div><div class="ic word k s72 wmk" data-lock="none"></div>
+          <span class="iclabel">The full word is clearer but gets too thin below 48 pixels.</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Store listing</h3>
+        <div class="store"><div class="ic wmk" data-glyph="z"></div><div><b>Zap of Nakamoto</b><small class="storeLine">Bitcoin, as easy as a zap.</small></div></div>
+        <div class="store"><div class="ic word wmk" data-lock="none"></div><div><b>Zap of Nakamoto</b><small class="storeLine">Bitcoin, as easy as a zap.</small></div></div>
+      </div>
+    </div>
+    <div class="posterwrap">
+      <div class="poster" aria-label="Poster"><div class="wmk" data-lock="current"></div><p id="posterLine">Bitcoin, as easy as <em>a zap.</em></p></div>
+      <div class="phone" aria-label="Home screen example"><div class="screen">
+        <div class="top wmk" data-lock="none"></div>
+        <div class="lbl">Your bitcoin</div><div class="amt">₿2,100</div>
+        <div class="row"><span>Leo</span><b>+₿1,000</b></div><div class="row"><span>Coffee</span><b>−₿3,400</b></div>
+        <div class="acts"><span>Send</span><span>Receive</span></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="questions">
+    <span class="eyebrow" style="color:inherit;opacity:.7">Your turn</span>
+    <h2>For round 8</h2>
+    <ol>
+      <li>Which letters feel right, and how much idea do you want in them?</li>
+      <li>Which “of Nakamoto” placement, and does the serif italic feel elegant or out of place?</li>
+      <li>App icon: the z alone, or the whole word?</li>
+      <li>Which slogan, and should it come with a second line for the “small amounts” promise?</li>
+      <li>Is this closer than the earlier rounds? What's still missing?</li>
+    </ol>
+  </section>
+</main>
+
+<script>
+(() => {
+  // Letters on a 100-unit x-height (baseline y=100, p's tail to y=160), stroke weight 24-26.
+  const ring = cx => `<path fill-rule="evenodd" d="M${cx - 50} 50a50 50 0 1 0 100 0a50 50 0 1 0 -100 0z M${cx - 24} 50a24 24 0 1 0 48 0a24 24 0 1 0 -48 0z"/>`;
+  const rect = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}"/>`;
+  const Z = (x, bolt) => bolt
+    ? `<path d="M${x} 0h90v24l-36 30h20l-38 22h54v24h-90v-24l38-30h-20l36-22h-54z"/>`
+    : `<path d="M${x} 0h90v24l-54 52h54v24h-90v-24l54-52h-54z"/>`;
+  const V = {
+    plain: { name: 'Plain', bolt: 0, lig: 0, lean: 0 },
+    bolt: { name: 'Bolt z', bolt: 1, lig: 0, lean: 0 },
+    lig: { name: 'Shared stem', bolt: 0, lig: 1, lean: 0 },
+    lean: { name: 'Shared, leaning', bolt: 0, lig: 1, lean: 1 },
+    all: { name: 'All three', bolt: 1, lig: 1, lean: 1 }
+  };
+  const L = { none: 'none', caps: 'tucked caps', serif: 'tucked italic', inline: 'inline' };
+  const K = Math.tan(12 * Math.PI / 180);
+  let curV = 'plain', curL = 'none';
+
+  const word = v => v.lig
+    ? { d: Z(0, v.bolt) + ring(154) + rect(178, 0, 26, 160) + ring(228), w: 278, stem: 178 }
+    : { d: Z(0, v.bolt) + ring(154) + rect(178, 0, 26, 100) + rect(218, 0, 26, 160) + ring(268), w: 318, stem: 218 };
+
+  const lockup = (vk, lk) => {
+    const v = V[vk], g = word(v), k = v.lean ? K : 0, off = v.lean ? 34 : 0;
+    const body = v.lean ? `<g transform="translate(34 0) skewX(-12)">${g.d}</g>` : g.d;
+    let W = g.w + off, H = 164, text = '';
+    const left = y => off - k * y + 2, right = y => g.stem + off - k * y - 18;
+    if (lk === 'caps') {
+      const y = 146, x0 = left(y), x1 = right(y);
+      text = `<text x="${x0}" y="${y}" font-family="Figtree, sans-serif" font-weight="700" font-size="21" textLength="${(x1 - x0).toFixed(1)}" lengthAdjust="spacing">OF NAKAMOTO</text>`;
+    } else if (lk === 'serif') {
+      const y = 154, x0 = left(y), x1 = right(y);
+      text = `<text class="fit" data-max="${(x1 - x0).toFixed(1)}" x="${x0}" y="${y}" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="50">of Nakamoto</text>`;
+    } else if (lk === 'inline') {
+      const x = W + 24;
+      text = `<text class="grow" x="${x}" y="100" font-family="Figtree, sans-serif" font-weight="500" font-size="40" letter-spacing="-0.5">of Nakamoto</text>`;
+      W = x + 230;
+    }
+    return `<svg viewBox="-4 -4 ${W + 8} ${H + 8}" fill="currentColor" aria-hidden="true">${body}${text}</svg>`;
+  };
+
+  const glyph = vk => {
+    const v = V[vk], z = Z(0, v.bolt);
+    return v.lean
+      ? `<svg viewBox="-4 -4 124 108" fill="currentColor" aria-hidden="true"><g transform="translate(22 0) skewX(-12)">${z}</g></svg>`
+      : `<svg viewBox="-4 -4 98 108" fill="currentColor" aria-hidden="true">${z}</svg>`;
+  };
+
+  const fit = root => {
+    root.querySelectorAll('text.fit').forEach(t => {
+      const max = +t.dataset.max, len = t.getComputedTextLength();
+      if (len > 0) t.setAttribute('font-size', Math.min(58, 50 * max / len).toFixed(2));
+    });
+    root.querySelectorAll('text.grow').forEach(t => {
+      const len = t.getComputedTextLength();
+      if (len > 0) t.ownerSVGElement.setAttribute('viewBox', `-4 -4 ${+t.getAttribute('x') + len + 8} 172`);
+    });
+  };
+
+  const render = () => {
+    document.querySelectorAll('.wmk').forEach(el => {
+      if (el.dataset.glyph) { el.innerHTML = glyph(curV); return; }
+      const vk = el.dataset.v || curV;
+      const lk = el.dataset.lock === 'current' ? curL : el.dataset.lock;
+      el.innerHTML = lockup(vk, lk);
+    });
+    fit(document);
+    document.getElementById('curV').textContent = 'Letters: ' + V[curV].name;
+    document.getElementById('curL').textContent = 'of Nakamoto: ' + L[curL];
+  };
+
+  const pick = (groupId, attr, set) => {
+    const group = document.getElementById(groupId);
+    group.addEventListener('click', e => {
+      const btn = e.target.closest('.opt');
+      if (!btn) return;
+      group.querySelectorAll('.opt').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+      set(btn.dataset[attr]);
+      render();
+    });
+  };
+  pick('variants', 'v', v => { curV = v; });
+  pick('locks', 'l', l => { curL = l; });
+
+  // Slogans: try a line on the poster and the store listing.
+  const slogans = document.getElementById('slogans');
+  const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]);
+  slogans.addEventListener('click', e => {
+    const btn = e.target.closest('.opt');
+    if (!btn) return;
+    slogans.querySelectorAll('.opt').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+    const [plain, accent] = btn.dataset.s.split('|');
+    document.getElementById('posterLine').innerHTML = `${esc(plain)}<em>${esc(accent)}</em>`;
+    document.querySelectorAll('.storeLine').forEach(s => { s.textContent = plain + accent; });
+  });
+
+  render();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+})();
+</script>

@@ -45,7 +45,7 @@ import whitewallet.brand.WalletStatus
 import whitewallet.brand.ui.LocalWalletEvents
 
 /**
- * The mark (../zap-app/DESIGN.md "The mark", "States", "Motion"): a chubby bolt with a face cut out of it, which shows
+ * The mark (design/DESIGN.md "The mark", "States", "Motion"): a chubby bolt with a face cut out of it, which shows
  * how things are going. Drawn in the theme's primary colour (ink on light, spark on dark), in a box of [size].
  *
  * [status] picks the face and, when it changes, the motion: a payment arriving drops the bolt in (Happy), one going

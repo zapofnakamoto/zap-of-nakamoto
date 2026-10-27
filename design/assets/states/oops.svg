@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 120 120" width="120" height="120">
+  <title>Zap of Nakamoto – oops</title>
+  <defs><mask id="face" maskUnits="userSpaceOnUse" x="-20" y="-20" width="140" height="140">
+    <rect x="-20" y="-20" width="140" height="140" fill="#fff"/><circle cx="41" cy="47" r="3.8"/><circle cx="58" cy="45" r="3.8"/><path d="M45 59Q51 54 57 58" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/>
+  </mask></defs>
+  <g><path d="M62 6L16 58H44L34 94L84 38H57L70 6Z" fill="#16182B" stroke="#16182B" stroke-width="12" stroke-linejoin="round" mask="url(#face)"/></g>
+</svg>

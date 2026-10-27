@@ -1,0 +1,279 @@
+<title>Bolt Z Refinement</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a mark-refinement sheet. Quiet neutral chrome; the brand is locked to Spark (yellow, ink, paper)
+   and Unbounded, so only the mark varies. Picking a variant redraws every test below it. */
+:root {
+  --bg: #F4F4F7; --surface: #FFFFFF; --fg: #17171F; --muted: #5E5E70; --line: #E1E1E8; --focus: #4B5BFF;
+  --spark: #FFD23F; --ink: #16182B; --paper: #FFF6D6; --gold: #F2B705; --ink-soft: #3A3D57;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px }
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 64px }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; font-weight: 800 }
+h2 { font-size: 1.35rem; font-weight: 700 }
+p { margin: 0; max-width: 65ch }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.muted { color: var(--muted) }
+section { display: grid; gap: 20px }
+.head { display: grid; gap: 8px }
+
+.hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center }
+.hero-text { display: grid; gap: 16px; min-width: 0 }
+.locked { display: flex; gap: 8px; flex-wrap: wrap }
+.locked span { font-size: .8rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface) }
+.hero-mark { aspect-ratio: 1; max-width: 100%; border-radius: 28px; background: var(--spark); display: grid; place-items: center; cursor: pointer; border: 0; padding: 0 }
+.hero-mark svg { width: 48%; height: 48%; color: var(--ink) }
+.hero-mark.zap svg { animation: reveal .7s cubic-bezier(.2,.8,.2,1) }
+@keyframes reveal {
+  0% { clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0); transform: scale(.92) }
+  60% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: scale(1.04) }
+  100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: none } }
+
+.variants { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px }
+.opt { background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 16px; display: grid; gap: 10px; align-content: start;
+  text-align: left; font: inherit; color: inherit; cursor: pointer; transition: border-color .2s, transform .2s }
+.opt:hover { transform: translateY(-2px) }
+.opt[aria-pressed="true"] { border-color: var(--fg) }
+.opt:focus-visible, .hero-mark:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px }
+.opt .tile { aspect-ratio: 1; max-width: 100%; border-radius: 12px; background: var(--paper); display: grid; place-items: center }
+.opt .tile svg { width: 56%; height: 56%; color: var(--ink) }
+.opt b { font-size: .98rem }
+.opt p { font-size: .86rem; color: var(--muted) }
+.opt .tag { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.opt.ref { opacity: .75 }
+
+/* size + surface tests */
+.tests { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: grid; gap: 22px; overflow-x: auto }
+.trow { display: grid; grid-template-columns: 9rem 1fr; gap: 16px; align-items: center }
+.trow > span { font-size: .85rem; color: var(--muted) }
+.sizes { display: flex; align-items: flex-end; gap: 22px; flex-wrap: wrap }
+.ic { border-radius: 23%; display: grid; place-items: center; flex: none }
+.ic svg { width: 60%; height: 60% }
+.ic.y { background: var(--spark); color: var(--ink) }
+.ic.k { background: var(--ink); color: var(--spark) }
+.ic.m { background: #2B2B33; color: #E6E6EA; border-radius: 50% }
+.ic.w { background: #FFFFFF; color: var(--ink); box-shadow: inset 0 0 0 1px #E1E1E8 }
+.s16 { width: 16px; height: 16px } .s24 { width: 24px; height: 24px } .s48 { width: 48px; height: 48px } .s96 { width: 96px; height: 96px }
+
+/* lockups */
+.lockups { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px }
+.lk { border-radius: 18px; padding: 32px; display: flex; align-items: center; justify-content: center; min-height: 200px }
+.lk.paper { background: var(--paper); color: var(--ink) }
+.lk.inkbg { background: var(--ink); color: var(--spark) }
+.lk.yellow { background: var(--spark); color: var(--ink) }
+.lock-h { display: flex; align-items: center; gap: 16px }
+.lock-h svg { width: 72px; height: 72px; flex: none }
+.wm { font-family: var(--display); display: grid; line-height: .95; gap: 6px }
+.wm b { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em }
+.wm span { font: 600 .82rem var(--body); letter-spacing: .16em; text-transform: uppercase; opacity: .7 }
+.lock-v { display: grid; justify-items: center; gap: 14px; text-align: center }
+.lock-v svg { width: 64px; height: 64px }
+.lock-v .wm b { font-size: 2.2rem }
+.lockgrid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px }
+
+/* store card */
+.store { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: flex; gap: 16px; align-items: center; max-width: 520px }
+.store .ic { width: 72px; height: 72px }
+.store b { font-size: 1.05rem; display: block }
+.store small { color: var(--muted); font-size: .88rem }
+
+/* palette */
+.pal { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px }
+.chip { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--surface) }
+.chip i { display: block; height: 84px }
+.chip div { padding: 12px 14px; display: grid; gap: 2px; font-size: .85rem }
+.chip code { font: 500 .78rem ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted) }
+.table { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface) }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; min-width: 560px }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line) }
+th { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700 }
+tr:last-child td { border-bottom: 0 }
+td code { font: 500 .82rem ui-monospace, "SF Mono", Menlo, monospace }
+.dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -1px; margin-right: 6px; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .15) }
+
+.questions { background: var(--fg); color: var(--bg); border-radius: 22px; padding: 28px; display: grid; gap: 14px }
+.questions h2 { color: var(--bg) }
+.questions ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; max-width: 70ch }
+
+@media (max-width: 900px) { .variants { grid-template-columns: repeat(3, minmax(0, 1fr)) } .pal { grid-template-columns: repeat(3, minmax(0, 1fr)) } }
+@media (max-width: 720px) {
+  .hero, .lockups, .lockgrid2 { grid-template-columns: 1fr }
+  .hero-mark { max-width: 240px }
+  .variants, .pal { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .trow { grid-template-columns: 1fr; gap: 8px }
+  .wm b { font-size: 2.3rem }
+  .lock-h svg { width: 56px; height: 56px }
+}
+@media (prefers-reduced-motion: reduce) { .hero-mark.zap svg { animation: none } .opt { transition: none } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Round 2 reference: the bolt's jog is too small to read. -->
+    <symbol id="z0" viewBox="0 0 100 100"><polyline points="22,20 78,20 46,50 64,50 24,82 80,82" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="square"/></symbol>
+    <!-- A: the jog kicks back up-right, so the diagonal becomes a real bolt. -->
+    <symbol id="za" viewBox="0 0 100 100"><polyline points="20,22 80,22 40,54 62,46 20,78 80,78" fill="none" stroke="currentColor" stroke-width="11" stroke-linejoin="miter" stroke-miterlimit="10" stroke-linecap="butt"/></symbol>
+    <!-- B: the same line, rounded to match Unbounded. -->
+    <symbol id="zb" viewBox="0 0 100 100"><polyline points="22,22 78,22 41,53 61,47 22,78 78,78" fill="none" stroke="currentColor" stroke-width="13" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <!-- C: one solid shape; bars and bolt share one weight. -->
+    <symbol id="zc" viewBox="0 0 100 100"><path d="M18 16H82V30L58 48H74L44 70H82V84H18V70L42 52H26L56 30H18Z" fill="currentColor"/></symbol>
+    <!-- D: solid, leaning forward for speed. -->
+    <symbol id="zd" viewBox="0 0 100 100"><path transform="translate(9 0) skewX(-10)" d="M18 16H82V30L58 48H74L44 70H82V84H18V70L42 52H26L56 30H18Z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Zap of Nakamoto · Round 3</span>
+      <h1>Refining the Bolt Z</h1>
+      <p>In round 2 the bolt barely showed: the small step in the diagonal read as a wobbly Z. Each refinement here makes the bolt obvious, so the mark reads as a letter and a zap at once, even at 16 pixels.</p>
+      <div class="locked" aria-label="Locked choices"><span>Colour: Spark</span><span>Wordmark: Unbounded</span><span>“Zap” is the verb</span></div>
+      <p class="muted">Pick a variant and every test below redraws with it. Tap the big mark to see how it can appear on screen.</p>
+    </div>
+    <button class="hero-mark" id="hero" aria-label="Play the mark's reveal"><svg><use class="mk" href="#za"/></svg></button>
+  </header>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">1 · Variants</span>
+      <h2>Four refinements of one idea</h2>
+    </div>
+    <div class="variants" id="variants">
+      <button class="opt ref" aria-pressed="false" data-z="z0">
+        <div class="tile"><svg><use href="#z0"/></svg></div>
+        <span class="tag">Round 2</span><b>Reference</b>
+        <p>Where we started. The bolt hides in a small step.</p>
+      </button>
+      <button class="opt" aria-pressed="true" data-z="za">
+        <div class="tile"><svg><use href="#za"/></svg></div>
+        <span class="tag">A · Line</span><b>Sharp bolt</b>
+        <p>The diagonal kicks back up before it falls, like a real bolt. It's crisp and precise.</p>
+      </button>
+      <button class="opt" aria-pressed="false" data-z="zb">
+        <div class="tile"><svg><use href="#zb"/></svg></div>
+        <span class="tag">B · Line</span><b>Round bolt</b>
+        <p>The same drawing with round ends and corners, so it's softer and matches the round wordmark.</p>
+      </button>
+      <button class="opt" aria-pressed="false" data-z="zc">
+        <div class="tile"><svg><use href="#zc"/></svg></div>
+        <span class="tag">C · Solid</span><b>Block bolt</b>
+        <p>One solid shape with a thick bolt. It's the boldest, and it holds up best when small.</p>
+      </button>
+      <button class="opt" aria-pressed="false" data-z="zd">
+        <div class="tile"><svg><use href="#zd"/></svg></div>
+        <span class="tag">D · Solid</span><b>Leaning bolt</b>
+        <p>Block bolt leaning forward. It looks like it's already on its way.</p>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">2 · Does it survive?</span>
+      <h2>Small sizes and every surface</h2>
+      <p class="muted">A launcher icon lives at 48 pixels, a notification at 24 and a browser tab at 16. Android's themed icons strip all colour, so the mark has to work in one colour.</p>
+    </div>
+    <div class="tests">
+      <div class="trow"><span>App icon, Spark</span><div class="sizes">
+        <div class="ic y s16"><svg><use class="mk" href="#za"/></svg></div><div class="ic y s24"><svg><use class="mk" href="#za"/></svg></div>
+        <div class="ic y s48"><svg><use class="mk" href="#za"/></svg></div><div class="ic y s96"><svg><use class="mk" href="#za"/></svg></div></div></div>
+      <div class="trow"><span>Dark mode / ink</span><div class="sizes">
+        <div class="ic k s16"><svg><use class="mk" href="#za"/></svg></div><div class="ic k s24"><svg><use class="mk" href="#za"/></svg></div>
+        <div class="ic k s48"><svg><use class="mk" href="#za"/></svg></div><div class="ic k s96"><svg><use class="mk" href="#za"/></svg></div></div></div>
+      <div class="trow"><span>Android themed icon</span><div class="sizes">
+        <div class="ic m s16"><svg><use class="mk" href="#za"/></svg></div><div class="ic m s24"><svg><use class="mk" href="#za"/></svg></div>
+        <div class="ic m s48"><svg><use class="mk" href="#za"/></svg></div><div class="ic m s96"><svg><use class="mk" href="#za"/></svg></div></div></div>
+      <div class="trow"><span>On white</span><div class="sizes">
+        <div class="ic w s16"><svg><use class="mk" href="#za"/></svg></div><div class="ic w s24"><svg><use class="mk" href="#za"/></svg></div>
+        <div class="ic w s48"><svg><use class="mk" href="#za"/></svg></div><div class="ic w s96"><svg><use class="mk" href="#za"/></svg></div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">3 · Lockups</span>
+      <h2>Mark and name together</h2>
+    </div>
+    <div class="lockups">
+      <div class="lk paper"><div class="lock-h"><svg><use class="mk" href="#za"/></svg><div class="wm"><b>Zap</b><span>of Nakamoto</span></div></div></div>
+      <div class="lk yellow"><div class="lock-v"><svg><use class="mk" href="#za"/></svg><div class="wm"><b>Zap</b><span>of Nakamoto</span></div></div></div>
+    </div>
+    <div class="lockgrid2">
+      <div class="lk inkbg"><div class="lock-h"><svg><use class="mk" href="#za"/></svg><div class="wm"><b>Zap</b><span>of Nakamoto</span></div></div></div>
+      <div class="store" aria-label="Store listing example">
+        <div class="ic y"><svg><use class="mk" href="#za"/></svg></div>
+        <div><b>Zap of Nakamoto</b><small>Bitcoin, as easy as a zap</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="eyebrow">4 · Spark, worked out</span>
+      <h2>The palette and where it goes in the app</h2>
+      <p class="muted">Yellow is loud, so it carries the brand on big surfaces (icon, main button, the zap flash). Ink does the reading. One catch: white text on yellow is unreadable, so text on yellow is always ink.</p>
+    </div>
+    <div class="pal">
+      <div class="chip"><i style="background:#FFD23F"></i><div><b>Spark</b><code>#FFD23F</code></div></div>
+      <div class="chip"><i style="background:#F2B705"></i><div><b>Gold</b><code>#F2B705</code></div></div>
+      <div class="chip"><i style="background:#16182B"></i><div><b>Ink</b><code>#16182B</code></div></div>
+      <div class="chip"><i style="background:#3A3D57"></i><div><b>Ink soft</b><code>#3A3D57</code></div></div>
+      <div class="chip"><i style="background:#FFF6D6"></i><div><b>Paper</b><code>#FFF6D6</code></div></div>
+    </div>
+    <div class="table">
+      <table>
+        <thead><tr><th>App colour (brand_colors.xml)</th><th>Light</th><th>Dark</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td><code>brand_launcher_background</code></td><td><span class="dot" style="background:#FFD23F"></span>Spark</td><td>same</td><td>Behind the icon on the home screen</td></tr>
+          <tr><td><code>brand_primary</code></td><td><span class="dot" style="background:#16182B"></span>Ink</td><td><span class="dot" style="background:#FFD23F"></span>Spark</td><td>Main buttons, links, focus</td></tr>
+          <tr><td><code>brand_on_primary</code></td><td><span class="dot" style="background:#FFD23F"></span>Spark</td><td><span class="dot" style="background:#16182B"></span>Ink</td><td>Text on main buttons</td></tr>
+          <tr><td><code>brand_secondary</code></td><td><span class="dot" style="background:#F2B705"></span>Gold</td><td><span class="dot" style="background:#FFE38A"></span>Light gold</td><td>Highlights, the zap flash</td></tr>
+          <tr><td><code>brand_tertiary</code></td><td><span class="dot" style="background:#3A3D57"></span>Ink soft</td><td><span class="dot" style="background:#C9CBE0"></span>Mist</td><td>Quiet accents, history</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">The app's main colour is the one it uses for text and links too, and yellow text on a light screen can't be read. So in light mode the buttons are ink with yellow text, and yellow lives on the icon and the zap moment. In dark mode they swap and yellow leads. A first proposal, to check on a real phone.</p>
+  </section>
+
+  <section class="questions">
+    <span class="eyebrow" style="color:inherit;opacity:.7">Your turn</span>
+    <h2>For round 4</h2>
+    <ol>
+      <li>Which variant: A, B, C or D? What still bothers you about it?</li>
+      <li>On playfulness you answered “yes”. Where on the 1 (calm) to 5 (loud) scale? I've assumed about 3: calm screens, fun only in the zap moment.</li>
+      <li>Lockup: side by side or stacked as the main one?</li>
+      <li>Light mode: ink buttons with a yellow icon (as proposed), or yellow buttons with ink text?</li>
+      <li>Next step: a full set of screens (setup, wallet, send, receive), store screenshots, or a launch poster and social posts?</li>
+    </ol>
+  </section>
+</main>
+
+<script>
+(() => {
+  const variants = document.getElementById('variants');
+  const hero = document.getElementById('hero');
+  const play = () => { hero.classList.remove('zap'); void hero.offsetWidth; hero.classList.add('zap'); };
+  variants.addEventListener('click', e => {
+    const btn = e.target.closest('.opt');
+    if (!btn) return;
+    variants.querySelectorAll('.opt').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+    document.querySelectorAll('.mk').forEach(u => u.setAttribute('href', '#' + btn.dataset.z));
+    play();
+  });
+  hero.addEventListener('click', play);
+})();
+</script>

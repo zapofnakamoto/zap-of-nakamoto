@@ -1,0 +1,257 @@
+<title>Zap Territories</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Archivo:ital,wdth,wght@0,125,800;1,125,800&family=Familjen+Grotesk:wght@500;700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: three territories, one wide band each. Every band repeats the same anatomy (poster, mark,
+   icon sizes, palette, type, a calm home screen) from its own --t-* tokens, so they compare like for like. */
+:root {
+  --bg: #F4F4F7; --surface: #FFFFFF; --fg: #17171F; --muted: #5E5E70; --line: #E1E1E8; --focus: #4B5BFF;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* territory defaults (overridden per band; brand specimens look the same in both themes) */
+  --t-bg: #16182B; --t-fg: #FFF6D6; --t-accent: #FFD23F; --t-soft: #FFF6D6; --t-ink: #16182B; --t-font: var(--display);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px }
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 56px }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; font-weight: 800 }
+p { margin: 0; max-width: 65ch }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.muted { color: var(--muted) }
+
+.intro { display: grid; gap: 14px }
+.brief { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px }
+.brief div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 2px }
+.brief b { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.brief span { font-weight: 600 }
+
+.terr { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 24px; display: grid; gap: 22px }
+.terr-head { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: end }
+.terr-head h2 { font-size: 1.8rem; font-weight: 800 }
+.terr-head h2 small { display: block; font: 700 .75rem var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px }
+.keeps { display: flex; gap: 6px; flex-wrap: wrap }
+.keeps span { font-size: .75rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line) }
+.keeps span.off { opacity: .45; text-decoration: line-through }
+.idea { font-size: 1.05rem }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr) auto; gap: 18px; align-items: start }
+.poster { aspect-ratio: 4/5; max-width: 100%; border-radius: 16px; overflow: hidden; background: var(--t-bg); display: block }
+.poster svg { width: 100%; height: 100%; display: block }
+.side { display: grid; gap: 14px; min-width: 0 }
+.markrow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+.tile { aspect-ratio: 1; max-width: 100%; border-radius: 14px; display: grid; place-items: center }
+.tile svg { width: 58%; height: 58% }
+.tile.a { background: var(--t-accent); color: var(--t-ink) }
+.tile.b { background: var(--t-soft); color: var(--t-ink); box-shadow: inset 0 0 0 1px rgb(0 0 0 / .06) }
+.sizes { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; padding: 12px 14px; border-radius: 14px; background: var(--bg) }
+.ic { border-radius: 23%; display: grid; place-items: center; flex: none; background: var(--t-accent); color: var(--t-ink) }
+.ic svg { width: 62%; height: 62% }
+.ic.k { background: var(--t-ink); color: var(--t-accent) }
+.ic.m { background: #2B2B33; color: #E6E6EA; border-radius: 50% }
+.s20 { width: 20px; height: 20px } .s32 { width: 32px; height: 32px } .s48 { width: 48px; height: 48px }
+.wm { font-family: var(--t-font); color: var(--fg); display: flex; align-items: baseline; gap: .4em; flex-wrap: wrap; line-height: 1 }
+.wm b { font-size: 2rem; letter-spacing: -0.02em }
+.wm span { font-size: .95rem; opacity: .7 }
+.pal { display: flex; height: 40px; border-radius: 10px; overflow: hidden }
+.pal i { flex: 1 } .pal i:first-child { flex: 2 }
+.pal-hex { display: flex; gap: 10px; flex-wrap: wrap; font: 500 .74rem ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted) }
+
+.phone { width: 196px; max-width: 100%; border-radius: 30px; padding: 7px; background: #0D0D12 }
+.screen { border-radius: 24px; aspect-ratio: 9/19; background: var(--t-soft); color: var(--t-ink); padding: 16px 14px; display: flex; flex-direction: column; gap: 8px; overflow: hidden }
+.screen .top { display: flex; justify-content: space-between; align-items: center; font: 600 .7rem var(--body) }
+.screen .top svg { width: 22px; height: 22px }
+.screen .lbl { margin-top: 30px; text-align: center; font: 600 .62rem var(--body); letter-spacing: .12em; text-transform: uppercase; opacity: .6 }
+.screen .amt { text-align: center; font: 800 1.9rem/1 var(--t-font); letter-spacing: -0.02em; font-variant-numeric: tabular-nums }
+.screen .row { display: flex; justify-content: space-between; font: 500 .66rem var(--body); padding: 7px 9px; border-radius: 9px; background: rgb(0 0 0 / .05) }
+.screen .row:first-of-type { margin-top: auto }
+.screen .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px }
+.screen .acts span { text-align: center; padding: 10px 0; border-radius: 12px; font: 700 .72rem var(--body); border: 1.5px solid var(--t-ink) }
+.screen .acts span:first-child { background: var(--t-ink); color: var(--t-soft) }
+
+.why { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+.why div { display: grid; gap: 2px; font-size: .92rem }
+.why b { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+
+/* per-territory tokens */
+#t1 { --t-bg: #16182B; --t-fg: #FFF6D6; --t-accent: #FFD23F; --t-soft: #FFF6D6; --t-ink: #16182B; --t-font: "Unbounded", "Arial Black", sans-serif }
+#t2 { --t-bg: #1E2EFF; --t-fg: #FFFFFF; --t-accent: #1E2EFF; --t-soft: #F2F3F7; --t-ink: #0E0F1A; --t-font: "Archivo", "Arial Black", sans-serif }
+#t2 .wm b, #t2 .amt { font-stretch: 125%; font-style: italic }
+#t2 .ic:not(.k):not(.m), #t2 .tile.a { color: #FFFFFF }
+#t2 .screen .acts span:first-child { background: #1E2EFF; border-color: #1E2EFF; color: #FFFFFF }
+#t3 { --t-bg: #0E3B2E; --t-fg: #F3F6F1; --t-accent: #0E3B2E; --t-soft: #F3F6F1; --t-ink: #0E3B2E; --t-font: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif }
+#t3 .ic:not(.k):not(.m), #t3 .tile.a { color: #B9EBCB }
+#t3 .ic.k { background: #B9EBCB; color: #0E3B2E }
+
+.questions { background: var(--fg); color: var(--bg); border-radius: 22px; padding: 28px; display: grid; gap: 14px }
+.questions h2 { color: var(--bg); font-size: 1.35rem }
+.questions ol { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; max-width: 70ch }
+
+@media (max-width: 980px) { .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) } .phone { grid-column: 1 / -1; justify-self: center } }
+@media (max-width: 640px) {
+  .grid, .why, .brief { grid-template-columns: 1fr }
+  .poster { max-width: 360px }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 1 Split Coin: a solid coin cut through by a zap. -->
+    <mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <rect width="100" height="100" fill="#fff"/>
+      <polyline points="68,4 44,48 60,52 32,96" fill="none" stroke="#000" stroke-width="7" stroke-linejoin="miter" stroke-miterlimit="10"/>
+    </mask>
+    <symbol id="m1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="currentColor" mask="url(#cut)"/></symbol>
+    <!-- 2 Forward: one solid slab, leaning ahead. -->
+    <symbol id="m2" viewBox="0 0 100 100"><path d="M16 14H50L86 50L50 86H16L52 50Z" fill="currentColor"/></symbol>
+    <!-- 3 Fold: a note with its corner folded, handed over. -->
+    <symbol id="m3" viewBox="0 0 100 100"><path d="M14 14H58L86 42V86H14Z M58 14V42H86" fill="currentColor" fill-rule="evenodd"/>
+      <path d="M62 14L86 38H62Z" fill="currentColor" opacity=".55"/></symbol>
+  </defs>
+</svg>
+
+<main class="wrap">
+  <header class="intro">
+    <span class="eyebrow">Zap of Nakamoto · Round 6 · From scratch</span>
+    <h1>Bold on the outside, calm on the inside</h1>
+    <p>You asked for a bold, graphic brand and an app that makes first-timers feel safe and calm. So each territory gets one strong shape and one confident colour for the outside world: icon, posters, store. Inside the app it turns quiet. No characters, no jokes.</p>
+    <div class="brief">
+      <div><b>Feel</b><span>Bold &amp; graphic, like a Swiss poster</span></div>
+      <div><b>First-timer feels</b><span>Safe and calm</span></div>
+      <div><b>Survivors</b><span>Optional. Territory 1 keeps all three, 2 keeps the zap, 3 keeps nothing</span></div>
+    </div>
+  </header>
+
+  <!-- Territory 1 -->
+  <article class="terr" id="t1">
+    <div class="terr-head">
+      <h2><small>Territory 1</small>Split Coin</h2>
+      <div class="keeps"><span>Zap idea</span><span>Spark yellow</span><span>Unbounded</span></div>
+    </div>
+    <p class="idea">A plain, solid coin with one zap cut straight through it. The coin says “money, simple”. The cut says “it moves in a flash”. Two ideas in one shape, with nothing extra.</p>
+    <div class="grid">
+      <div class="poster" aria-label="Poster">
+        <svg viewBox="0 0 400 500">
+          <rect width="400" height="500" fill="#16182B"/>
+          <use href="#m1" x="40" y="40" width="320" height="320" style="color:#FFD23F"/>
+          <text x="40" y="420" fill="#FFF6D6" font-family="Unbounded, Arial Black, sans-serif" font-weight="800" font-size="30" letter-spacing="-0.5">Bitcoin,</text>
+          <text x="40" y="456" fill="#FFF6D6" font-family="Unbounded, Arial Black, sans-serif" font-weight="800" font-size="30" letter-spacing="-0.5">in a zap.</text>
+          <text x="360" y="456" fill="#FFD23F" font-family="Figtree, sans-serif" font-weight="600" font-size="12" text-anchor="end">Zap of Nakamoto</text>
+        </svg>
+      </div>
+      <div class="side">
+        <div class="markrow"><div class="tile a"><svg><use href="#m1"/></svg></div><div class="tile b"><svg><use href="#m1"/></svg></div></div>
+        <div class="sizes"><div class="ic s20"><svg><use href="#m1"/></svg></div><div class="ic s32"><svg><use href="#m1"/></svg></div><div class="ic s48"><svg><use href="#m1"/></svg></div><div class="ic k s48"><svg><use href="#m1"/></svg></div><div class="ic m s48"><svg><use href="#m1"/></svg></div></div>
+        <div class="wm"><b>Zap</b><span>of Nakamoto</span></div>
+        <div class="pal"><i style="background:#FFD23F"></i><i style="background:#16182B"></i><i style="background:#FFF6D6"></i></div>
+        <div class="pal-hex"><span>#FFD23F</span><span>#16182B</span><span>#FFF6D6</span></div>
+      </div>
+      <div class="phone" aria-label="Home screen example"><div class="screen">
+        <div class="top"><span>Mia</span><svg><use href="#m1"/></svg></div>
+        <div class="lbl">Your bitcoin</div><div class="amt">₿2,100</div>
+        <div class="row"><span>Leo</span><b>+₿1,000</b></div><div class="row"><span>Coffee</span><b>−₿3,400</b></div>
+        <div class="acts"><span>Send</span><span>Receive</span></div>
+      </div></div>
+    </div>
+    <div class="why">
+      <div><b>Strong because</b>It's the most direct way to say “money that moves fast”, and it's very simple to recognise. It keeps everything you liked so far.</div>
+      <div><b>Watch out</b>Coins are familiar in bitcoin land. The cut is what makes it ours, so it has to stay bold.</div>
+    </div>
+  </article>
+
+  <!-- Territory 2 -->
+  <article class="terr" id="t2">
+    <div class="terr-head">
+      <h2><small>Territory 2</small>Forward</h2>
+      <div class="keeps"><span>Zap idea</span><span class="off">Spark yellow</span><span class="off">Unbounded</span></div>
+    </div>
+    <p class="idea">The zap as pure direction: one solid slab leaning ahead, like D from round 3 without the letter. It's a sign everyone reads the same way: go, next, done. In print it repeats into a pattern of motion.</p>
+    <div class="grid">
+      <div class="poster" aria-label="Poster">
+        <svg viewBox="0 0 400 500">
+          <rect width="400" height="500" fill="#1E2EFF"/>
+          <g fill="#FFFFFF" opacity=".16">
+            <use href="#m2" x="-60" y="30" width="200" height="200" style="color:#FFFFFF"/>
+            <use href="#m2" x="40" y="30" width="200" height="200" style="color:#FFFFFF"/>
+          </g>
+          <use href="#m2" x="140" y="30" width="200" height="200" style="color:#FFFFFF"/>
+          <text x="40" y="350" fill="#FFFFFF" font-family="Archivo, Arial Black, sans-serif" font-style="italic" font-weight="800" font-stretch="125%" font-size="40" letter-spacing="-1">Send it.</text>
+          <text x="40" y="398" fill="#FFFFFF" font-family="Archivo, Arial Black, sans-serif" font-style="italic" font-weight="800" font-stretch="125%" font-size="40" letter-spacing="-1">Done.</text>
+          <text x="40" y="460" fill="#FFFFFF" opacity=".8" font-family="Figtree, sans-serif" font-weight="600" font-size="12">Zap of Nakamoto · bitcoin in a zap</text>
+        </svg>
+      </div>
+      <div class="side">
+        <div class="markrow"><div class="tile a"><svg><use href="#m2"/></svg></div><div class="tile b"><svg><use href="#m2"/></svg></div></div>
+        <div class="sizes"><div class="ic s20"><svg><use href="#m2"/></svg></div><div class="ic s32"><svg><use href="#m2"/></svg></div><div class="ic s48"><svg><use href="#m2"/></svg></div><div class="ic k s48"><svg><use href="#m2"/></svg></div><div class="ic m s48"><svg><use href="#m2"/></svg></div></div>
+        <div class="wm"><b>Zap</b><span>of Nakamoto</span></div>
+        <div class="pal"><i style="background:#1E2EFF"></i><i style="background:#0E0F1A"></i><i style="background:#F2F3F7"></i></div>
+        <div class="pal-hex"><span>#1E2EFF</span><span>#0E0F1A</span><span>#F2F3F7</span></div>
+      </div>
+      <div class="phone" aria-label="Home screen example"><div class="screen">
+        <div class="top"><span>Mia</span><svg style="color:#1E2EFF"><use href="#m2"/></svg></div>
+        <div class="lbl">Your bitcoin</div><div class="amt">₿2,100</div>
+        <div class="row"><span>Leo</span><b>+₿1,000</b></div><div class="row"><span>Coffee</span><b>−₿3,400</b></div>
+        <div class="acts"><span>Send</span><span>Receive</span></div>
+      </div></div>
+    </div>
+    <div class="why">
+      <div><b>Strong because</b>It's the boldest and most poster-like, with the most energy in the fewest lines. Ultramarine stands out from every orange bitcoin app.</div>
+      <div><b>Watch out</b>A chevron is close to a “next” or “play” icon. It needs its exact proportions and lean to stay ownable.</div>
+    </div>
+  </article>
+
+  <!-- Territory 3 -->
+  <article class="terr" id="t3">
+    <div class="terr-head">
+      <h2><small>Territory 3</small>Fold</h2>
+      <div class="keeps"><span class="off">Zap idea</span><span class="off">Spark yellow</span><span class="off">Unbounded</span></div>
+    </div>
+    <p class="idea">A banknote with its corner folded, the way you'd fold cash to hand it to a friend. It's about the simplest, oldest kind of money and the calm of a done deal, not speed. Deep green is the colour of money that's safe.</p>
+    <div class="grid">
+      <div class="poster" aria-label="Poster">
+        <svg viewBox="0 0 400 500">
+          <rect width="400" height="500" fill="#0E3B2E"/>
+          <use href="#m3" x="40" y="40" width="320" height="320" style="color:#B9EBCB"/>
+          <text x="40" y="420" fill="#F3F6F1" font-family="Familjen Grotesk, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.8">Bitcoin,</text>
+          <text x="40" y="458" fill="#F3F6F1" font-family="Familjen Grotesk, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.8">like cash.</text>
+          <text x="360" y="458" fill="#B9EBCB" font-family="Figtree, sans-serif" font-weight="600" font-size="12" text-anchor="end">Zap of Nakamoto</text>
+        </svg>
+      </div>
+      <div class="side">
+        <div class="markrow"><div class="tile a"><svg><use href="#m3"/></svg></div><div class="tile b"><svg><use href="#m3"/></svg></div></div>
+        <div class="sizes"><div class="ic s20"><svg><use href="#m3"/></svg></div><div class="ic s32"><svg><use href="#m3"/></svg></div><div class="ic s48"><svg><use href="#m3"/></svg></div><div class="ic k s48"><svg><use href="#m3"/></svg></div><div class="ic m s48"><svg><use href="#m3"/></svg></div></div>
+        <div class="wm"><b>Zap</b><span>of Nakamoto</span></div>
+        <div class="pal"><i style="background:#0E3B2E"></i><i style="background:#B9EBCB"></i><i style="background:#F3F6F1"></i></div>
+        <div class="pal-hex"><span>#0E3B2E</span><span>#B9EBCB</span><span>#F3F6F1</span></div>
+      </div>
+      <div class="phone" aria-label="Home screen example"><div class="screen">
+        <div class="top"><span>Mia</span><svg><use href="#m3"/></svg></div>
+        <div class="lbl">Your bitcoin</div><div class="amt">₿2,100</div>
+        <div class="row"><span>Leo</span><b>+₿1,000</b></div><div class="row"><span>Coffee</span><b>−₿3,400</b></div>
+        <div class="acts"><span>Send</span><span>Receive</span></div>
+      </div></div>
+    </div>
+    <div class="why">
+      <div><b>Strong because</b>It's the calmest and most reassuring. It frames bitcoin as cash, which is exactly how the app works: small amounts in your pocket.</div>
+      <div><b>Watch out</b>It's the least “zap”. The name promises speed while the brand promises calm, which is a good tension only if it's deliberate.</div>
+    </div>
+  </article>
+
+  <section class="questions">
+    <span class="eyebrow" style="color:inherit;opacity:.7">Your turn</span>
+    <h2>Before round 7</h2>
+    <ol>
+      <li>Which territory feels most like the brand, even if the details are off?</li>
+      <li>Which mark is strongest on its own: Split Coin, Forward or Fold?</li>
+      <li>Which colour world: yellow and ink, ultramarine, or deep green?</li>
+      <li>Is the split right: bold outside (posters, icon), calm inside (the app)?</li>
+    </ol>
+  </section>
+</main>

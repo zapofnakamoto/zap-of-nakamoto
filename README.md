@@ -3,7 +3,7 @@
 The simplest bitcoin wallet built on [White Wallet](https://github.com/zapofnakamoto/white-wallet), by configuration and a
 little design code: this repository is the whole app. It holds White Wallet's brand files (`brand.properties`, `res/`),
 the brand's look in code (`code/`: the living mark and its components, nothing about money), the Zapstore listing and
-the workflows that keep it current and publish it. The design is `../zap-app/DESIGN.md`.
+the workflows that keep it current and publish it. The design it follows is [`design/DESIGN.md`](design/DESIGN.md).
 
 **Who it's for:** absolute beginners who want to send and receive bitcoin, and don't care how LNURLcash works. (An
 app for experts and power users would be a different brand.)
@@ -37,7 +37,9 @@ phrase, address, security and About.
 | `res/values*/brand_colors.xml` | the palette mapped onto White Wallet's colour roles: paper and ink on light, ink and spark on dark |
 | `res/font/`, `res/values/zap_type.xml` | Unbounded (balance, headlines) and Figtree (everything else), with their licences in `fonts/` |
 | `res/values*/strings.xml` | slogan, first-run texts, the brand term and Zap's voice, in English and German |
-| `code/` | `ZapDesign`: the living mark (it reacts to the wallet's status and payments), the wordmark, spark pill buttons |
+| `code/` | `ZapDesign`: the living mark (it reacts to the wallet's status and payments), the celebrations on the success screens, the wordmark, spark pill buttons |
+| `dev/mark.py` | writes the mark's drawables above; run it after changing the mark |
+| `design/` | the brand design: `DESIGN.md` (palette, type, the mark, its states and motion, voice), the reference SVGs and their generator (`assets/`), the interactive prototype (`prototype/zap-states.html`, open it in a browser) and the earlier rounds (`explorations/`) |
 | `white-wallet.version` | the White Wallet release this app is built from (a tag, e.g. `v0.1.0`) |
 | `zapstore.yaml`, `zapstore/` | the store listing and its screenshots |
 | `CHANGELOG.md` | release notes, one section per version; Zapstore shows the released one |
