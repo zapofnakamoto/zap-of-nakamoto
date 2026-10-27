@@ -13,18 +13,18 @@ app for experts and power users would be a different brand.)
 | Rule | How (brand.properties) |
 |---|---|
 | One service, chosen for the user, another if they want | `defaultServiceHost=mint.lnurlcash.com` is preselected at setup and restore; `allowServiceChange=true` lets users pick a custom one there instead (no suggestions) |
-| One trusted service | the home mint, whichever it is, is trusted by default; `showMints=false` leaves nothing to trust by hand |
+| One trusted service | the home mint, whichever it is, is trusted by default; Settings → Services (`showMints=true`) shows it, and others can be trusted by hand |
 | One account | `maxAccounts=1`: no switcher, no "Add account" |
 | One Lightning address, asked for at setup | `requireAddress=true`, `maxAddresses=1` |
 | One note per service, kept automatically | `noteStrategies=single`, `defaultNoteStrategy=single` (it also renews the address's notes) |
 | Notes from elsewhere come home by themselves | `collectAtHomeMint=always` (fee cap 2 %) |
-| Nothing to manage by hand | `notesView=hidden` (no Notes tab or page), `showMints=false`; Note settings disappear by themselves, as there is nothing to choose |
+| Nothing to manage by hand | `notesView=hidden` (no Notes tab or page); Note settings disappear by themselves, as there is nothing to choose. Services are there to look at and change (`showMints=true`), never needed |
 | One unit, no choice | `defaultAmountUnit=bitcoin` (₿1,000; texts say "bitcoin", never "BTC" or "sats"), `allowUnitChange=false` (no Amounts page) |
 | No developer tools in sight | `developerOptions=hidden`: never in release builds (debug builds unlock them by tapping the version in About seven times) |
 | Plain words | the custodian is "a Lightning service" (`res/values*/strings.xml`), slogan "Just zap it." |
 
 What users see: setup (pick a name), the wallet (balance, Send, Receive), History, and Settings with their recovery
-phrase, address, security and About.
+phrase, address, their service (and other services), security and About.
 
 ## Files
 

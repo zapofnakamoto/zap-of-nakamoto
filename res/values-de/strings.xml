@@ -9,6 +9,9 @@
     <string name="settings_home_mint">Dein Dienst</string>
     <string name="settings_mints">Dienste</string>
     <string name="addresses_home_mint">Dienst: %1$s</string>
+    <string name="onboarding_change_service_title">Dienst wechseln</string>
+    <string name="service_change_home">Dienst wechseln</string>
+    <string name="service_make_home">Zu meinem Dienst machen</string>
 
     <!-- Slogan und Texte beim ersten Start -->
     <string name="onboarding_tagline">Einfach zappen.</string>

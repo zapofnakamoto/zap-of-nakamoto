@@ -11,6 +11,8 @@ White Wallet version.
 - Setup and restore let you use another Lightning service: mint.lnurlcash.com stays preselected, "Custom…" takes the
   address of any other.
 - Settings → Lightning addresses can add an address on another Lightning service, with the same recovery phrase.
+- Settings → Services shows your Lightning service and any other the wallet knows; on Claim, which service a note is
+  on and whether you trust it.
 
 ## [0.3.0]
 
