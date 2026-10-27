@@ -4,6 +4,14 @@ Every release of Zap of Nakamoto, newest first ([Keep a Changelog](https://keepa
 section of the released version as its release notes in Zapstore; the update workflow adds a section for each new
 White Wallet version.
 
+## [Unreleased]
+
+### Added
+
+- Setup and restore let you use another Lightning service: mint.lnurlcash.com stays preselected, "Custom…" takes the
+  address of any other.
+- Settings → Lightning addresses can add an address on another Lightning service, with the same recovery phrase.
+
 ## [0.3.0]
 
 On White Wallet v0.3.0.

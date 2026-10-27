@@ -12,8 +12,8 @@ app for experts and power users would be a different brand.)
 
 | Rule | How (brand.properties) |
 |---|---|
-| One service, chosen for the user | `defaultServiceHost=mint.lnurlcash.com`, `allowServiceChange=false`, no suggestions |
-| One trusted service | the home mint is trusted by default; `showMints=false` leaves nothing to trust by hand |
+| One service, chosen for the user, another if they want | `defaultServiceHost=mint.lnurlcash.com` is preselected at setup and restore; `allowServiceChange=true` lets users pick a custom one there instead (no suggestions) |
+| One trusted service | the home mint, whichever it is, is trusted by default; `showMints=false` leaves nothing to trust by hand |
 | One account | `maxAccounts=1`: no switcher, no "Add account" |
 | One Lightning address, asked for at setup | `requireAddress=true`, `maxAddresses=1` |
 | One note per service, kept automatically | `noteStrategies=single`, `defaultNoteStrategy=single` (it also renews the address's notes) |
