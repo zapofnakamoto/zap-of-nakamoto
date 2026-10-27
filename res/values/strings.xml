@@ -13,7 +13,6 @@
     <string name="settings_home_mint">Your service</string>
     <string name="settings_mints">Services</string>
     <string name="addresses_home_mint">Service: %1$s</string>
-    <string name="onboarding_change_service_title">Change service</string>
     <string name="service_change_home">Change service</string>
     <string name="service_make_home">Make this my service</string>
 
