@@ -7,7 +7,7 @@ Zapstore; the update workflow adds a section for each new White Wallet version.
 Zap of Nakamoto is a beta until 1.0.0: any release may change how the app works or break what it did before. Use it
 only to try it out, with tiny amounts you could lose.
 
-## [0.4.0]
+## [Unreleased]
 
 On White Wallet v0.3.0. From here on the version is the app's own (semver), no longer White Wallet's.
 
