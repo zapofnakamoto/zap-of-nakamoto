@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Markenbegriff -->
-    <string name="claim_home_mint">Bei %1$s, deinem Dienst</string>
-    <string name="notes_home_mint">Dein Dienst</string>
-    <string name="onboarding_service">Dienst</string>
-    <string name="onboarding_service_custom_host">Adresse des Dienstes</string>
-    <string name="onboarding_custody">Deine Bitcoin verwahrt ein Lightning-Dienst für dich, wie Bargeld in der Hosentasche. Halte die Beträge klein.</string>
-    <string name="settings_home_mint">Dein Dienst</string>
-    <string name="settings_mints">Dienste</string>
-    <string name="addresses_home_mint">Dienst: %1$s</string>
-    <string name="service_change_home">Dienst wechseln</string>
-    <string name="service_make_home">Zu meinem Dienst machen</string>
-    <string name="settings_account_mints">Deine Dienste</string>
-    <string name="mints_home_of">Dienst von %1$s</string>
-    <string name="mints_remove">Dienst entfernen</string>
+    <!-- Die Mint, in Zaps Worten -->
+    <string name="onboarding_mint_custody">Deine Bitcoin verwahrt eine Mint für dich, wie Bargeld in der Hosentasche. Halte die Beträge klein.</string>
 
     <!-- Slogan und Texte beim ersten Start -->
     <string name="onboarding_tagline">Einfach zappen.</string>
