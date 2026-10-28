@@ -59,17 +59,19 @@ jobs:
             name="$major.$((minor + 1)).0"
           fi
           code=$(( $(grep -E '^versionCode=' brand.properties | cut -d= -f2- | tr -d ' ') + 1 ))
+          # Two commits: the move to White Wallet, then the release (versionCode, versionName, CHANGELOG.md section).
+          git config user.name "zap-of-nakamoto-bot"
+          git config user.email "zap-of-nakamoto-bot@users.noreply.github.com"
+          git switch -C update/white-wallet
           echo "$TAG" > white-wallet.version
+          git commit -qam "chore(deps): white-wallet $TAG"
           sed -i -E "s/^versionCode=.*/versionCode=$code/; s/^versionName=.*/versionName=$name/" brand.properties
           { printf '## [%s]\n\nOn White Wallet %s.\n\n' "$name" "$TAG"; cat "$RUNNER_TEMP/notes.md"; printf '\n\n'; } > "$RUNNER_TEMP/section.md"
           awk -v f="$RUNNER_TEMP/section.md" '!done && /^## \[/ { while ((getline l < f) > 0) print l; done = 1 } { print }' \
             CHANGELOG.md > "$RUNNER_TEMP/CHANGELOG.md"
           mv "$RUNNER_TEMP/CHANGELOG.md" CHANGELOG.md
 
-          git config user.name "zap-of-nakamoto-bot"
-          git config user.email "zap-of-nakamoto-bot@users.noreply.github.com"
-          git switch -C update/white-wallet
-          git commit -qam "White Wallet $TAG"
+          git commit -qam "chore(release): v$name"
           git push -f origin update/white-wallet
           body="$(printf 'Moves to White Wallet %s and releases %s (versionCode %s) when merged.\n\n%s' "$TAG" "$name" "$code" "$(cat "$RUNNER_TEMP/notes.md")")"
           if gh pr view update/white-wallet --json state --jq .state 2>/dev/null | grep -q OPEN; then

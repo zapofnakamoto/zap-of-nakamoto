@@ -72,11 +72,14 @@ The debug build installs as `io.github.zapofnakamoto.debug`, next to a release b
 Everything that ships is decided here; CI only carries it out.
 
 - **A new White Wallet release** (a `v*` tag there): `update.yml` checks daily and opens a pull request that moves
-  `white-wallet.version` to it, raises `versionName` (minor for a new White Wallet minor or major, patch for a
-  White Wallet patch), raises `versionCode` by one and adds a `CHANGELOG.md` section with its release notes. Keys White Wallet adds come with defaults, so a brand rarely needs
-  more than that; a renamed or removed key makes the pull request's build fail instead of the app.
-- **A change to the brand itself** (texts, colors, a rule): a pull request that also raises `versionCode`, raises
-  `versionName` (patch for fixes and wording, minor for anything new) and adds its `CHANGELOG.md` section.
+  `white-wallet.version` to it (`chore(deps): white-wallet v…`) and then, in a commit of its own
+  (`chore(release): v…`), raises `versionName` (minor for a new White Wallet minor or major, patch for a White Wallet
+  patch), raises `versionCode` by one and adds a `CHANGELOG.md` section with its release notes. Keys White Wallet adds
+  come with defaults, so a brand rarely needs more than that; a renamed or removed key makes the pull request's build
+  fail instead of the app.
+- **A change to the brand itself** (texts, colors, a rule): its commits add to `## [Unreleased]` in `CHANGELOG.md`;
+  a commit of its own (`chore(release): v…`) then raises `versionCode` and `versionName` (patch for fixes and
+  wording, minor for anything new) and names that section.
 - **Versions** are the app's own [semver](https://semver.org/), independent of White Wallet's (each `CHANGELOG.md`
   section says which White Wallet it's on). Until 1.0.0 the app is a beta and any release may break things; 1.0.0
   is a decision made here, never a White Wallet update's.
