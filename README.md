@@ -83,11 +83,12 @@ Everything that ships is decided here; CI only carries it out.
 - **Versions** are the app's own [semver](https://semver.org/), independent of White Wallet's (each `CHANGELOG.md`
   section says which White Wallet it's on). Until 1.0.0 the app is a beta and any release may break things; 1.0.0
   is a decision made here, never a White Wallet update's.
-- **CI** (`ci.yml`) builds and checks every pull request against the pinned White Wallet, and refuses a change to
-  what ships (`brand.properties`, `res/`, `white-wallet.version`) without a new version.
+- **CI** (`ci.yml`) builds and checks every pull request against the pinned White Wallet. Changes can wait on main
+  unreleased: while `versionName` is a released one, a push is no release (and `versionCode` must stay that
+  release's). A new `versionName` needs a higher `versionCode` and its `CHANGELOG.md` section.
 - **Release** (`release.yml`): every push to main whose `v<versionName>` tag doesn't exist yet is released: the signed
   APK is built, its certificate checked, and a GitHub release `v<versionName>` created with the APK and its checksum.
-  Zapstore picks the release up from there. A push that ships nothing new (a README change) does nothing. If the
+  Zapstore picks the release up from there. A push that doesn't raise `versionName` releases nothing. If the
   release job fails, re-run that job in Actions; a new push would skip the version, as its tag exists by then.
 
 ### Set up once
