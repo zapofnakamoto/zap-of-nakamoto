@@ -21,6 +21,8 @@ On White Wallet v0.3.0. From here on the version is the app's own (semver), no l
 
 ### Changed
 
+- History has no filters any more: the "Note maintenance" chip is gone, and so are the entries it showed, which
+  never changed your balance.
 - The beta notice at setup and in About says what beta means here: until 1.0.0, updates may change how the app
   works, and only tiny amounts belong in it.
 
