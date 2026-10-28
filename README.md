@@ -8,6 +8,10 @@ the workflows that keep it current and publish it. The design it follows is [`de
 **Who it's for:** absolute beginners who want to send and receive bitcoin, and don't care how LNURLcash works. (An
 app for experts and power users would be a different brand.)
 
+> **Beta until 1.0.0.** Zap of Nakamoto is not ready for everyday money yet. Until version 1.0.0, any update may
+> change how the app works or break what it did before, and bugs can cost you what's in the wallet. Use it only to
+> try it out, with tiny amounts you could lose without minding.
+
 ## Product rules
 
 | Rule | How (brand.properties) |
@@ -68,11 +72,14 @@ The debug build installs as `io.github.zapofnakamoto.debug`, next to a release b
 Everything that ships is decided here; CI only carries it out.
 
 - **A new White Wallet release** (a `v*` tag there): `update.yml` checks daily and opens a pull request that moves
-  `white-wallet.version` to it, sets `versionName` to its version, raises `versionCode` by one and adds a
-  `CHANGELOG.md` section with its release notes. Keys White Wallet adds come with defaults, so a brand rarely needs
+  `white-wallet.version` to it, raises `versionName` (minor for a new White Wallet minor or major, patch for a
+  White Wallet patch), raises `versionCode` by one and adds a `CHANGELOG.md` section with its release notes. Keys White Wallet adds come with defaults, so a brand rarely needs
   more than that; a renamed or removed key makes the pull request's build fail instead of the app.
-- **A change to the brand itself** (texts, colors, a rule): a pull request that also raises `versionCode`, sets
-  `versionName` to the White Wallet version plus a revision (`0.1.0.1`) and adds its `CHANGELOG.md` section.
+- **A change to the brand itself** (texts, colors, a rule): a pull request that also raises `versionCode`, raises
+  `versionName` (patch for fixes and wording, minor for anything new) and adds its `CHANGELOG.md` section.
+- **Versions** are the app's own [semver](https://semver.org/), independent of White Wallet's (each `CHANGELOG.md`
+  section says which White Wallet it's on). Until 1.0.0 the app is a beta and any release may break things; 1.0.0
+  is a decision made here, never a White Wallet update's.
 - **CI** (`ci.yml`) builds and checks every pull request against the pinned White Wallet, and refuses a change to
   what ships (`brand.properties`, `res/`, `white-wallet.version`) without a new version.
 - **Release** (`release.yml`): every push to main whose `v<versionName>` tag doesn't exist yet is released: the signed

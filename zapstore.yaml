@@ -15,6 +15,10 @@ description: |
   - A recovery phrase that stays on your phone
 
   Your bitcoin is kept by a Lightning service (mint.lnurlcash.com), like cash in your pocket: keep amounts small.
+
+  Beta until version 1.0.0: not ready for everyday money yet. Any update may change how the app works or break
+  what it did before, and bugs can cost you what's in the wallet. Use it only to try it out, with tiny amounts you
+  could lose without minding.
 tags:
   - bitcoin
   - lightning

@@ -1,8 +1,11 @@
 # Changelog
 
-Every release of Zap of Nakamoto, newest first ([Keep a Changelog](https://keepachangelog.com/)). zsp shows the
-section of the released version as its release notes in Zapstore; the update workflow adds a section for each new
-White Wallet version.
+Every release of Zap of Nakamoto, newest first ([Keep a Changelog](https://keepachangelog.com/),
+[Semantic Versioning](https://semver.org/)). zsp shows the section of the released version as its release notes in
+Zapstore; the update workflow adds a section for each new White Wallet version.
+
+Zap of Nakamoto is a beta until 1.0.0: any release may change how the app works or break what it did before. Use it
+only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
@@ -13,6 +16,11 @@ White Wallet version.
 - Settings → Lightning addresses can add an address on another Lightning service, with the same recovery phrase.
 - Settings → Services shows your Lightning service and any other the wallet knows; on Claim, which service a note is
   on and whether you trust it.
+
+### Changed
+
+- The beta notice at setup and in About says what beta means here: until 1.0.0, updates may change how the app
+  works, and only tiny amounts belong in it.
 
 ## [0.3.0]
 

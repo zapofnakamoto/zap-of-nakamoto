@@ -31,4 +31,7 @@
     <string name="receive_invoice_waiting">Waiting for a zap…</string>
     <string name="send_paid_title">Zapped!</string>
     <string name="receive_success_title">You got zapped!</string>
+
+    <!-- Beta until 1.0.0 (README.md) -->
+    <string name="release_notice_beta">This app is a beta until version 1.0.0: updates may change how it works, and bugs can cost you what\'s in it. Only try it out, with tiny amounts you could lose.</string>
 </resources>

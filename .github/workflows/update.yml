@@ -48,7 +48,16 @@ jobs:
           GH_TOKEN: ${{ steps.token.outputs.token }}
           TAG: ${{ steps.latest.outputs.tag }}
         run: |
-          name="${TAG#v}"
+          # The app's own semver: a White Wallet patch raises the patch, anything bigger the minor. 1.0.0 is decided
+          # by hand (README.md, "Updates and releases").
+          IFS=. read -r major minor patch <<< "$(grep -E '^versionName=' brand.properties | cut -d= -f2- | tr -d ' ')"
+          IFS=. read -r old_major old_minor _ <<< "$(tr -d '[:space:]v' < white-wallet.version)"
+          IFS=. read -r new_major new_minor _ <<< "${TAG#v}"
+          if [[ "$old_major.$old_minor" == "$new_major.$new_minor" ]]; then
+            name="$major.$minor.$((patch + 1))"
+          else
+            name="$major.$((minor + 1)).0"
+          fi
           code=$(( $(grep -E '^versionCode=' brand.properties | cut -d= -f2- | tr -d ' ') + 1 ))
           echo "$TAG" > white-wallet.version
           sed -i -E "s/^versionCode=.*/versionCode=$code/; s/^versionName=.*/versionName=$name/" brand.properties

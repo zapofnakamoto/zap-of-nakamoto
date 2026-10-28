@@ -27,4 +27,7 @@
     <string name="receive_invoice_waiting">Warte auf einen Zap …</string>
     <string name="send_paid_title">Gezappt!</string>
     <string name="receive_success_title">Du wurdest gezappt!</string>
+
+    <!-- Beta bis 1.0.0 (README.md) -->
+    <string name="release_notice_beta">Diese App ist bis Version 1.0.0 eine Beta: Updates können ändern, wie sie funktioniert, und Fehler können dich kosten, was darin ist. Probier sie nur aus, mit kleinsten Beträgen, die du verlieren könntest.</string>
 </resources>
