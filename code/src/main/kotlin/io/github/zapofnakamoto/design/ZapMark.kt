@@ -2,8 +2,10 @@ package io.github.zapofnakamoto.design
 
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.EaseInOutSine
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.rememberInfiniteTransition
@@ -52,7 +54,8 @@ import whitewallet.brand.ui.LocalWalletEvents
  * [size].
  *
  * [status] picks the face and, when it changes, the motion: a payment arriving drops the bolt in (Happy), one going
- * out lifts it away and back (Focus, then Rest), a problem shakes it (Oops), work on the wallet pulses it (Working).
+ * out lifts it away and back (Focus, then Rest), a problem shakes it (Oops), work on the wallet pulses it (Working),
+ * and while nothing happens (Idle) it floats.
  * With [settleFirst] the first status is
  * shown as it ends, without its motion: for a mark that shows how something already is. With [followEvents] the mark
  * also reacts to payments anywhere in the app (the wallet tab). With [reduceMotion] nothing moves; only the face
@@ -112,6 +115,17 @@ internal fun ZapMark(
     } else {
         1f
     }
+    // Idle floats: up 3 % and back down, slowly, easing in and out of the float so it never jumps.
+    val floating by animateFloatAsState(
+        if (status == WalletStatus.Idle && !reduceMotion) 1f else 0f,
+        tween(FLOAT_MILLIS / 2, easing = EaseInOutSine),
+        label = "floating",
+    )
+    val float = if (floating > 0f) {
+        rememberInfiniteTransition(label = "float").animateFloat(0f, 1f, infiniteRepeatable(tween(FLOAT_MILLIS / 2, easing = EaseInOutSine), RepeatMode.Reverse), label = "float")
+    } else {
+        null
+    }
     // Working: the flash ring goes out again and again while the bolt bobs.
     val pulse = if (status is WalletStatus.Working && !reduceMotion) {
         rememberInfiniteTransition(label = "pulse").animateFloat(0f, 1f, infiniteRepeatable(tween(PULSE_MILLIS, easing = EASE_OUT)), label = "pulse").value
@@ -136,7 +150,9 @@ internal fun ZapMark(
             Modifier.fillMaxSize().graphicsLayer {
                 val boltHeight = this.size.minDimension * BOLT_HEIGHT / BOX
                 // The bob: up 4 % and back, once per pulse.
-                translationY = (motion.ty - (pulse?.let { 0.04f * sin(it * PI.toFloat()) } ?: 0f)) * boltHeight
+                val bob = pulse?.let { 0.04f * sin(it * PI.toFloat()) } ?: 0f
+                val drift = float?.let { FLOAT_HEIGHT * floating * it.value } ?: 0f
+                translationY = (motion.ty - bob - drift) * boltHeight
                 translationX = motion.shake * boltHeight
                 scaleX = motion.sx * breath
                 scaleY = motion.sy * breath
@@ -151,6 +167,12 @@ internal fun ZapMark(
 
 /** One pulse of the ring while the wallet works. */
 private const val PULSE_MILLIS = 1_200
+
+/** One float while idle, up and back down. */
+private const val FLOAT_MILLIS = 4_000
+
+/** How high the mark floats while idle, relative to the bolt's height. */
+private const val FLOAT_HEIGHT = 0.03f
 
 /** How long the mark stays happy after a payment arrived on the wallet tab. */
 private const val HAPPY_FOR_MILLIS = 2_500L

@@ -81,7 +81,7 @@ morphs between its 6 numbers, so every transition is smooth.
 
 | State | When | Eyes | Mouth `[x0,y0,cx,cy,x1,y1]` | Extra |
 |---|---|---|---|---|
-| **Rest** | Has a balance, idle | dots | smile `44,55.5,51,61.5,58,53.5` | — |
+| **Rest** | Has a balance, idle | dots | smile `44,55.5,51,61.5,58,53.5` | Floats while idle |
 | **Curious** | Empty wallet (₿0) | dots | small `47.5,56.5,51,59,54.5,56` | Head tilt −9° |
 | **Waiting** | Receive screen open | dots looking up-right (+2, −1.5) | focus `46,56,51,58.5,56,55.5` | Slow breathing, scale 1.04, 1.4 s |
 | **Focus** | Payment going out | dots | focus | — |
@@ -121,6 +121,9 @@ balance; it shrinks back once money arrives.
 **Working** (while the loading screen is up): the face becomes Focus over 200 ms. Then, again and again, the
 receive's flash ring goes out (scale .7 → 1.35, opacity .8 → 0, 1.2 s ease-out) while the bolt bobs up 4 % and back
 with it. It stops when the work is done and the balance shows again.
+
+**Idle:** while nothing happens, the bolt floats up 3 % and back down, 4 s a round, ease-in-out sine. It eases into
+and out of the float, so it never jumps when something else starts.
 
 **Reduced motion:** all movement is skipped and only the face changes, instantly.
 

@@ -35,6 +35,7 @@ On White Wallet v0.3.0. From here on the version is the app's own (semver), no l
   outline once the money left, the mark rising out of the card when it happens; back in your wallet, a solid one.
   Claim shows the same card, "Ready to claim". On paper it is an ink outline. The QR code stays covered until you
   tap, behind a gold cover, and is covered again when you leave the app. In English and German.
+- While nothing happens, the mark on the wallet floats gently up and down (not with reduced motion).
 
 - History has no filters any more: the "Note maintenance" chip is gone, and so are the entries it showed, which
   never changed your balance.
