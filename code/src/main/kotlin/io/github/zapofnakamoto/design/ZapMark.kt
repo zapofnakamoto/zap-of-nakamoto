@@ -36,6 +36,8 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.Dp
+import kotlin.math.PI
+import kotlin.math.sin
 import kotlin.random.Random
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -50,7 +52,8 @@ import whitewallet.brand.ui.LocalWalletEvents
  * [size].
  *
  * [status] picks the face and, when it changes, the motion: a payment arriving drops the bolt in (Happy), one going
- * out lifts it away and back (Focus, then Rest), a problem shakes it (Oops). With [settleFirst] the first status is
+ * out lifts it away and back (Focus, then Rest), a problem shakes it (Oops), work on the wallet pulses it (Working).
+ * With [settleFirst] the first status is
  * shown as it ends, without its motion: for a mark that shows how something already is. With [followEvents] the mark
  * also reacts to payments anywhere in the app (the wallet tab). With [reduceMotion] nothing moves; only the face
  * changes.
@@ -109,15 +112,22 @@ internal fun ZapMark(
     } else {
         1f
     }
+    // Working: the flash ring goes out again and again while the bolt bobs.
+    val pulse = if (status is WalletStatus.Working && !reduceMotion) {
+        rememberInfiniteTransition(label = "pulse").animateFloat(0f, 1f, infiniteRepeatable(tween(PULSE_MILLIS, easing = EASE_OUT)), label = "pulse").value
+    } else {
+        null
+    }
 
     Box(modifier.size(size)) {
         // The flash ring sits behind the bolt and doesn't move with it.
         Canvas(Modifier.fillMaxSize()) {
-            if (motion.ringAlpha <= 0f) return@Canvas
+            val (ringScale, ringAlpha) = pulse?.let { lerp(0.7f, 1.35f, it) to lerp(0.8f, 0f, it) } ?: (motion.ringScale to motion.ringAlpha)
+            if (ringAlpha <= 0f) return@Canvas
             val unit = this.size.minDimension / BOX
             drawCircle(
-                color.copy(alpha = motion.ringAlpha),
-                radius = 50 * unit * motion.ringScale,
+                color.copy(alpha = ringAlpha),
+                radius = 50 * unit * ringScale,
                 center = center,
                 style = Stroke(width = 3 * unit),
             )
@@ -125,7 +135,8 @@ internal fun ZapMark(
         Canvas(
             Modifier.fillMaxSize().graphicsLayer {
                 val boltHeight = this.size.minDimension * BOLT_HEIGHT / BOX
-                translationY = motion.ty * boltHeight
+                // The bob: up 4 % and back, once per pulse.
+                translationY = (motion.ty - (pulse?.let { 0.04f * sin(it * PI.toFloat()) } ?: 0f)) * boltHeight
                 translationX = motion.shake * boltHeight
                 scaleX = motion.sx * breath
                 scaleY = motion.sy * breath
@@ -137,6 +148,9 @@ internal fun ZapMark(
         ) { drawMark(color, motion) }
     }
 }
+
+/** One pulse of the ring while the wallet works. */
+private const val PULSE_MILLIS = 1_200
 
 /** How long the mark stays happy after a payment arrived on the wallet tab. */
 private const val HAPPY_FOR_MILLIS = 2_500L
@@ -256,7 +270,7 @@ private class MarkMotion(private var settleNext: Boolean) {
             is WalletStatus.Problem -> oops()
             WalletStatus.Empty -> curious()
             WalletStatus.AwaitingPayment, WalletStatus.WaitingForRecipient -> face(Face.Waiting, 220)
-            WalletStatus.Sending -> face(Face.Focus, 200)
+            WalletStatus.Sending, is WalletStatus.Working -> face(Face.Focus, 200)
             else -> face(Face.Rest, 220)
         }
     }

@@ -133,4 +133,13 @@
         <item quantity="one">Renewed %1$d zap</item>
         <item quantity="other">Renewed %1$d zaps</item>
     </plurals>
+
+    <!-- The loading screen, while the wallet works on the zaps -->
+    <plurals name="home_working_checking_notes">
+        <item quantity="one">Checking your zap…</item>
+        <item quantity="other">Checking zap %1$d of %2$d…</item>
+    </plurals>
+    <string name="home_working_combining">Combining your zaps…</string>
+    <string name="home_working_splitting">Splitting your zaps…</string>
+    <string name="home_working_renewing">Renewing your zaps…</string>
 </resources>

@@ -85,6 +85,7 @@ morphs between its 6 numbers, so every transition is smooth.
 | **Curious** | Empty wallet (₿0) | dots | small `47.5,56.5,51,59,54.5,56` | Head tilt −9° |
 | **Waiting** | Receive screen open | dots looking up-right (+2, −1.5) | focus `46,56,51,58.5,56,55.5` | Slow breathing, scale 1.04, 1.4 s |
 | **Focus** | Payment going out | dots | focus | — |
+| **Working** | The loading screen: the wallet updates, checks the zaps or looks after them | dots | focus | The ring pulses, the bolt bobs |
 | **Happy** | Payment arrived | arcs `M36.5 48.5Q41 43 45.5 48.5` and `M53.5 46.5Q58 41 62.5 46.5` | big `42.5,54,51,66,60,52` | — |
 | **Oops** | Not enough funds, no connection | dots | worry `45,59,51,54,57,58` | Small shake |
 
@@ -116,6 +117,10 @@ limited to the bolt's position, squash and one flash ring. Nothing gets added on
 **Empty:** the head tilts −9° over 400 ms and the face shows the small smile. On the wallet the mark grows from
 88 to 128 dp over the same 400 ms, above "Nothing here yet. Share your address to get your first zap." under the
 balance; it shrinks back once money arrives.
+
+**Working** (while the loading screen is up): the face becomes Focus over 200 ms. Then, again and again, the
+receive's flash ring goes out (scale .7 → 1.35, opacity .8 → 0, 1.2 s ease-out) while the bolt bobs up 4 % and back
+with it. It stops when the work is done and the balance shows again.
 
 **Reduced motion:** all movement is skipped and only the face changes, instantly.
 

@@ -75,6 +75,8 @@ object ZapDesign : BrandDesign {
             // The Zaps tab: waiting while zaps you handed out wait, curious once, above the hint, when there are none.
             Anchor.NotesHeader -> if (context.status == WalletStatus.Empty) null else 56.dp
             Anchor.NotesEmpty -> 112.dp
+            // The loading screen: the mark works (Focus, pulsing) where the balance was.
+            Anchor.Loading -> 96.dp
             else -> null
         }
         when {
