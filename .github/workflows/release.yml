@@ -1,8 +1,8 @@
-# Every push to main whose v<versionName> isn't released yet: build and sign the APK, check its certificate, and
+# Every push to main whose v<app.version.name> isn't released yet: build and sign the APK, check its certificate, and
 # create the GitHub release with the APK and its checksum. Zapstore's catalog indexes new apps from these releases.
 # With the repository variable ZAPSTORE_PUBLISH=true, the release is also published to Zapstore with zsp; running the
 # workflow by hand then publishes the current version even if its GitHub release exists already. A push whose
-# versionName is released already does nothing. When the release job fails (the bunker offline, say), re-run that
+# app.version.name is released already does nothing. When the release job fails (the bunker offline, say), re-run that
 # job. Setup: README.md, "Set up once".
 name: Release
 
@@ -34,7 +34,7 @@ jobs:
       - run: .github/scripts/version-check.sh
       - id: v
         run: |
-          name="$(grep -E '^versionName=' brand.properties | cut -d= -f2- | tr -d ' ')"
+          name="$(grep -E '^app.version.name=' brand.properties | cut -d= -f2- | tr -d ' ')"
           echo "name=$name" >> "$GITHUB_OUTPUT"
           if ! git rev-parse -q --verify "refs/tags/v$name" >/dev/null; then
             echo "release=true" >> "$GITHUB_OUTPUT"

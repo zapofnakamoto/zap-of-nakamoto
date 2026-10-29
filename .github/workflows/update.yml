@@ -50,7 +50,7 @@ jobs:
         run: |
           # The app's own semver: a White Wallet patch raises the patch, anything bigger the minor. 1.0.0 is decided
           # by hand (README.md, "Updates and releases").
-          IFS=. read -r major minor patch <<< "$(grep -E '^versionName=' brand.properties | cut -d= -f2- | tr -d ' ')"
+          IFS=. read -r major minor patch <<< "$(grep -E '^app.version.name=' brand.properties | cut -d= -f2- | tr -d ' ')"
           IFS=. read -r old_major old_minor _ <<< "$(tr -d '[:space:]v' < white-wallet.version)"
           IFS=. read -r new_major new_minor _ <<< "${TAG#v}"
           if [[ "$old_major.$old_minor" == "$new_major.$new_minor" ]]; then
@@ -58,14 +58,14 @@ jobs:
           else
             name="$major.$((minor + 1)).0"
           fi
-          code=$(( $(grep -E '^versionCode=' brand.properties | cut -d= -f2- | tr -d ' ') + 1 ))
-          # Two commits: the move to White Wallet, then the release (versionCode, versionName, CHANGELOG.md section).
+          code=$(( $(grep -E '^app.version.code=' brand.properties | cut -d= -f2- | tr -d ' ') + 1 ))
+          # Two commits: the move to White Wallet, then the release (app.version.code, app.version.name, CHANGELOG.md section).
           git config user.name "zap-of-nakamoto-bot"
           git config user.email "zap-of-nakamoto-bot@users.noreply.github.com"
           git switch -C update/white-wallet
           echo "$TAG" > white-wallet.version
           git commit -qam "chore(deps): white-wallet $TAG"
-          sed -i -E "s/^versionCode=.*/versionCode=$code/; s/^versionName=.*/versionName=$name/" brand.properties
+          sed -i -E "s/^app.version.code=.*/app.version.code=$code/; s/^app.version.name=.*/app.version.name=$name/" brand.properties
           { printf '## [%s]\n\nOn White Wallet %s.\n\n' "$name" "$TAG"; cat "$RUNNER_TEMP/notes.md"; printf '\n\n'; } > "$RUNNER_TEMP/section.md"
           awk -v f="$RUNNER_TEMP/section.md" '!done && /^## \[/ { while ((getline l < f) > 0) print l; done = 1 } { print }' \
             CHANGELOG.md > "$RUNNER_TEMP/CHANGELOG.md"
@@ -73,7 +73,7 @@ jobs:
 
           git commit -qam "chore(release): v$name"
           git push -f origin update/white-wallet
-          body="$(printf 'Moves to White Wallet %s and releases %s (versionCode %s) when merged.\n\n%s' "$TAG" "$name" "$code" "$(cat "$RUNNER_TEMP/notes.md")")"
+          body="$(printf 'Moves to White Wallet %s and releases %s (app.version.code %s) when merged.\n\n%s' "$TAG" "$name" "$code" "$(cat "$RUNNER_TEMP/notes.md")")"
           if gh pr view update/white-wallet --json state --jq .state 2>/dev/null | grep -q OPEN; then
             gh pr edit update/white-wallet --title "White Wallet $TAG" --body "$body"
           else

@@ -1,20 +1,22 @@
 #!/usr/bin/env bash
-# The version in brand.properties decides what a push to main is. versionName released already (its tag v<versionName>
-# exists): not a release, and versionCode must still be that release's. A new versionName: a release, so versionCode
-# must be above the latest release's, versionName above its tag, and CHANGELOG.md must have a section for it. Changes
-# can wait on main until a commit raises the version. Needs the tags (actions/checkout with fetch-depth: 0).
+# The version in brand.properties decides what a push to main is. app.version.name released already (its tag
+# v<app.version.name> exists): not a release, and app.version.code must still be that release's. A new
+# app.version.name: a release, so app.version.code must be above the latest release's, app.version.name above its tag,
+# and CHANGELOG.md must have a section for it. Changes can wait on main until a commit raises the version. Needs the
+# tags (actions/checkout with fetch-depth: 0).
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 prop() { grep -E "^$1=" "${2:-brand.properties}" | head -1 | cut -d= -f2- | tr -d ' '; }
-code_at() { git show "$1:brand.properties" | grep -E '^versionCode=' | cut -d= -f2- | tr -d ' '; }
+# Releases before White Wallet grouped its keys called it versionCode.
+code_at() { git show "$1:brand.properties" | grep -E '^(app\.version\.code|versionCode)=' | head -1 | cut -d= -f2- | tr -d ' '; }
 
-name="$(prop versionName)"
-code="$(prop versionCode)"
+name="$(prop app.version.name)"
+code="$(prop app.version.code)"
 
 if git rev-parse -q --verify "refs/tags/v$name" >/dev/null; then
   released="$(code_at "v$name")"
   if [[ "$code" != "$released" ]]; then
-    echo "versionName $name is released already, with versionCode $released, not $code: raise versionName too, or put versionCode back." >&2
+    echo "app.version.name $name is released already, with app.version.code $released, not $code: raise app.version.name too, or put app.version.code back." >&2
     exit 1
   fi
   echo "v$name is released already; this is not a release."

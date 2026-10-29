@@ -60,7 +60,7 @@
     <string name="mints_add_invalid">Diese Adresse kann keine Bitcoin verwahren.</string>
     <string name="mints_remove_body">Die App vergisst sie, ihren Signaturschlüssel und ob du ihr vertraust. Deine Bitcoin und der Verlauf bleiben. Fügst du sie später wieder hinzu, ist es wie beim ersten Mal: Der Schlüssel, den sie dann zeigt, ist der, den sich die App merkt.</string>
 
-    <!-- Der Tab Zaps (notesView=tab): deine Zaps einzeln -->
+    <!-- Der Tab Zaps (notes.view=tab): deine Zaps einzeln -->
     <string name="home_tab_notes">Zaps</string>
     <string name="settings_note_list">Zaps</string>
     <string name="settings_note_list_hint">Deine Zaps einzeln ansehen, teilen, aufteilen oder zusammenlegen</string>
