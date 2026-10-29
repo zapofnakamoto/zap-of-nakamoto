@@ -1,0 +1,295 @@
+<title>Zap Spark Card Round 13</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: round-13 working sheet. Round 12's spark card, refined: the card says its own state, speaks to whoever
+   scans it, keeps its QR code covered until a tap, and is the same card on the claim screen. One row for the
+   sender's phone, one for everywhere else. */
+:root {
+  --bg: #F4F4F7; --surface: #FFFFFF; --fg: #17171F; --muted: #5E5E70; --line: #E1E1E8; --focus: #4B5BFF;
+  --spark: #FFD23F; --ink: #16182B; --ink-soft: #4A4C60; --ink-raised: #21243A; --paper: #FFF6D6;
+  --paper-deep: #FBEDC0; --paper-soft: #D8D2BC; --white: #FFFFFF; --warn: #B3261E; --warn-dark: #FFB4AB;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px }
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 64px }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; font-weight: 800 }
+h2 { font-size: 1.35rem; font-weight: 700 }
+p { margin: 0; max-width: 65ch }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.muted { color: var(--muted) }
+section { display: grid; gap: 20px }
+.head { display: grid; gap: 8px }
+button { font: inherit; color: inherit }
+button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px }
+
+.intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start }
+.intro > * { min-width: 0 }
+.changes { display: grid; margin: 0; padding: 0; list-style: none; font-size: .95rem }
+.changes li { display: grid; grid-template-columns: 2rem 1fr; gap: 10px; padding-block: 8px; border-bottom: 1px solid var(--line) }
+.changes li span:first-child { font: 800 .95rem var(--display) }
+.lang { display: inline-flex; border: 1.5px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; justify-self: start }
+.lang button { border: 0; background: transparent; padding: 5px 14px; border-radius: 999px; font-weight: 700; font-size: .85rem; cursor: pointer }
+.lang button[aria-pressed="true"] { background: var(--fg); color: var(--bg) }
+
+.row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
+.row.three { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+.place { display: grid; gap: 8px; align-content: start; min-width: 0 }
+.place > b { font-size: .92rem }
+.place > span { font-size: .8rem; color: var(--muted) }
+.screen { --screen: var(--paper); --on: var(--ink); --cover: var(--paper-deep); --on-cover: var(--ink-soft); --warn-c: var(--warn);
+  background: var(--screen); color: var(--on); border-radius: 22px; padding: 22px 16px; display: grid; gap: 12px;
+  align-content: start; justify-items: center; min-height: 100%; border: 1px solid var(--line) }
+.screen.dark { --screen: var(--ink); --on: var(--paper); --cover: var(--ink-raised); --on-cover: var(--paper-soft); --warn-c: var(--warn-dark) }
+.screen.sheet { --screen: var(--white); --on: var(--ink); border-radius: 4px; box-shadow: 0 1px 0 var(--line), 0 14px 30px -24px rgb(0 0 0 / .5) }
+.app { font: 500 .78rem/1.4 var(--body); text-align: center; max-width: 30ch; opacity: .85 }
+.app.warn { color: var(--warn-c); opacity: 1 }
+.app-btn { font: 700 .8rem var(--body); background: var(--spark); color: var(--ink); border-radius: 999px; padding: 9px 0; width: 100%; max-width: 220px; text-align: center }
+.screen.dark .app-btn { background: var(--spark) }
+.app-row { display: flex; gap: 6px; width: 100%; max-width: 220px }
+.app-row span { flex: 1; text-align: center; font: 600 .7rem var(--body); border: 1.5px solid var(--paper-soft); border-radius: 999px; padding: 6px 0 }
+
+/* The spark card. Its own line of state on top, the mark, the amount, then the code (or its cover, or the outcome). */
+.card { width: 100%; max-width: 220px; background: var(--spark); color: var(--ink); border-radius: 22px; padding: 12px 14px 14px;
+  display: grid; justify-items: center; gap: 8px; position: relative }
+.state { font: 700 .66rem var(--body); letter-spacing: .1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px }
+.state i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; display: inline-block }
+.mk { width: 34px; height: 34px; display: grid; place-items: center }
+.mk svg { width: 100%; height: 100%; overflow: visible }
+.amt { font: 800 1.9rem/1 var(--display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; white-space: nowrap }
+.scan { font: 700 .78rem var(--body) }
+.qr { width: 140px; height: 140px; image-rendering: pixelated; border-radius: 8px; display: block; max-width: 100% }
+.cover { width: 140px; height: 140px; border-radius: 8px; background: var(--cover); color: var(--on-cover); display: grid; place-items: center;
+  text-align: center; font: 600 .78rem/1.35 var(--body); padding: 14px; max-width: 100%; cursor: pointer; border: 0 }
+.outcome { width: 140px; min-height: 64px; border-radius: 8px; display: grid; place-items: center; text-align: center;
+  font: 800 .9rem/1.2 var(--display); letter-spacing: -0.01em; padding: 10px; max-width: 100% }
+
+/* Out of use: claimed is the dashed outline (the money left), taken back the solid outline with a spark dot (it's yours). */
+.card.claimed { background: transparent; color: var(--on); border: 2px dashed currentColor }
+.card.claimed .amt { opacity: .55 }
+.card.back { background: transparent; color: var(--on); border: 2px solid currentColor }
+.card.back .outcome { background: var(--spark); color: var(--ink) }
+.card.claimed .outcome { border: 1.5px dashed currentColor; opacity: .8 }
+.card.ink { background: transparent; border: 2.5px solid var(--ink) }
+
+.strings { overflow-x: auto }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .92rem }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top }
+th { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+td code { font-size: .82rem }
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none }
+.notes li { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 14px 16px; font-size: .9rem; display: grid; gap: 4px; align-content: start }
+
+@media (max-width: 920px) { .row, .row.three { grid-template-columns: repeat(2, minmax(0, 1fr)) } .intro, .notes { grid-template-columns: 1fr } }
+@media (max-width: 480px) { .row, .row.three { grid-template-columns: 1fr } }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <div class="head">
+      <span class="eyebrow">Zap of Nakamoto · round 13 · 2026-10-29</span>
+      <h1>The spark card</h1>
+      <p class="muted">Round 12 chose direction A, the spark card. This round refines it for the people who use it: the one who hands a zap over, and the one who scans or claims it. Tap a covered code to see it appear.</p>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" id="lang-de" data-lang="de" aria-pressed="false">Deutsch</button>
+      </div>
+    </div>
+    <ul class="changes">
+      <li><span>1</span><span>The card says its own state: waiting, claimed, or back in your wallet. Claimed and taken back no longer look the same.</span></li>
+      <li><span>2</span><span>"Scan to claim" above the code, for whoever looks at it, on screen and on paper.</span></li>
+      <li><span>3</span><span>The same card on the claim screen, without a code, so sender and recipient see one object.</span></li>
+      <li><span>+</span><span>The code stays covered until a tap, and again when the app leaves the screen. This is White Wallet's, for every brand.</span></li>
+    </ul>
+  </header>
+
+  <section aria-labelledby="h-sender">
+    <div class="head">
+      <span class="eyebrow">On the sender's phone</span>
+      <h2 id="h-sender">From handing it over to the end</h2>
+    </div>
+    <div class="row">
+      <div class="place">
+        <div class="screen">
+          <div class="card"><span class="state"><i></i><t data-k="waiting"></t></span><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b>
+            <button class="cover" type="button" data-reveal><t data-k="cover"></t></button></div>
+          <p class="app warn"><t data-k="warn"></t></p>
+          <div class="app-row"><span><t data-k="share"></t></span><span><t data-k="copy"></t></span><span><t data-k="print"></t></span></div>
+        </div>
+        <b>Waiting, covered</b><span>How the zap's page opens</span>
+      </div>
+      <div class="place">
+        <div class="screen">
+          <div class="card"><span class="state"><i></i><t data-k="waiting"></t></span><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b>
+            <span class="scan"><t data-k="scan"></t></span><canvas class="qr"></canvas></div>
+          <p class="app warn"><t data-k="warn"></t></p>
+          <div class="app-row"><span><t data-k="share"></t></span><span><t data-k="copy"></t></span><span><t data-k="print"></t></span></div>
+        </div>
+        <b>Waiting, shown</b><span>After a tap; covered again when you leave the app</span>
+      </div>
+      <div class="place">
+        <div class="screen">
+          <div class="card claimed"><span class="state"><t data-k="claimedState"></t></span><span class="mk" data-face="happy"></span><b class="amt">₿2,100</b>
+            <span class="outcome"><t data-k="claimed"></t></span></div>
+          <div class="app-btn"><t data-k="done"></t></div>
+        </div>
+        <b>Claimed</b><span>Dashed outline: the money left. The mark is happy.</span>
+      </div>
+      <div class="place">
+        <div class="screen">
+          <div class="card back"><span class="state"><t data-k="backState"></t></span><span class="mk" data-face="rest"></span><b class="amt">₿2,100</b>
+            <span class="outcome"><t data-k="back"></t></span></div>
+          <div class="app-btn"><t data-k="done"></t></div>
+        </div>
+        <b>Taken back</b><span>Solid outline, spark inside: the money is yours again</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-else">
+    <div class="head">
+      <span class="eyebrow">Everywhere else</span>
+      <h2 id="h-else">The recipient, the dark theme, paper</h2>
+    </div>
+    <div class="row three">
+      <div class="place">
+        <div class="screen">
+          <div class="card"><span class="state"><i></i><t data-k="ready"></t></span><span class="mk" data-face="happy"></span><b class="amt">₿2,100</b></div>
+          <p class="app"><t data-k="mint"></t></p>
+          <div class="app-btn"><t data-k="claim"></t></div>
+        </div>
+        <b>Claim screen, recipient</b><span>The same card without a code; Claim right under it</span>
+      </div>
+      <div class="place">
+        <div class="screen dark">
+          <div class="card"><span class="state"><i></i><t data-k="waiting"></t></span><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b>
+            <button class="cover" type="button" data-reveal><t data-k="cover"></t></button></div>
+          <p class="app warn"><t data-k="warn"></t></p>
+        </div>
+        <b>Waiting, dark</b><span>Spark on ink; the cover in Zap's raised ink</span>
+      </div>
+      <div class="place">
+        <div class="screen sheet">
+          <div class="card ink"><span class="state"><t data-k="paperState"></t></span><span class="mk" data-face="rest"></span><b class="amt">₿2,100</b>
+            <span class="scan"><t data-k="scan"></t></span><canvas class="qr"></canvas></div>
+          <p class="app"><t data-k="paperWarn"></t></p>
+        </div>
+        <b>On paper</b><span>Always uncovered; ink outline; "Scan to claim" travels with it</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-strings">
+    <div class="head">
+      <span class="eyebrow">Words</span>
+      <h2 id="h-strings">New Zap strings</h2>
+      <p class="muted">The card's own lines, in Zap's strings (English and German). The cover's label and everything below the card are White Wallet's.</p>
+    </div>
+    <div class="strings">
+      <table>
+        <thead><tr><th>Where</th><th>Key (proposed)</th><th>English</th><th>German</th></tr></thead>
+        <tbody>
+          <tr><td>Waiting</td><td><code>zap_card_waiting</code></td><td>Waiting to be claimed</td><td>Wartet aufs Einlösen</td></tr>
+          <tr><td>Above the code</td><td><code>zap_card_scan</code></td><td>Scan to claim</td><td>Zum Einlösen scannen</td></tr>
+          <tr><td>Claimed</td><td><code>zap_card_claimed</code></td><td>Claimed</td><td>Eingelöst</td></tr>
+          <tr><td>Taken back</td><td><code>zap_card_taken_back</code></td><td>Back in your wallet</td><td>Zurück in deiner Wallet</td></tr>
+          <tr><td>Claim screen</td><td><code>zap_card_ready</code></td><td>Ready to claim</td><td>Bereit zum Einlösen</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-notes">
+    <div class="head">
+      <span class="eyebrow">Open</span>
+      <h2 id="h-notes">Still to decide</h2>
+    </div>
+    <ul class="notes">
+      <li><b>Two marks</b><span class="muted">The zap's page already shows the living mark above the card. With the card's own small mark there are two. Keep both, or drop the page's mark on this page?</span></li>
+      <li><b>The state line</b><span class="muted">Small caps on the card repeat the sentence White Wallet shows below it ("Not claimed yet…"). Keep both, or keep only the card's?</span></li>
+      <li><b>The cover's colour</b><span class="muted">White Wallet draws the cover in the theme's surface variant (Zap: deep paper, raised ink in dark), the same on every brand's card. On spark it reads as a hole in the card. If Zap wants it spark-tinted, White Wallet would have to let brands restyle the cover.</span></li>
+      <li><b>Motion</b><span class="muted">Waiting to claimed could play round 11's send motion on the card's mark, then turn dashed. Not drawn here.</span></li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(() => {
+  const words = {
+    en: { waiting: 'Waiting to be claimed', scan: 'Scan to claim', claimedState: 'Done', claimed: 'Claimed', backState: 'Done',
+      back: 'Back in your wallet', ready: 'Ready to claim', paperState: 'Bitcoin', cover: 'Tap to show the QR code',
+      warn: 'Anyone with this code can spend it.', share: 'Share', copy: 'Copy', print: 'Print', done: 'Done', claim: 'Claim',
+      mint: 'On mint.lnurlcash.com', paperWarn: 'Whoever holds this paper can spend it. Keep it like cash.' },
+    de: { waiting: 'Wartet aufs Einlösen', scan: 'Zum Einlösen scannen', claimedState: 'Fertig', claimed: 'Eingelöst', backState: 'Fertig',
+      back: 'Zurück in deiner Wallet', ready: 'Bereit zum Einlösen', paperState: 'Bitcoin', cover: 'Tippen, um den QR-Code zu zeigen',
+      warn: 'Jeder mit diesem Code kann ihn ausgeben.', share: 'Teilen', copy: 'Kopieren', print: 'Drucken', done: 'Fertig', claim: 'Einlösen',
+      mint: 'Bei mint.lnurlcash.com', paperWarn: 'Wer dieses Papier hat, kann es ausgeben. Bewahre es auf wie Bargeld.' },
+  };
+  const amounts = { en: '₿2,100', de: '2.100 ₿' };
+  const setLang = lang => {
+    document.querySelectorAll('t[data-k]').forEach(t => { t.textContent = words[lang][t.dataset.k]; });
+    document.querySelectorAll('.amt').forEach(a => { a.textContent = amounts[lang]; });
+    document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('r13-lang', lang); } catch (e) {}
+  };
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  // The mark, from DESIGN.md: a chubby bolt with a face cut out of it.
+  const P = 'M62 6L16 58H44L34 94L84 38H57L70 6Z';
+  const faces = {
+    rest: { eyes: [[41, 47], [58, 45]], mouth: [44, 55.5, 51, 61.5, 58, 53.5] },
+    waiting: { eyes: [[43, 45.5], [60, 43.5]], mouth: [46, 56, 51, 58.5, 56, 55.5] },
+    happy: { arcs: ['M36.5 48.5Q41 43 45.5 48.5', 'M53.5 46.5Q58 41 62.5 46.5'], mouth: [42.5, 54, 51, 66, 60, 52] },
+  };
+  let n = 0;
+  document.querySelectorAll('.mk').forEach(el => {
+    const f = faces[el.dataset.face], id = 'zf' + (n++), m = f.mouth;
+    const eyes = f.eyes ? f.eyes.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.8" fill="#000"/>`).join('')
+      : f.arcs.map(d => `<path d="${d}" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/>`).join('');
+    el.innerHTML = `<svg viewBox="-10 -10 120 120" aria-hidden="true"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="-20" y="-20" width="140" height="140">
+      <rect x="-20" y="-20" width="140" height="140" fill="#fff"/>${eyes}
+      <path d="M${m[0]} ${m[1]}Q${m[2]} ${m[3]} ${m[4]} ${m[5]}" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/></mask></defs>
+      <path d="${P}" fill="currentColor" stroke="currentColor" stroke-width="12" stroke-linejoin="round" mask="url(#${id})"/></svg>`;
+  });
+
+  // A placeholder QR code (not a real zap), black on white with its quiet zone, as the app draws it.
+  const N = 29;
+  let s = 2100;
+  const rnd = () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  const grid = Array.from({ length: N }, () => Array.from({ length: N }, () => rnd() < 0.5));
+  const finder = (r0, c0) => { for (let r = -1; r < 8; r++) for (let c = -1; c < 8; c++) {
+    const y = r0 + r, x = c0 + c; if (y < 0 || x < 0 || y >= N || x >= N) continue;
+    grid[y][x] = r >= 0 && r < 7 && c >= 0 && c < 7 && Math.max(Math.abs(r - 3), Math.abs(c - 3)) !== 2; } };
+  finder(0, 0); finder(0, N - 7); finder(N - 7, 0);
+  for (let i = 8; i < N - 8; i++) { grid[6][i] = i % 2 === 0; grid[i][6] = i % 2 === 0; }
+  const drawQr = cv => {
+    const m = 2, size = N + m * 2; cv.width = size; cv.height = size;
+    const g = cv.getContext('2d'); g.fillStyle = '#FFFFFF'; g.fillRect(0, 0, size, size); g.fillStyle = '#000000';
+    grid.forEach((row, y) => row.forEach((on, x) => { if (on) g.fillRect(x + m, y + m, 1, 1); }));
+  };
+  document.querySelectorAll('canvas.qr').forEach(drawQr);
+
+  // Tapping a cover shows the code in its place, as on the phone.
+  document.querySelectorAll('[data-reveal]').forEach(btn => btn.addEventListener('click', () => {
+    const scan = document.createElement('span'); scan.className = 'scan';
+    const t = document.createElement('t'); t.dataset.k = 'scan'; t.textContent = words[document.documentElement.lang || 'en'].scan; scan.append(t);
+    const cv = document.createElement('canvas'); cv.className = 'qr'; drawQr(cv);
+    btn.replaceWith(scan, cv);
+  }));
+
+  let saved = 'en';
+  try { saved = localStorage.getItem('r13-lang') || 'en'; } catch (e) {}
+  setLang(words[saved] ? saved : 'en');
+})();
+</script>
