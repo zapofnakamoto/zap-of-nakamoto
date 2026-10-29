@@ -123,6 +123,46 @@ Implementation: Web Animations API on nested groups `.tilt > .mv` with
 `transform-box: fill-box`. The mouth is tweened with `requestAnimationFrame` using ease-out cubic.
 See [`prototype/zap-states.html`](prototype/zap-states.html).
 
+## The zap
+
+A zap is bitcoin as a QR code or link: whoever claims it gets the bitcoin (White Wallet calls it a note). Zap draws
+it as a **spark card** (rounds 12 and 13), in [`code/`](../code) (`ZapNote.kt`, White Wallet's `NoteFace`).
+
+**The card** is spark (`primaryContainer`) with 24 dp corners, at least 220 dp wide, with 16 × 14 dp padding and
+10 dp between its parts. From the top: the state line, the mark (40 dp, ink), the amount (Unbounded,
+`headlineLarge`), then "Scan to claim" above the QR code. The code stays exactly as White Wallet draws it, black on
+white. The state line is in small capitals with 0.1 em letter spacing, with a dot while the zap is money.
+
+| Where | State line | Look |
+|---|---|---|
+| A zap's page, waiting | "Waiting to be claimed" | Spark card; mark Waiting; the code under the cover until a tap |
+| A zap's page, claimed | "Claimed" | Dashed 2 dp outline, the amount at 55 %; mark Happy |
+| A zap's page, taken back | "Back in your wallet", on a spark pill | Solid 2 dp outline; mark Rest |
+| Claim | "Ready to claim" | Spark card without a code; mark Happy |
+| A zap's details (Zaps tab) | — | Spark card without a code; mark Rest |
+| Paper | — | 2.5 dp ink outline on white, no fill, to save ink; mark Rest; "Scan to claim" |
+
+**One mark.** On a zap's page the mark is on the card; the page has none of its own above it.
+
+**The cover.** White Wallet covers the code until the user taps it, and again whenever the app leaves the screen.
+Zap's cover is gold (`tertiary`) with 12 dp corners and a dashed edge in ink at 35 %, with "Tap to show the QR code"
+in ink (`titleSmall`), so it reads as part of the card, not a hole in it. Paper is never covered.
+
+**Motion.** A zap claimed while its page is open: the card's mark plays **Send** and ends Happy; 700 ms in, the
+spark fill fades out over 300 ms, so the card empties once the mark has left it. A zap taken back changes at once.
+A zap opened later shows its state settled, without motion. With reduced motion nothing moves.
+
+**The Zaps tab** (White Wallet's notes view). Each row starts with a 32 dp spark tile, 8 dp corners, holding the bolt
+without its face (18 dp, ink; faceless only below 24 dp), then the amount (`titleMedium`), what is unusual about the
+zap (with its icon), and its age. While a zap is being paid or its payment is unclear, the tile is a dashed outline
+and the bolt is muted. Handed-out zaps sit under their own heading and name their mint. Above the total the mark
+(56 dp) waits while zaps are out and rests otherwise; an empty tab shows it once, 112 dp and Curious, above
+"No zaps yet." The mint headers are White Wallet's.
+
+**Words.** The card's lines are Zap's (`code/src/main/res`): "Waiting to be claimed", "Scan to claim", "Claimed",
+"Back in your wallet", "Ready to claim" (German "Wartet aufs Einlösen", "Zum Einlösen scannen", "Eingelöst",
+"Zurück in deiner Wallet", "Bereit zum Einlösen"). A zap is claimed, never redeemed, and what it carries is bitcoin.
+
 ## Voice
 
 - Short and warm, written in second person. "Waiting for a zap…", "Your first bitcoin!", "Zapped!"
@@ -161,5 +201,6 @@ Published copy: https://claude.ai/artifact/M3Xwh5fyDxxXe7Fn4Cvm7A
 | 11 | Send = receive backwards | Current; awaiting feedback |
 | 12 | The zap you hand over: spark card, ticket, bolt frame ([`r12-zap-note.html`](explorations/r12-zap-note.html), https://claude.ai/artifact/QW19svj7NfsVxMmiuU58Jm) | **Spark card** chosen, to refine |
 | 13 | Spark card refined: its own state, "Scan to claim", covered code, same card on Claim ([`r13-spark-card.html`](explorations/r13-spark-card.html), https://claude.ai/artifact/PtsQxM7orGN7ut8BR9GFYF) | **Chosen**: one mark, on the card; the state line kept; Zap draws the cover; the claim motion. Built on `white-wallet-next` |
+| 14 | The Zaps tab: rows as small spark tiles, the mark above the total and on an empty tab | Built straight in code on `white-wallet-next`, without an exploration page ("The zap") |
 
 Earlier rounds are in [`explorations/`](explorations), named by round number.
