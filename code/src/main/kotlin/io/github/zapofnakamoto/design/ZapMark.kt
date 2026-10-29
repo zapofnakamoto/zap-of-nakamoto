@@ -55,7 +55,7 @@ import whitewallet.brand.ui.LocalWalletEvents
  *
  * [status] picks the face and, when it changes, the motion: a payment arriving drops the bolt in (Happy), one going
  * out lifts it away and back (Focus, then Rest), a problem shakes it (Oops), work on the wallet pulses it (Working),
- * and while nothing happens (Idle) it floats.
+ * and while nothing happens (Idle) it floats and now and then glances aside.
  * With [settleFirst] the first status is
  * shown as it ends, without its motion: for a mark that shows how something already is. With [followEvents] the mark
  * also reacts to payments anywhere in the app (the wallet tab). With [reduceMotion] nothing moves; only the face
@@ -99,14 +99,24 @@ internal fun ZapMark(
             }
         }
     }
-    // Idle blink: the open dots close for a moment, about every three seconds.
+    // Idle blink: the open dots close for a moment, about every three seconds; one blink in five is a double.
     LaunchedEffect(reduceMotion) {
         if (reduceMotion) return@LaunchedEffect
         while (true) {
             delay(2_600L + Random.nextLong(800))
-            motion.blink = true
-            delay(130)
-            motion.blink = false
+            motion.blink()
+            if (Random.nextInt(5) == 0) {
+                delay(120)
+                motion.blink()
+            }
+        }
+    }
+    // Idle glance: every 10 to 20 seconds the eyes look to one side for a moment.
+    LaunchedEffect(status, reduceMotion) {
+        if (status != WalletStatus.Idle || reduceMotion) return@LaunchedEffect
+        while (true) {
+            delay(10_000L + Random.nextLong(10_000))
+            motion.glance(if (Random.nextBoolean()) 1f else -1f)
         }
     }
     // Waiting breathes slowly.
@@ -322,6 +332,23 @@ private class MarkMotion(private var settleNext: Boolean) {
             look = Offset(lerp(fromLook.x, to.look.x, t), lerp(fromLook.y, to.look.y, t))
             if (t >= 0.5f) happyEyes = to.happyEyes
         }
+    }
+
+    suspend fun blink() {
+        blink = true
+        delay(130)
+        blink = false
+    }
+
+    /** Glance: the eyes look to one side ([side] -1 left, 1 right), stay a moment and come back; only at Rest. */
+    suspend fun glance(side: Float) {
+        if (face != Face.Rest) return
+        val aside = Offset(2.5f * side, 0.5f)
+        // Another face takes the eyes over: from then on the glance leaves them alone.
+        val toward = { t: Float -> if (face == Face.Rest) look = Offset(lerp(0f, aside.x, t), lerp(0f, aside.y, t)) }
+        animate(0f, 1f, animationSpec = tween(280, easing = EASE_OUT)) { t, _ -> toward(t) }
+        delay(900L + Random.nextLong(500))
+        animate(1f, 0f, animationSpec = tween(320, easing = EASE_OUT)) { t, _ -> toward(t) }
     }
 
     private fun rest() {
