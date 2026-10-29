@@ -160,6 +160,6 @@ Published copy: https://claude.ai/artifact/M3Xwh5fyDxxXe7Fn4Cvm7A
 | 10 | Send moves hop, wink, press, watch; empty states | Send moves too cute; **Curious** chosen for empty |
 | 11 | Send = receive backwards | Current; awaiting feedback |
 | 12 | The zap you hand over: spark card, ticket, bolt frame ([`r12-zap-note.html`](explorations/r12-zap-note.html), https://claude.ai/artifact/QW19svj7NfsVxMmiuU58Jm) | **Spark card** chosen, to refine |
-| 13 | Spark card refined: its own state, "Scan to claim", covered code, same card on Claim ([`r13-spark-card.html`](explorations/r13-spark-card.html), https://claude.ai/artifact/PtsQxM7orGN7ut8BR9GFYF) | Awaiting feedback |
+| 13 | Spark card refined: its own state, "Scan to claim", covered code, same card on Claim ([`r13-spark-card.html`](explorations/r13-spark-card.html), https://claude.ai/artifact/PtsQxM7orGN7ut8BR9GFYF) | **Chosen**: one mark, on the card; the state line kept; Zap draws the cover; the claim motion. Built on `white-wallet-next` |
 
 Earlier rounds are in [`explorations/`](explorations), named by round number.
