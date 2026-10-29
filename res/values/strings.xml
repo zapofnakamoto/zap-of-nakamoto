@@ -111,4 +111,26 @@
 
     <!-- Beta until 1.0.0 (README.md) -->
     <string name="release_notice_beta">This app is a beta until version 1.0.0: updates may change how it works, and bugs can cost you what\'s in it. Only try it out, with tiny amounts you could lose.</string>
+
+    <!-- What the wallet did to the zaps by itself, said on the home screen -->
+    <plurals name="notice_combined_into_one">
+        <item quantity="one">Combined %1$d zap into one of %2$s</item>
+        <item quantity="other">Combined %1$d zaps into one of %2$s</item>
+    </plurals>
+    <plurals name="notice_combined">
+        <item quantity="one">Combined %1$d zap into %2$d</item>
+        <item quantity="other">Combined %1$d zaps into %2$d</item>
+    </plurals>
+    <plurals name="notice_split">
+        <item quantity="one">Split %1$d zap into %2$d</item>
+        <item quantity="other">Split %1$d zaps into %2$d</item>
+    </plurals>
+    <plurals name="notice_rearranged">
+        <item quantity="one">Rearranged %1$d zap into %2$d</item>
+        <item quantity="other">Rearranged %1$d zaps into %2$d</item>
+    </plurals>
+    <plurals name="notice_renewed">
+        <item quantity="one">Renewed %1$d zap</item>
+        <item quantity="other">Renewed %1$d zaps</item>
+    </plurals>
 </resources>
