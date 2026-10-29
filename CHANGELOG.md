@@ -28,6 +28,8 @@ On White Wallet v0.3.0. From here on the version is the app's own (semver), no l
 - A note you hand out is a zap: "Send as a zap", "Claim a zap", "Sent a zap", in English and German. What you hold
   is bitcoin, so Settings and the mint pages say "your bitcoin" where they said "your notes". The success screens
   say "Sent!" and "Bitcoin arrived!", waiting for a payment says "Waiting for the payment…", so "zap" means one thing.
+- A zap is claimed, never redeemed: its page, the Zaps tab and History say "Not claimed yet" and "Claimed", and the
+  zap's page says the recipient has the bitcoin, or that the bitcoin is back in your balance.
 - A zap is a spark card (needs White Wallet after v0.4.0): the mark, the amount and, on a handed-out zap's page,
   "Scan to claim" above its QR code. The card says where it stands: waiting to be claimed; claimed, a dashed
   outline once the money left, the mark rising out of the card when it happens; back in your wallet, a solid one.

@@ -45,6 +45,13 @@
     <string name="receive_claim">Claim a zap instead</string>
     <string name="activity_claimed">Claimed a zap</string>
     <string name="activity_sent_note">Sent a zap</string>
+    <!-- A zap is claimed, never redeemed -->
+    <string name="activity_note_waiting">Not claimed yet</string>
+    <string name="activity_note_redeemed">Claimed</string>
+    <string name="note_waiting">Not claimed yet. You can take it back until it is.</string>
+    <string name="note_redeemed">Claimed. The recipient has the bitcoin.</string>
+    <string name="note_reclaimed">Taken back. The bitcoin is in your balance again.</string>
+    <string name="note_reclaim_body">The bitcoin returns to your balance and this code stops working. If someone has claimed it already, nothing changes.</string>
     <string name="home_key_changed_body">Your wallet stopped working with it, so nothing is sent there. Your bitcoin there is unchanged. Open the details to see the new key and decide whether to use it.</string>
     <string name="about_body">A Lightning wallet that keeps your bitcoin with a mint you choose. Your recovery phrase stays on this device.</string>
     <string name="settings_account_contents">Recovery phrase, address, bitcoin</string>
@@ -84,6 +91,8 @@
         <item quantity="other">%1$d zaps are no longer there: they were spent elsewhere, for example with this recovery phrase on another phone.</item>
     </plurals>
     <string name="notes_already_spent">This zap was already spent, so it wasn\'t shared. It\'s no longer in your balance.</string>
+    <string name="notes_waiting_total">%1$s shared, not claimed yet</string>
+    <string name="notes_shared_title">Shared, not claimed yet</string>
     <string name="notes_empty">No zaps yet. Zaps appear here once you receive bitcoin.</string>
     <string name="notes_strategy_warning">\"%1$s\" is on: it rearranges your zaps again on every refresh.</string>
     <string name="notes_combined">Combined into one zap of %1$s.</string>

@@ -41,6 +41,13 @@
     <string name="receive_claim">Stattdessen einen Zap einlösen</string>
     <string name="activity_claimed">Zap eingelöst</string>
     <string name="activity_sent_note">Zap verschickt</string>
+    <!-- Ein Zap wird eingelöst, wie bei White Wallet; was er ist, sind Bitcoin -->
+    <string name="activity_note_waiting">Noch nicht eingelöst</string>
+    <string name="activity_note_redeemed">Eingelöst</string>
+    <string name="note_waiting">Noch nicht eingelöst. Bis dahin kannst du ihn zurückholen.</string>
+    <string name="note_redeemed">Eingelöst. Der Empfänger hat die Bitcoin.</string>
+    <string name="note_reclaimed">Zurückgeholt. Die Bitcoin sind wieder in deinem Guthaben.</string>
+    <string name="note_reclaim_body">Die Bitcoin kommen zurück in dein Guthaben und dieser Code funktioniert nicht mehr. Hat ihn schon jemand eingelöst, ändert sich nichts.</string>
     <string name="home_key_changed_body">Deine Wallet arbeitet nicht mehr damit, es wird also nichts dorthin gesendet. Deine Bitcoin dort sind unverändert. Öffne die Details, um den neuen Schlüssel zu sehen und zu entscheiden, ob du ihn verwendest.</string>
     <string name="about_body">Eine Lightning-Wallet, die deine Bitcoin bei einer Mint deiner Wahl verwahrt. Deine Wiederherstellungsphrase bleibt auf diesem Gerät.</string>
     <string name="settings_account_contents">Wiederherstellungsphrase, Adresse, Bitcoin</string>
@@ -80,6 +87,8 @@
         <item quantity="other">%1$d Zaps sind nicht mehr da: Sie wurden woanders ausgegeben, zum Beispiel mit dieser Wiederherstellungsphrase auf einem anderen Handy.</item>
     </plurals>
     <string name="notes_already_spent">Dieser Zap war schon ausgegeben und wurde daher nicht verschickt. Er ist nicht mehr in deinem Guthaben.</string>
+    <string name="notes_waiting_total">%1$s verschickt, noch nicht eingelöst</string>
+    <string name="notes_shared_title">Verschickt, noch nicht eingelöst</string>
     <string name="notes_empty">Noch keine Zaps. Zaps erscheinen hier, sobald du Bitcoin empfängst.</string>
     <string name="notes_strategy_warning">„%1$s“ ist an und ordnet deine Zaps bei jedem Aktualisieren neu.</string>
     <string name="notes_combined">Zu einem Zap über %1$s zusammengelegt.</string>
