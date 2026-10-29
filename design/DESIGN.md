@@ -159,5 +159,6 @@ Published copy: https://claude.ai/artifact/M3Xwh5fyDxxXe7Fn4Cvm7A
 | 9 | Eyes back (3 styles); send moves spark, dash, streak | Best so far; **dot eyes** chosen |
 | 10 | Send moves hop, wink, press, watch; empty states | Send moves too cute; **Curious** chosen for empty |
 | 11 | Send = receive backwards | Current; awaiting feedback |
+| 12 | The zap you hand over: spark card, ticket, bolt frame ([`r12-zap-note.html`](explorations/r12-zap-note.html), https://claude.ai/artifact/QW19svj7NfsVxMmiuU58Jm) | Awaiting feedback |
 
 Earlier rounds are in [`explorations/`](explorations), named by round number.
