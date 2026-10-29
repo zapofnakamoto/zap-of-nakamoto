@@ -67,8 +67,9 @@ internal fun ZapNote(params: NoteFaceParams, modifier: Modifier) {
         params.status == NoteStatus.TakenBack -> Look.TakenBack
         else -> Look.Spark
     }
-    // Claimed while the page is open: the card empties once the mark has risen out of it (ZapMark's send).
-    val change = if (reduceMotion) snap() else tween<Color>(300, delayMillis = 700)
+    // Claimed while the page is open: the card empties once the mark has risen out of it (ZapMark's send). Taken back,
+    // the mark doesn't move, so neither does the card wait.
+    val change = if (reduceMotion) snap() else tween<Color>(300, delayMillis = if (look == Look.Claimed) 700 else 0)
     val fill by animateColorAsState(if (look == Look.Spark) colors.primaryContainer else Color.Transparent, change, label = "zap fill")
     val ink by animateColorAsState(if (look == Look.Spark) colors.onPrimaryContainer else colors.onSurface, change, label = "zap ink")
     val edge = when (look) {
