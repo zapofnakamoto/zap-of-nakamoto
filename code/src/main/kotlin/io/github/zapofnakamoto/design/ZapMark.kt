@@ -66,8 +66,7 @@ internal fun ZapMark(
     settleFirst: Boolean = false,
     color: Color = MaterialTheme.colorScheme.primary,
 ) {
-    val motion = remember { MarkMotion() }
-    var settle by remember { mutableStateOf(settleFirst) }
+    val motion = remember { MarkMotion(settleFirst) }
     val haptics = LocalHapticFeedback.current
     val scope = rememberCoroutineScope()
     motion.reduceMotion = reduceMotion
@@ -75,10 +74,7 @@ internal fun ZapMark(
     // On the wallet tab the mark is what tells of a payment, so it buzzes; elsewhere the screen does.
     motion.onArrived = { if (followEvents) haptics.performHapticFeedback(HapticFeedbackType.Confirm) }
 
-    LaunchedEffect(status) {
-        if (settle) motion.settle(status) else motion.show(status)
-        settle = false
-    }
+    LaunchedEffect(status) { motion.show(status) }
     if (followEvents) {
         val events = LocalWalletEvents.current
         LaunchedEffect(events) {
@@ -205,8 +201,8 @@ private val RISE = CubicBezierEasing(0.5f, 0f, 0.7f, 0.4f)
 
 private fun lerp(a: Float, b: Float, t: Float) = a + (b - a) * t
 
-/** The mark's moving parts, and the motions of DESIGN.md that drive them. */
-private class MarkMotion {
+/** The mark's moving parts, and the motions of DESIGN.md that drive them; the first status without its motion with [settleNext]. */
+private class MarkMotion(private var settleNext: Boolean) {
     var reduceMotion = false
 
     /** On a success screen: a payment that went out ends happy, not calm. */
@@ -229,6 +225,10 @@ private class MarkMotion {
 
     /** Settles on the face for [status], with the motion that leads there. */
     suspend fun show(status: WalletStatus) {
+        if (settleNext) {
+            settleNext = false
+            return settle(status)
+        }
         if (status !is WalletStatus.Empty) untilt()
         when (status) {
             is WalletStatus.PaymentReceived -> receive()
@@ -245,7 +245,7 @@ private class MarkMotion {
     }
 
     /** Shows the face for [status] at once, as its motion would end. */
-    suspend fun settle(status: WalletStatus) {
+    private suspend fun settle(status: WalletStatus) {
         val reduce = reduceMotion
         reduceMotion = true
         try {
