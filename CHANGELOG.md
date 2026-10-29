@@ -21,6 +21,11 @@ On White Wallet v0.3.0. From here on the version is the app's own (semver), no l
 
 ### Changed
 
+- A note you hand out is a zap: "Send as a zap", "Claim a zap", "Sent a zap", in English and German. What you hold
+  is bitcoin, so Settings and the mint pages say "your bitcoin" where they said "your notes". The success screens
+  say "Sent!" and "Bitcoin arrived!", waiting for a payment says "Waiting for the payment…", so "zap" means one thing.
+- A handed-out zap's page shows the mark, waiting until someone claims it (needs White Wallet after v0.4.0).
+
 - History has no filters any more: the "Note maintenance" chip is gone, and so are the entries it showed, which
   never changed your balance.
 - The beta notice at setup and in About says what beta means here: until 1.0.0, updates may change how the app

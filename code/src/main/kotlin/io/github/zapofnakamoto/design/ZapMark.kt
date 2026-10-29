@@ -230,7 +230,7 @@ private class MarkMotion {
             }
             is WalletStatus.Problem -> oops()
             WalletStatus.Empty -> curious()
-            WalletStatus.AwaitingPayment -> face(Face.Waiting, 220)
+            WalletStatus.AwaitingPayment, WalletStatus.WaitingForRecipient -> face(Face.Waiting, 220)
             WalletStatus.Sending -> face(Face.Focus, 200)
             else -> face(Face.Rest, 220)
         }

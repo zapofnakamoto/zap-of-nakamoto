@@ -8,13 +8,55 @@
     <string name="onboarding_username">Wähle deinen Namen</string>
     <string name="claimed_body">Das ist deine Lightning-Adresse. Damit kann dir jeder Bitcoin schicken, auch wenn dein Handy aus ist.</string>
     <string name="home_empty">Noch nichts hier. Teile deine Adresse, um deine ersten Bitcoin zu empfangen.</string>
-    <string name="home_wallet_empty">Noch nichts hier. Teile deine Adresse, um deinen ersten Zap zu bekommen.</string>
+    <string name="home_wallet_empty">Noch nichts hier. Teile deine Adresse, um deine ersten Bitcoin zu bekommen, oder löse einen Zap ein.</string>
 
     <!-- Zaps Ton (design/DESIGN.md): kurz, freundlich, ohne Protokollwörter -->
     <string name="receive_hint">Jeder kann dir an diese Adresse Bitcoin schicken, aus jeder Lightning-Wallet.</string>
-    <string name="receive_invoice_waiting">Warte auf einen Zap …</string>
-    <string name="send_paid_title">Gezappt!</string>
-    <string name="receive_success_title">Du wurdest gezappt!</string>
+    <string name="receive_invoice_waiting">Warte auf die Zahlung …</string>
+    <string name="send_paid_title">Gesendet!</string>
+    <string name="receive_success_title">Bitcoin sind da!</string>
+
+    <!-- Scheine sind Zaps: was man weitergibt oder einlöst. Was man hat, sind Bitcoin (design/DESIGN.md) -->
+    <string name="send_create_note">Zap erstellen</string>
+    <string name="note_create_title">Als Zap senden</string>
+    <string name="note_create_body">Erstelle einen Zap über einen Betrag und gib ihn als QR-Code oder Link weiter. Wer ihn bekommt, kann die Bitcoin in einer kompatiblen Wallet einlösen.</string>
+    <string name="note_available">Du kannst einen Zap über bis zu %1$s erstellen.</string>
+    <string name="note_create">Zap erstellen</string>
+    <string name="note_create_pending">Der Zap ließ sich noch nicht bestätigen, deshalb wurde nichts weitergegeben. Versuche es gleich noch einmal.</string>
+    <string name="note_title">Zap</string>
+    <string name="note_qr_description">QR-Code des Zaps</string>
+    <string name="note_uncertified">Der Betrag dieses Zaps ist nicht zertifiziert.</string>
+    <string name="note_share_title">Zap teilen</string>
+    <string name="note_reclaim_title">Diesen Zap zurückholen?</string>
+    <string name="note_already_redeemed">Zu spät: Jemand hat diesen Zap schon eingelöst.</string>
+    <string name="note_not_found">Dieser Zap ist nicht in diesem Konto.</string>
+    <string name="claim_title">Zap einlösen</string>
+    <string name="claim_input">Link eines Zaps einfügen</string>
+    <string name="claim_scan_hint">Richte die Kamera auf den QR-Code des Zaps.</string>
+    <string name="claim_check">Zap prüfen</string>
+    <string name="claim_invalid">Kein gültiger Zap: %1$s</string>
+    <string name="claim_spent">Dieser Zap wurde bereits eingelöst.</string>
+    <string name="claim_in_wallet">Dieser Zap ist bereits in deiner Wallet.</string>
+    <string name="claim_other_mint">Dieser Zap liegt bei %1$s und bleibt dort.</string>
+    <string name="receive_claim">Stattdessen einen Zap einlösen</string>
+    <string name="activity_claimed">Zap eingelöst</string>
+    <string name="activity_sent_note">Zap verschickt</string>
+    <string name="home_key_changed_body">Deine Wallet arbeitet nicht mehr damit, es wird also nichts dorthin gesendet. Deine Bitcoin dort sind unverändert. Öffne die Details, um den neuen Schlüssel zu sehen und zu entscheiden, ob du ihn verwendest.</string>
+    <string name="about_body">Eine Lightning-Wallet, die deine Bitcoin bei einer Mint deiner Wahl verwahrt. Deine Wiederherstellungsphrase bleibt auf diesem Gerät.</string>
+    <string name="settings_account_contents">Wiederherstellungsphrase, Adresse, Bitcoin</string>
+    <string name="delete_what">Das entfernt dieses Konto von diesem Handy: seine Wiederherstellungsphrase, seine Bitcoin und seine Einstellungen. Andere Konten sind nicht betroffen.</string>
+    <string name="mints_intro">Vertraue einer Mint anhand ihres Signaturschlüssels: Zaps von vertrauten Mints sind mit einem Haken markiert. Signiert eine Mint einmal mit einem anderen Schlüssel, ist sie nicht mehr vertraut.</string>
+    <string name="mint_key_changed">%1$s signiert jetzt mit einem anderen Schlüssel als bei deiner ersten Verbindung. Bis du den neuen Schlüssel annimmst, sendet und empfängt deine Wallet dort nichts. Deine Bitcoin dort sind unverändert.</string>
+    <string name="mint_key_accept_body">Tu das nur, wenn du weißt, warum %1$s den Schlüssel geändert hat, etwa weil der Betreiber es angekündigt hat. Antwortet jemand anderes an ihrer Stelle, können deine Bitcoin dort und alles, was du dorthin sendest, verloren gehen.</string>
+    <string name="mint_watch_only_hint">Damit kann eine andere App die Bitcoin dieses Kontos hier sehen und an es zahlen, aber nie ausgeben.</string>
+    <string name="mint_invalid">Antwortet, kann aber keine Bitcoin verwahren</string>
+    <string name="mints_add_invalid">Diese Adresse kann keine Bitcoin verwahren.</string>
+    <string name="mints_remove_body">Die App vergisst sie, ihren Signaturschlüssel und ob du ihr vertraust. Deine Bitcoin und der Verlauf bleiben. Fügst du sie später wieder hinzu, ist es wie beim ersten Mal: Der Schlüssel, den sie dann zeigt, ist der, den sich die App merkt.</string>
+    <!-- One note per mint (noteStrategies=single): the count says nothing. -->
+    <plurals name="mint_balance">
+        <item quantity="one">%1$s</item>
+        <item quantity="other">%1$s</item>
+    </plurals>
 
     <!-- Beta bis 1.0.0 (README.md) -->
     <string name="release_notice_beta">Diese App ist bis Version 1.0.0 eine Beta: Updates können ändern, wie sie funktioniert, und Fehler können dich kosten, was darin ist. Probier sie nur aus, mit kleinsten Beträgen, die du verlieren könntest.</string>

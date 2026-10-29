@@ -12,13 +12,55 @@
     <string name="onboarding_username">Pick your name</string>
     <string name="claimed_body">This is your Lightning address. Anyone can send you bitcoin with it, even while your phone is off.</string>
     <string name="home_empty">Nothing here yet. Share your address to receive your first bitcoin.</string>
-    <string name="home_wallet_empty">Nothing here yet. Share your address to get your first zap.</string>
+    <string name="home_wallet_empty">Nothing here yet. Share your address to get your first bitcoin, or claim a zap.</string>
 
     <!-- Zap's voice (design/DESIGN.md): short, warm, no protocol words -->
     <string name="receive_hint">Anyone can send you bitcoin at this address, from any Lightning wallet.</string>
-    <string name="receive_invoice_waiting">Waiting for a zap…</string>
-    <string name="send_paid_title">Zapped!</string>
-    <string name="receive_success_title">You got zapped!</string>
+    <string name="receive_invoice_waiting">Waiting for the payment…</string>
+    <string name="send_paid_title">Sent!</string>
+    <string name="receive_success_title">Bitcoin arrived!</string>
+
+    <!-- Notes are zaps: what you hand over or claim. What you hold is bitcoin (design/DESIGN.md) -->
+    <string name="send_create_note">Create a zap</string>
+    <string name="note_create_title">Send as a zap</string>
+    <string name="note_create_body">Make a zap worth an amount and hand it over as a QR code or link. Whoever gets it can claim the bitcoin in a compatible wallet.</string>
+    <string name="note_available">You can make a zap of up to %1$s.</string>
+    <string name="note_create">Create zap</string>
+    <string name="note_create_pending">The zap couldn\'t be confirmed yet, so nothing was handed out. Try again in a moment.</string>
+    <string name="note_title">Zap</string>
+    <string name="note_qr_description">QR code of the zap</string>
+    <string name="note_uncertified">The amount of this zap isn\'t certified.</string>
+    <string name="note_share_title">Share zap</string>
+    <string name="note_reclaim_title">Take this zap back?</string>
+    <string name="note_already_redeemed">Too late: someone already claimed this zap.</string>
+    <string name="note_not_found">This zap isn\'t in this account.</string>
+    <string name="claim_title">Claim a zap</string>
+    <string name="claim_input">Paste a zap link</string>
+    <string name="claim_scan_hint">Point the camera at the zap\'s QR code.</string>
+    <string name="claim_check">Check zap</string>
+    <string name="claim_invalid">Not a valid zap: %1$s</string>
+    <string name="claim_spent">This zap has already been claimed.</string>
+    <string name="claim_in_wallet">This zap is already in your wallet.</string>
+    <string name="claim_other_mint">This zap is held by %1$s and stays there.</string>
+    <string name="receive_claim">Claim a zap instead</string>
+    <string name="activity_claimed">Claimed a zap</string>
+    <string name="activity_sent_note">Sent a zap</string>
+    <string name="home_key_changed_body">Your wallet stopped working with it, so nothing is sent there. Your bitcoin there is unchanged. Open the details to see the new key and decide whether to use it.</string>
+    <string name="about_body">A Lightning wallet that keeps your bitcoin with a mint you choose. Your recovery phrase stays on this device.</string>
+    <string name="settings_account_contents">Recovery phrase, address, bitcoin</string>
+    <string name="delete_what">This removes this account from this phone: its recovery phrase, its bitcoin and its settings. Other accounts are not affected.</string>
+    <string name="mints_intro">Trust a mint by its signing key: zaps from trusted mints are marked with a check. If a mint ever signs with a different key, it is no longer trusted.</string>
+    <string name="mint_key_changed">%1$s now signs with a different key than when you first connected. Until you accept the new key, your wallet doesn\'t send or receive there. Your bitcoin there is unchanged.</string>
+    <string name="mint_key_accept_body">Only do this if you know why %1$s changed its key, for example because its operator announced it. If someone else is answering in its place, your bitcoin there and anything you send can be lost.</string>
+    <string name="mint_watch_only_hint">Lets another app see this account\'s bitcoin here and receive to it, but never spend.</string>
+    <string name="mint_invalid">Answers, but can\'t hold bitcoin</string>
+    <string name="mints_add_invalid">That address can\'t hold bitcoin.</string>
+    <string name="mints_remove_body">The app forgets it, its signing key and whether you trust it. Your bitcoin and history stay. If you add it again later, it\'s like the first time: the key it shows then is the one the app remembers.</string>
+    <!-- One note per mint (noteStrategies=single): the count says nothing. -->
+    <plurals name="mint_balance">
+        <item quantity="one">%1$s</item>
+        <item quantity="other">%1$s</item>
+    </plurals>
 
     <!-- Beta until 1.0.0 (README.md) -->
     <string name="release_notice_beta">This app is a beta until version 1.0.0: updates may change how it works, and bugs can cost you what\'s in it. Only try it out, with tiny amounts you could lose.</string>

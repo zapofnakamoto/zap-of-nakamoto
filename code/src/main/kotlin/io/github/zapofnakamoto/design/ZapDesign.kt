@@ -68,7 +68,7 @@ object ZapDesign : BrandDesign {
             Anchor.AppLock -> 96.dp
             // An empty wallet makes the mark bigger, above the hint on how to get the first zap.
             Anchor.HomeHeader -> if (context.status == WalletStatus.Empty) 128.dp else 88.dp
-            Anchor.ReceiveHeader, Anchor.SendHeader, Anchor.ClaimResult -> 72.dp
+            Anchor.ReceiveHeader, Anchor.SendHeader, Anchor.ClaimResult, Anchor.NoteShared -> 72.dp
             else -> null
         }
         when {
