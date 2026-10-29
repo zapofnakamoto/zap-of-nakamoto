@@ -55,7 +55,7 @@ import whitewallet.brand.ui.LocalWalletEvents
  *
  * [status] picks the face and, when it changes, the motion: a payment arriving drops the bolt in (Happy), one going
  * out lifts it away and back (Focus, then Rest), a problem shakes it (Oops), work on the wallet pulses it (Working),
- * and while nothing happens (Idle) it floats and now and then glances aside.
+ * and while nothing happens (Idle) it floats and now and then glances aside, a little up or down.
  * With [settleFirst] the first status is
  * shown as it ends, without its motion: for a mark that shows how something already is. With [followEvents] the mark
  * also reacts to payments anywhere in the app (the wallet tab). With [reduceMotion] nothing moves; only the face
@@ -111,12 +111,13 @@ internal fun ZapMark(
             }
         }
     }
-    // Idle glance: every 10 to 20 seconds the eyes look to one side for a moment.
+    // Idle glance: every 10 to 20 seconds the face turns to one side, a little up or down, for a moment. A new status
+    // cancels it; the face and tilt of that status take over from wherever the glance was.
     LaunchedEffect(status, reduceMotion) {
         if (status != WalletStatus.Idle || reduceMotion) return@LaunchedEffect
         while (true) {
             delay(10_000L + Random.nextLong(10_000))
-            motion.glance(if (Random.nextBoolean()) 1f else -1f)
+            motion.glance(side = if (Random.nextBoolean()) 1f else -1f, lift = if (Random.nextBoolean()) 1f else -1f)
         }
     }
     // Waiting breathes slowly.
@@ -183,6 +184,13 @@ private const val FLOAT_MILLIS = 4_000
 
 /** How high the mark floats while idle, relative to the bolt's height. */
 private const val FLOAT_HEIGHT = 0.03f
+
+/** How long the mouth and the tilt follow the eyes when the mark glances. */
+private const val GLANCE_LAG_MILLIS = 80L
+
+/** How far the mouth moves with the eyes when the mark glances (half), and the head tilts toward them, in degrees. */
+private const val GLANCE_MOUTH = 0.5f
+private const val GLANCE_TILT = 2.5f
 
 /** How long the mark stays happy after a payment arrived on the wallet tab. */
 private const val HAPPY_FOR_MILLIS = 2_500L
@@ -340,15 +348,32 @@ private class MarkMotion(private var settleNext: Boolean) {
         blink = false
     }
 
-    /** Glance: the eyes look to one side ([side] -1 left, 1 right), stay a moment and come back; only at Rest. */
-    suspend fun glance(side: Float) {
+    /**
+     * Glance: the face turns to one side ([side] -1 left, 1 right), a little down or up ([lift] 1 or -1), stays a
+     * moment and comes back; only at Rest. The eyes lead, the mouth and a slight head tilt follow, as a head turns.
+     */
+    suspend fun glance(side: Float, lift: Float) {
         if (face != Face.Rest) return
-        val aside = Offset(2.5f * side, 0.5f)
-        // Another face takes the eyes over: from then on the glance leaves them alone.
-        val toward = { t: Float -> if (face == Face.Rest) look = Offset(lerp(0f, aside.x, t), lerp(0f, aside.y, t)) }
-        animate(0f, 1f, animationSpec = tween(280, easing = EASE_OUT)) { t, _ -> toward(t) }
-        delay(900L + Random.nextLong(500))
-        animate(1f, 0f, animationSpec = tween(320, easing = EASE_OUT)) { t, _ -> toward(t) }
+        val eyes = Offset(2.5f * side, lift)
+        turn(0f, 1f, eyes, side, millis = 240 + Random.nextInt(100))
+        delay(700L + Random.nextLong(600))
+        turn(1f, 0f, eyes, side, millis = 280 + Random.nextInt(100))
+    }
+
+    /** One way of a glance, from [from] to [to] of the way there: the eyes, then the mouth and the tilt after them. */
+    private suspend fun turn(from: Float, to: Float, eyes: Offset, side: Float, millis: Int) = coroutineScope {
+        launch {
+            animate(from, to, animationSpec = tween(millis, easing = EASE_OUT)) { t, _ ->
+                // Another face takes the eyes over (a payment arrived): from then on the glance leaves them alone.
+                if (face == Face.Rest) look = eyes * t
+            }
+        }
+        delay(GLANCE_LAG_MILLIS)
+        val mouthMoves = eyes.x * GLANCE_MOUTH to eyes.y * GLANCE_MOUTH / 2
+        animate(from, to, animationSpec = tween(millis, easing = EASE_OUT)) { t, _ ->
+            if (face == Face.Rest) mouth = FloatArray(6) { Face.Rest.mouth[it] + t * if (it % 2 == 0) mouthMoves.first else mouthMoves.second }
+            tilt = GLANCE_TILT * side * t
+        }
     }
 
     private fun rest() {

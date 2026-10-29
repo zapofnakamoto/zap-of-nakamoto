@@ -81,7 +81,7 @@ morphs between its 6 numbers, so every transition is smooth.
 
 | State | When | Eyes | Mouth `[x0,y0,cx,cy,x1,y1]` | Extra |
 |---|---|---|---|---|
-| **Rest** | Has a balance, idle | dots | smile `44,55.5,51,61.5,58,53.5` | Floats and glances aside while idle |
+| **Rest** | Has a balance, idle | dots | smile `44,55.5,51,61.5,58,53.5` | Floats and glances around while idle |
 | **Curious** | Empty wallet (₿0) | dots | small `47.5,56.5,51,59,54.5,56` | Head tilt −9° |
 | **Waiting** | Receive screen open | dots looking up-right (+2, −1.5) | focus `46,56,51,58.5,56,55.5` | Slow breathing, scale 1.04, 1.4 s |
 | **Focus** | Payment going out | dots | focus | — |
@@ -92,8 +92,10 @@ morphs between its 6 numbers, so every transition is smooth.
 Idle blink: the open dots become short lines for 130 ms, about every 3 s; one blink in five is a double, the
 second 120 ms after the first.
 
-Idle glance: at Rest, every 10–20 s, the dots look to one side (±2.5, +0.5) over 280 ms, stay 0.9–1.4 s and come
-back over 320 ms.
+Idle glance: at Rest, every 10–20 s, the face turns to one side, a little up or down: the dots move (±2.5, ±1), the
+mouth follows half as far sideways and a quarter as far up or down, and the head tilts 2.5° toward that side. The
+mouth and tilt start 80 ms after the dots, as a head follows the eyes. It turns over 240–340 ms, stays 0.7–1.3 s and
+turns back over 280–380 ms, each picked at random.
 
 Files: [`assets/states/`](assets/states).
 
