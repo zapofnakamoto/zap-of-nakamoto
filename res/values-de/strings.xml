@@ -53,6 +53,49 @@
     <string name="mints_add_invalid">Diese Adresse kann keine Bitcoin verwahren.</string>
     <string name="mints_remove_body">Die App vergisst sie, ihren Signaturschlüssel und ob du ihr vertraust. Deine Bitcoin und der Verlauf bleiben. Fügst du sie später wieder hinzu, ist es wie beim ersten Mal: Der Schlüssel, den sie dann zeigt, ist der, den sich die App merkt.</string>
 
+    <!-- Der Tab Zaps (notesView=tab): deine Zaps einzeln -->
+    <string name="home_tab_notes">Zaps</string>
+    <string name="settings_note_list">Zaps</string>
+    <string name="settings_note_list_hint">Deine Zaps einzeln ansehen, teilen, aufteilen oder zusammenlegen</string>
+    <string name="notes_title">Zaps</string>
+    <string name="notes_settings">Zap-Einstellungen</string>
+    <plurals name="notes_count">
+        <item quantity="one">%1$d Zap</item>
+        <item quantity="other">%1$d Zaps</item>
+    </plurals>
+    <string name="notes_sort">Zaps sortieren</string>
+    <string name="notes_select_hint">Tippe auf Zaps, um sie auszuwählen.</string>
+    <plurals name="notes_selected">
+        <item quantity="one">%1$d Zap ausgewählt · %2$s</item>
+        <item quantity="other">%1$d Zaps ausgewählt · %2$s</item>
+    </plurals>
+    <string name="notes_share_hint">„Als QR teilen“ gibt den ganzen Zap weiter. Um nur einen Teil zu geben, teile ihn zuerst.</string>
+    <string name="notes_renew_hint">Erneuern gibt dem Zap einen neuen Schlüssel, zum Beispiel wenn du seinen QR-Code versehentlich jemandem gezeigt hast.</string>
+    <plurals name="notes_checked_ok">
+        <item quantity="one">%1$d Zap geprüft: noch da.</item>
+        <item quantity="other">%1$d Zaps geprüft: alle noch da.</item>
+    </plurals>
+    <plurals name="notes_checked_gone">
+        <item quantity="one">%1$d Zap ist nicht mehr da: Er wurde woanders ausgegeben, zum Beispiel mit dieser Wiederherstellungsphrase auf einem anderen Handy.</item>
+        <item quantity="other">%1$d Zaps sind nicht mehr da: Sie wurden woanders ausgegeben, zum Beispiel mit dieser Wiederherstellungsphrase auf einem anderen Handy.</item>
+    </plurals>
+    <string name="notes_already_spent">Dieser Zap war schon ausgegeben und wurde daher nicht verschickt. Er ist nicht mehr in deinem Guthaben.</string>
+    <string name="notes_empty">Noch keine Zaps. Zaps erscheinen hier, sobald du Bitcoin empfängst.</string>
+    <string name="notes_strategy_warning">„%1$s“ ist an und ordnet deine Zaps bei jedem Aktualisieren neu.</string>
+    <string name="notes_combined">Zu einem Zap über %1$s zusammengelegt.</string>
+    <string name="notes_split_title">Zap teilen</string>
+    <string name="notes_split_amount_bitcoin">Erster Zap, in ₿</string>
+    <string name="notes_split_amount_sats">Erster Zap, in Sats</string>
+    <string name="notes_split_preview">Du bekommst einen Zap über %1$s und einen über %2$s.</string>
+    <string name="notes_split_switches_manual">„%1$s“ würde das rückgängig machen, daher wird auf manuelle Verwaltung umgestellt.</string>
+    <string name="notes_move_hint">Die Zaps werden über Lightning ausgezahlt und kommen dort als neuer Zap an. Beide Seiten berechnen ihre Gebühren.</string>
+    <string name="notes_problem_different_mints">Wähle Zaps bei einer einzigen Mint aus.</string>
+    <string name="notes_problem_not_found">Diese Zaps haben sich inzwischen geändert. Wähle sie erneut aus.</string>
+    <string name="notes_problem_too_few">Wähle mindestens zwei Zaps zum Zusammenlegen aus.</string>
+    <string name="notes_problem_invalid_amount">Dieser Zap ist zu klein zum Teilen, oder der Betrag passt nicht.</string>
+    <string name="notes_problem_same_mint">Die Zaps sind schon dort.</string>
+    <string name="notes_problem_mint_invalid">Diese Adresse kann keine Bitcoin verwahren.</string>
+
     <!-- Beta bis 1.0.0 (README.md) -->
     <string name="release_notice_beta">Diese App ist bis Version 1.0.0 eine Beta: Updates können ändern, wie sie funktioniert, und Fehler können dich kosten, was darin ist. Probier sie nur aus, mit kleinsten Beträgen, die du verlieren könntest.</string>
 </resources>

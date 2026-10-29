@@ -57,6 +57,49 @@
     <string name="mints_add_invalid">That address can\'t hold bitcoin.</string>
     <string name="mints_remove_body">The app forgets it, its signing key and whether you trust it. Your bitcoin and history stay. If you add it again later, it\'s like the first time: the key it shows then is the one the app remembers.</string>
 
+    <!-- The Zaps tab (notesView=tab): your zaps one by one -->
+    <string name="home_tab_notes">Zaps</string>
+    <string name="settings_note_list">Zaps</string>
+    <string name="settings_note_list_hint">See your zaps one by one, share, split or combine them</string>
+    <string name="notes_title">Zaps</string>
+    <string name="notes_settings">Zap settings</string>
+    <plurals name="notes_count">
+        <item quantity="one">%1$d zap</item>
+        <item quantity="other">%1$d zaps</item>
+    </plurals>
+    <string name="notes_sort">Sort zaps</string>
+    <string name="notes_select_hint">Tap zaps to select them.</string>
+    <plurals name="notes_selected">
+        <item quantity="one">%1$d zap selected · %2$s</item>
+        <item quantity="other">%1$d zaps selected · %2$s</item>
+    </plurals>
+    <string name="notes_share_hint">Share as QR hands over the whole zap. To give part of it, split it first.</string>
+    <string name="notes_renew_hint">Renew gives the zap a fresh key, for example after you showed its QR code to someone by mistake.</string>
+    <plurals name="notes_checked_ok">
+        <item quantity="one">Checked %1$d zap: still there.</item>
+        <item quantity="other">Checked %1$d zaps: all still there.</item>
+    </plurals>
+    <plurals name="notes_checked_gone">
+        <item quantity="one">%1$d zap is no longer there: it was spent elsewhere, for example with this recovery phrase on another phone.</item>
+        <item quantity="other">%1$d zaps are no longer there: they were spent elsewhere, for example with this recovery phrase on another phone.</item>
+    </plurals>
+    <string name="notes_already_spent">This zap was already spent, so it wasn\'t shared. It\'s no longer in your balance.</string>
+    <string name="notes_empty">No zaps yet. Zaps appear here once you receive bitcoin.</string>
+    <string name="notes_strategy_warning">\"%1$s\" is on: it rearranges your zaps again on every refresh.</string>
+    <string name="notes_combined">Combined into one zap of %1$s.</string>
+    <string name="notes_split_title">Split zap</string>
+    <string name="notes_split_amount_bitcoin">First zap, in ₿</string>
+    <string name="notes_split_amount_sats">First zap, in sats</string>
+    <string name="notes_split_preview">You get one zap of %1$s and one of %2$s.</string>
+    <string name="notes_split_switches_manual">\"%1$s\" would undo this, so this switches to managing zaps yourself.</string>
+    <string name="notes_move_hint">The zaps are paid out over Lightning and arrive there as a new zap. Both sides charge their fees.</string>
+    <string name="notes_problem_different_mints">Select zaps on one mint.</string>
+    <string name="notes_problem_not_found">These zaps changed in the meantime. Select them again.</string>
+    <string name="notes_problem_too_few">Select at least two zaps to combine.</string>
+    <string name="notes_problem_invalid_amount">This zap is too small to split, or the amount doesn\'t fit.</string>
+    <string name="notes_problem_same_mint">The zaps are already there.</string>
+    <string name="notes_problem_mint_invalid">That address can\'t hold bitcoin.</string>
+
     <!-- Beta until 1.0.0 (README.md) -->
     <string name="release_notice_beta">This app is a beta until version 1.0.0: updates may change how it works, and bugs can cost you what\'s in it. Only try it out, with tiny amounts you could lose.</string>
 </resources>

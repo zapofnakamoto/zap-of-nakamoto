@@ -72,6 +72,9 @@ object ZapDesign : BrandDesign {
             Anchor.HomeHeader -> if (context.status == WalletStatus.Empty) 128.dp else 88.dp
             // Not on a handed-out zap's page: there the mark is on the zap (ZapNote).
             Anchor.ReceiveHeader, Anchor.SendHeader, Anchor.ClaimResult -> 72.dp
+            // The Zaps tab: waiting while zaps you handed out wait, curious once, above the hint, when there are none.
+            Anchor.NotesHeader -> if (context.status == WalletStatus.Empty) null else 56.dp
+            Anchor.NotesEmpty -> 112.dp
             else -> null
         }
         when {

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -36,29 +38,34 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import whitewallet.brand.WalletStatus
-import whitewallet.brand.ui.DefaultComponents
+import whitewallet.brand.ui.ListIconParams
+import whitewallet.brand.ui.ListIconSize
+import whitewallet.brand.ui.LocalBrandDesign
 import whitewallet.brand.ui.LocalReduceMotion
 import whitewallet.brand.ui.NoteFaceParams
 import whitewallet.brand.ui.NoteFacePlace
 import whitewallet.brand.ui.NoteFaceSize
 import whitewallet.brand.ui.NoteStatus
 import whitewallet.brand.ui.QrCodeCoverParams
+import whitewallet.brand.ui.ToggleKind
+import whitewallet.brand.ui.ToggleParams
 
 /** How the card looks: [Spark] while it is money, an outline once it isn't, ink only on paper. */
 private enum class Look { Spark, Claimed, TakenBack, Paper }
 
 private val CARD = RoundedCornerShape(24.dp)
 private val COVER = RoundedCornerShape(12.dp)
+private val TILE = RoundedCornerShape(8.dp)
 
 /**
  * A zap as design/explorations/r13-spark-card.html draws it, large: a spark card with its state on top, the mark, the
  * amount in Unbounded, and below "Scan to claim" the QR code (or the cover over it). Once claimed it is a dashed
  * outline, the money gone; taken back a solid one, the money yours again; on paper an ink outline, to save ink. In the
- * notes list it stays White Wallet's row.
+ * Zaps tab, a row with the card in small ([ZapRow]).
  */
 @Composable
 internal fun ZapNote(params: NoteFaceParams, modifier: Modifier) {
-    if (params.size == NoteFaceSize.Row) return DefaultComponents.noteFace(params, modifier)
+    if (params.size == NoteFaceSize.Row) return ZapRow(params, modifier)
     val reduceMotion = LocalReduceMotion.current
     val colors = MaterialTheme.colorScheme
     val look = when {
@@ -95,6 +102,44 @@ internal fun ZapNote(params: NoteFaceParams, modifier: Modifier) {
             if (!params.qrCovered) Text(stringResource(R.string.zap_card_scan), color = ink, style = MaterialTheme.typography.labelLarge)
             qrCode()
         }
+    }
+}
+
+/**
+ * One zap in the Zaps tab: the card in small (a spark tile with the bolt, dashed while the zap is being paid or its
+ * payment is unclear), the amount, what is unusual about it (or, handed out, its mint), and its age. The tap and, while
+ * selecting, the checkbox's state are the app's.
+ */
+@Composable
+private fun ZapRow(params: NoteFaceParams, modifier: Modifier) {
+    val components = LocalBrandDesign.current.components
+    val colors = MaterialTheme.colorScheme
+    val busy = params.status == NoteStatus.Paying || params.status == NoteStatus.Unclear
+    Row(
+        modifier.fillMaxWidth().heightIn(min = 56.dp).padding(horizontal = 16.dp, vertical = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        params.selected?.let { components.Toggle(ToggleParams(ToggleKind.Checkbox, it, onCheckedChange = null, enabled = params.enabled), Modifier) }
+        Box(
+            Modifier.size(32.dp).then(
+                if (busy) Modifier.dashedOutline(colors.onSurfaceVariant, 1.5.dp, 8.dp) else Modifier.background(colors.primaryContainer, TILE),
+            ),
+            contentAlignment = Alignment.Center,
+        ) {
+            ZapBolt(if (busy) colors.onSurfaceVariant else colors.onPrimaryContainer, 18.dp)
+        }
+        Column(Modifier.weight(1f)) {
+            Text(params.amount, style = MaterialTheme.typography.titleMedium)
+            // A handed-out zap has no mint header above it, so its row names the mint.
+            (params.statusText ?: params.mint?.takeIf { params.place == NoteFacePlace.Shared })?.let { text ->
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    params.statusIcon?.let { components.ListIcon(ListIconParams(it, size = ListIconSize.Inline), Modifier) }
+                    Text(text, style = MaterialTheme.typography.bodySmall, color = colors.onSurfaceVariant)
+                }
+            }
+        }
+        params.age?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = colors.onSurfaceVariant) }
     }
 }
 

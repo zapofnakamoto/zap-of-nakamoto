@@ -149,15 +149,32 @@ private const val BOLT_HEIGHT = 100f
 
 private val BOLT = listOf(62f to 6f, 16f to 58f, 44f to 58f, 34f to 94f, 84f to 38f, 57f to 38f, 70f to 6f)
 
+/**
+ * The bolt without its face (design/DESIGN.md: only below 24 dp, where a face can't be read), in [color], in a box of
+ * [size].
+ */
+@Composable
+internal fun ZapBolt(color: Color, size: Dp, modifier: Modifier = Modifier) {
+    Canvas(modifier.size(size)) {
+        val unit = this.size.minDimension / BOX
+        translate(10 * unit, 10 * unit) { drawMarkBolt(color, unit) }
+    }
+}
+
+/** The bolt, filled and stroked round: what the face is cut out of. */
+private fun DrawScope.drawMarkBolt(color: Color, unit: Float) {
+    val bolt = Path().apply {
+        BOLT.forEachIndexed { i, (x, y) -> if (i == 0) moveTo(x * unit, y * unit) else lineTo(x * unit, y * unit) }
+        close()
+    }
+    drawPath(bolt, color)
+    drawPath(bolt, color, style = Stroke(width = 12 * unit, join = StrokeJoin.Round))
+}
+
 private fun DrawScope.drawMark(color: Color, motion: MarkMotion) {
     val unit = size.minDimension / BOX
     translate(10 * unit, 10 * unit) {
-        val bolt = Path().apply {
-            BOLT.forEachIndexed { i, (x, y) -> if (i == 0) moveTo(x * unit, y * unit) else lineTo(x * unit, y * unit) }
-            close()
-        }
-        drawPath(bolt, color)
-        drawPath(bolt, color, style = Stroke(width = 12 * unit, join = StrokeJoin.Round))
+        drawMarkBolt(color, unit)
 
         // The face, cut out: whatever is behind the mark shows through.
         val line = Stroke(width = 3.6f * unit, cap = StrokeCap.Round)
