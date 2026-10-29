@@ -46,11 +46,14 @@ import whitewallet.brand.ui.LocalWalletEvents
 
 /**
  * The mark (design/DESIGN.md "The mark", "States", "Motion"): a chubby bolt with a face cut out of it, which shows
- * how things are going. Drawn in the theme's primary colour (ink on light, spark on dark), in a box of [size].
+ * how things are going. Drawn in [color], by default the theme's primary (ink on light, spark on dark), in a box of
+ * [size].
  *
  * [status] picks the face and, when it changes, the motion: a payment arriving drops the bolt in (Happy), one going
- * out lifts it away and back (Focus, then Rest), a problem shakes it (Oops). With [followEvents] the mark also reacts
- * to payments anywhere in the app (the wallet tab). With [reduceMotion] nothing moves; only the face changes.
+ * out lifts it away and back (Focus, then Rest), a problem shakes it (Oops). With [settleFirst] the first status is
+ * shown as it ends, without its motion: for a mark that shows how something already is. With [followEvents] the mark
+ * also reacts to payments anywhere in the app (the wallet tab). With [reduceMotion] nothing moves; only the face
+ * changes.
  */
 @Composable
 internal fun ZapMark(
@@ -60,9 +63,11 @@ internal fun ZapMark(
     modifier: Modifier = Modifier,
     followEvents: Boolean = false,
     celebrate: Boolean = false,
+    settleFirst: Boolean = false,
+    color: Color = MaterialTheme.colorScheme.primary,
 ) {
-    val color = MaterialTheme.colorScheme.primary
     val motion = remember { MarkMotion() }
+    var settle by remember { mutableStateOf(settleFirst) }
     val haptics = LocalHapticFeedback.current
     val scope = rememberCoroutineScope()
     motion.reduceMotion = reduceMotion
@@ -70,7 +75,10 @@ internal fun ZapMark(
     // On the wallet tab the mark is what tells of a payment, so it buzzes; elsewhere the screen does.
     motion.onArrived = { if (followEvents) haptics.performHapticFeedback(HapticFeedbackType.Confirm) }
 
-    LaunchedEffect(status) { motion.show(status) }
+    LaunchedEffect(status) {
+        if (settle) motion.settle(status) else motion.show(status)
+        settle = false
+    }
     if (followEvents) {
         val events = LocalWalletEvents.current
         LaunchedEffect(events) {
@@ -233,6 +241,17 @@ private class MarkMotion {
             WalletStatus.AwaitingPayment, WalletStatus.WaitingForRecipient -> face(Face.Waiting, 220)
             WalletStatus.Sending -> face(Face.Focus, 200)
             else -> face(Face.Rest, 220)
+        }
+    }
+
+    /** Shows the face for [status] at once, as its motion would end. */
+    suspend fun settle(status: WalletStatus) {
+        val reduce = reduceMotion
+        reduceMotion = true
+        try {
+            show(status)
+        } finally {
+            reduceMotion = reduce
         }
     }
 

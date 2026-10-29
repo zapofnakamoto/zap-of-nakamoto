@@ -50,13 +50,15 @@ import whitewallet.brand.ui.ButtonKind
 import whitewallet.brand.ui.ButtonParams
 import whitewallet.brand.ui.DecorationContext
 import whitewallet.brand.ui.DefaultComponents
+import whitewallet.brand.ui.NoteFaceParams
+import whitewallet.brand.ui.QrCodeCoverParams
 import whitewallet.brand.ui.Tone
 import whitewallet.brand.ui.walletColors
 
 /**
  * Zap of Nakamoto's design in code (design/DESIGN.md), on top of its resources (palette, fonts, the static mark):
- * the living mark where the wallet shows how things are going, a celebration when a payment arrives, the wordmark for the name, spark pill buttons and the
- * balance in Unbounded.
+ * the living mark where the wallet shows how things are going, a celebration when a payment arrives, the wordmark for the name, spark pill buttons, the
+ * balance in Unbounded, and the zap you hand over as a spark card with the cover over its code.
  */
 object ZapDesign : BrandDesign {
     override val components: BrandComponents = ZapComponents
@@ -68,7 +70,8 @@ object ZapDesign : BrandDesign {
             Anchor.AppLock -> 96.dp
             // An empty wallet makes the mark bigger, above the hint on how to get the first zap.
             Anchor.HomeHeader -> if (context.status == WalletStatus.Empty) 128.dp else 88.dp
-            Anchor.ReceiveHeader, Anchor.SendHeader, Anchor.ClaimResult, Anchor.NoteShared -> 72.dp
+            // Not on a handed-out zap's page: there the mark is on the zap (ZapNote).
+            Anchor.ReceiveHeader, Anchor.SendHeader, Anchor.ClaimResult -> 72.dp
             else -> null
         }
         when {
@@ -187,4 +190,10 @@ private object ZapComponents : BrandComponents {
     override fun Amount(params: AmountParams, modifier: Modifier) {
         Text(params.text, modifier, color = MaterialTheme.walletColors.amount, style = MaterialTheme.typography.displayMedium, textAlign = TextAlign.Center)
     }
+
+    @Composable
+    override fun NoteFace(params: NoteFaceParams, modifier: Modifier) = ZapNote(params, modifier)
+
+    @Composable
+    override fun QrCodeCover(params: QrCodeCoverParams, modifier: Modifier) = ZapQrCodeCover(params, modifier)
 }

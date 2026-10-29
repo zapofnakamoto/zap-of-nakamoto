@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Der Zap, den man weitergibt, auf seiner Karte (ZapNote). -->
+    <string name="zap_card_waiting">Wartet aufs Einlösen</string>
+    <string name="zap_card_scan">Zum Einlösen scannen</string>
+    <string name="zap_card_claimed">Eingelöst</string>
+    <string name="zap_card_taken_back">Zurück in deiner Wallet</string>
+    <string name="zap_card_ready">Bereit zum Einlösen</string>
+</resources>
