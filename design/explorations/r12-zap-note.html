@@ -1,0 +1,235 @@
+<title>Zap Note Round 12</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: round-12 working sheet, like rounds 9-11. Three directions for the zap you hand out, each in the four
+   places it shows: waiting (light, dark), claimed or taken back, and on paper. The app draws the QR code; a
+   direction may only frame it. */
+:root {
+  --bg: #F4F4F7; --surface: #FFFFFF; --fg: #17171F; --muted: #5E5E70; --line: #E1E1E8; --focus: #4B5BFF;
+  --spark: #FFD23F; --ink: #16182B; --ink-raised: #21243A; --paper: #FFF6D6; --paper-soft: #D8D2BC; --white: #FFFFFF;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111117; --surface: #1A1A22; --fg: #ECECF2; --muted: #9C9CB0; --line: #2C2C38; --focus: #8E99FF; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px }
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 64px }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; font-weight: 800 }
+h2 { font-size: 1.35rem; font-weight: 700 }
+p { margin: 0; max-width: 65ch }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.muted { color: var(--muted) }
+section { display: grid; gap: 20px }
+.head { display: grid; gap: 8px }
+
+.intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start }
+.intro > * { min-width: 0 }
+.facts { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; font-size: .95rem }
+.facts li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 12px; padding-block: 8px; border-bottom: 1px solid var(--line) }
+.facts li span:first-child { font-weight: 700 }
+
+/* The four places a zap shows, one row per direction. */
+.row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
+.place { display: grid; gap: 8px; align-content: start; min-width: 0 }
+.place > b { font-size: .92rem }
+.place > span { font-size: .8rem; color: var(--muted) }
+.screen { --screen: var(--paper); --on: var(--ink); background: var(--screen); color: var(--on); border-radius: 22px;
+  padding: 22px 16px; display: grid; gap: 12px; align-content: start; justify-items: center; min-height: 100%;
+  border: 1px solid var(--line) }
+.screen.dark { --screen: var(--ink); --on: var(--paper) }
+.screen.sheet { --screen: var(--white); --on: var(--ink); border-radius: 4px; box-shadow: 0 1px 0 var(--line), 0 14px 30px -24px rgb(0 0 0 / .5) }
+.app-text { font: 500 .78rem/1.4 var(--body); text-align: center; max-width: 30ch; opacity: .85 }
+.app-text.warn { color: #B3261E; opacity: 1 }
+.screen.dark .app-text.warn { color: #FFB4AB }
+
+.mk { display: grid; place-items: center }
+.mk svg { width: 100%; height: 100%; overflow: visible }
+.qr-m { background: var(--white); border-radius: 10px; padding: 8px; line-height: 0 }
+.qr { width: 132px; height: 132px; image-rendering: pixelated; max-width: 100% }
+.amt { font: 800 1.9rem/1 var(--display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; white-space: nowrap }
+
+/* A: Spark card. The zap is a spark surface: the boldest brand moment. */
+.a { width: 100%; max-width: 220px; background: var(--spark); color: var(--ink); border-radius: 22px; padding: 16px 14px 14px;
+  display: grid; justify-items: center; gap: 10px }
+.a .mk { width: 34px; height: 34px }
+.a.out { background: transparent; color: var(--on); border: 2px solid currentColor }
+.a.out .amt { opacity: .55 }
+.a.ink { background: transparent; border: 2.5px solid var(--ink) }
+
+/* B: Ticket. A spark stub with the amount, a perforation, and the QR code below. Claiming tears the lower part off. */
+.b { width: 100%; max-width: 220px; display: grid; position: relative }
+.b .stub { background: var(--spark); color: var(--ink); border-radius: 16px 16px 4px 4px; padding: 14px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px }
+.b .stub .mk { width: 28px; height: 28px }
+.b .stub .amt { justify-self: end; font-size: 1.6rem }
+.b .perf { height: 0; border-top: 2px dashed var(--on); opacity: .5; margin-inline: 14px; position: relative }
+.b .perf::before, .b .perf::after { content: ""; position: absolute; top: -9px; width: 16px; height: 16px; border-radius: 50%; background: var(--screen) }
+.b .perf::before { left: -22px } .b .perf::after { right: -22px }
+.b .body { background: var(--surface-b, var(--white)); border-radius: 4px 4px 16px 16px; padding: 14px; display: grid; justify-items: center; border: 2px solid var(--spark); border-top: 0 }
+.screen.dark .b .body { --surface-b: var(--ink-raised) }
+.b.out .stub { background: transparent; color: var(--on); border: 2px solid currentColor; border-radius: 16px 16px 4px 4px }
+.b.out .stub .amt { opacity: .55 }
+.b.out .torn { height: 10px; margin-inline: 2px; background:
+  linear-gradient(135deg, transparent 50%, var(--screen) 50%) 0 0 / 10px 10px repeat-x,
+  linear-gradient(225deg, transparent 50%, var(--screen) 50%) 0 0 / 10px 10px repeat-x; border-inline: 2px solid var(--on); border-top: 0 }
+.b.ink .stub { background: transparent; border: 2.5px solid var(--ink) }
+.b.ink .body { border: 2.5px solid var(--ink); border-top: 0 }
+
+/* C: Bolt frame. An ink card with a big flat spark bolt behind the amount; the bolt leaves when the zap is claimed. */
+.c { width: 100%; max-width: 220px; background: var(--ink); color: var(--paper); border-radius: 22px; padding: 18px 14px 14px;
+  display: grid; justify-items: center; gap: 12px; position: relative; overflow: hidden }
+.screen.dark .c { background: var(--ink-raised) }
+.c .bolt { position: absolute; right: -30px; top: -26px; width: 132px; height: 132px; pointer-events: none }
+.c .amt { position: relative }
+.c .qr-m { position: relative }
+.c.out { background: transparent; color: var(--on); border: 2px solid currentColor }
+.c.out .amt { opacity: .55 }
+.c.ink { background: transparent; color: var(--ink); border: 2.5px solid var(--ink) }
+
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none }
+.notes li { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 14px 16px; font-size: .9rem; display: grid; gap: 4px; align-content: start }
+.notes li b { font-size: .95rem }
+.tbl { overflow-x: auto }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .92rem }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top }
+th { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+td:first-child { font-weight: 700; white-space: nowrap }
+
+@media (max-width: 920px) { .row { grid-template-columns: repeat(2, minmax(0, 1fr)) } .intro, .notes { grid-template-columns: 1fr } }
+@media (max-width: 480px) { .row { grid-template-columns: 1fr } }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <div class="head">
+      <span class="eyebrow">Zap of Nakamoto · round 12 · 2026-10-29</span>
+      <h1>The zap you hand over</h1>
+      <p class="muted">A zap is bitcoin as a QR code or link: whoever claims it gets the money. White Wallet now lets a brand draw it (<code>NoteFace</code>). Zap still uses the default, a large amount above the QR code. These are three directions for Zap's own.</p>
+    </div>
+    <ul class="facts">
+      <li><span>Where</span><span>The zap's page (waiting, claimed, taken back), the claim preview, and the printed page.</span></li>
+      <li><span>App keeps</span><span>The QR code exactly as drawn, the bearer warning, Share, Copy, Print, Take back.</span></li>
+      <li><span>Brand rules</span><span>Flat, one accent (spark), no gradients or shadows. Unbounded for the amount. Friendly, not cute.</span></li>
+      <li><span>On paper</span><span>Always the light theme on white, so ink-light versions are shown.</span></li>
+    </ul>
+  </header>
+
+  <section aria-labelledby="ha">
+    <div class="head">
+      <span class="eyebrow">Direction A</span>
+      <h2 id="ha">Spark card</h2>
+      <p class="muted">The zap is a spark card: the mark on top, the amount, the QR code on its own white margin. It's the brand's strongest moment. Once claimed or taken back, only the outline stays.</p>
+    </div>
+    <div class="row">
+      <div class="place"><div class="screen"><div class="a"><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b><div class="qr-m"><canvas class="qr"></canvas></div></div><p class="app-text warn">Anyone with this code can spend it.</p></div><b>Waiting</b><span>The zap's page and the claim preview</span></div>
+      <div class="place"><div class="screen dark"><div class="a"><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b><div class="qr-m"><canvas class="qr"></canvas></div></div><p class="app-text warn">Anyone with this code can spend it.</p></div><b>Waiting, dark</b><span>Same card; spark on ink</span></div>
+      <div class="place"><div class="screen"><div class="a out"><span class="mk" data-face="rest"></span><b class="amt">₿2,100</b></div><p class="app-text">Claimed. The recipient has the bitcoin.</p></div><b>Claimed or taken back</b><span>The outline of the card, no QR code</span></div>
+      <div class="place"><div class="screen sheet"><div class="a ink"><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b><div class="qr-m"><canvas class="qr"></canvas></div></div><p class="app-text">Whoever holds this paper can spend it. Keep it like cash.</p></div><b>On paper</b><span>Ink outline instead of a yellow fill, to save ink</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="hb">
+    <div class="head">
+      <span class="eyebrow">Direction B</span>
+      <h2 id="hb">Ticket</h2>
+      <p class="muted">A ticket: a spark stub with the mark and the amount, a perforation, and the QR code below. When someone claims the zap, the lower part is torn off and you keep the stub, like a receipt.</p>
+    </div>
+    <div class="row">
+      <div class="place"><div class="screen"><div class="b"><div class="stub"><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b></div><div class="perf"></div><div class="body"><div class="qr-m"><canvas class="qr"></canvas></div></div></div><p class="app-text warn">Anyone with this code can spend it.</p></div><b>Waiting</b><span>The zap's page and the claim preview</span></div>
+      <div class="place"><div class="screen dark"><div class="b"><div class="stub"><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b></div><div class="perf"></div><div class="body"><div class="qr-m"><canvas class="qr"></canvas></div></div></div><p class="app-text warn">Anyone with this code can spend it.</p></div><b>Waiting, dark</b><span>The lower part on raised ink</span></div>
+      <div class="place"><div class="screen"><div class="b out"><div class="stub"><span class="mk" data-face="rest"></span><b class="amt">₿2,100</b></div><div class="torn"></div></div><p class="app-text">Claimed. The recipient has the bitcoin.</p></div><b>Claimed or taken back</b><span>Only the stub is left</span></div>
+      <div class="place"><div class="screen sheet"><div class="b ink"><div class="stub"><span class="mk" data-face="waiting"></span><b class="amt">₿2,100</b></div><div class="perf"></div><div class="body"><div class="qr-m"><canvas class="qr"></canvas></div></div></div><p class="app-text">Whoever holds this paper can spend it. Keep it like cash.</p></div><b>On paper</b><span>The perforation is where to cut</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="hc">
+    <div class="head">
+      <span class="eyebrow">Direction C</span>
+      <h2 id="hc">Bolt frame</h2>
+      <p class="muted">An ink card with a large flat spark bolt behind the amount, cropped by the card's corner. When the zap is claimed, the bolt leaves the card. It is closest to the mark, and it bends two of its rules (see below).</p>
+    </div>
+    <div class="row">
+      <div class="place"><div class="screen"><div class="c"><span class="mk bolt" data-face="none"></span><b class="amt">₿2,100</b><div class="qr-m"><canvas class="qr"></canvas></div></div><p class="app-text warn">Anyone with this code can spend it.</p></div><b>Waiting</b><span>The zap's page and the claim preview</span></div>
+      <div class="place"><div class="screen dark"><div class="c"><span class="mk bolt" data-face="none"></span><b class="amt">₿2,100</b><div class="qr-m"><canvas class="qr"></canvas></div></div><p class="app-text warn">Anyone with this code can spend it.</p></div><b>Waiting, dark</b><span>The card on raised ink</span></div>
+      <div class="place"><div class="screen"><div class="c out"><b class="amt">₿2,100</b></div><p class="app-text">Claimed. The recipient has the bitcoin.</p></div><b>Claimed or taken back</b><span>The bolt has gone</span></div>
+      <div class="place"><div class="screen sheet"><div class="c ink"><span class="mk bolt" data-face="none" data-ink></span><b class="amt">₿2,100</b><div class="qr-m"><canvas class="qr"></canvas></div></div><p class="app-text">Whoever holds this paper can spend it. Keep it like cash.</p></div><b>On paper</b><span>The bolt in ink on white</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="hcmp">
+    <div class="head">
+      <span class="eyebrow">Side by side</span>
+      <h2 id="hcmp">How they compare</h2>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Direction</th><th>On screen</th><th>Claimed or taken back</th><th>On paper</th><th>Brand rules</th></tr></thead>
+        <tbody>
+          <tr><td>A · Spark card</td><td>Loudest; the whole zap is spark</td><td>Outline; reads as "used"</td><td>Outline, little ink</td><td>Keeps all of them</td></tr>
+          <tr><td>B · Ticket</td><td>Calm; spark only on the stub</td><td>Torn stub; the clearest story</td><td>Prints well; the perforation is a cut line</td><td>Keeps all of them</td></tr>
+          <tr><td>C · Bolt frame</td><td>Most graphic; ties the zap to the mark</td><td>The bolt leaves; needs motion to read</td><td>Solid ink bolt, more ink</td><td>A large bolt without a face (the guide allows that only below 24 px), and cropped</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="hn">
+    <div class="head">
+      <span class="eyebrow">Either way</span>
+      <h2 id="hn">What doesn't change</h2>
+    </div>
+    <ul class="notes">
+      <li><b>The QR code</b><span class="muted">The app draws it black on white. Every direction puts it on its own white margin and never tints, crops or covers it.</span></li>
+      <li><b>The mark above</b><span class="muted">The zap's page already shows the living mark above the zap (round 11 motion). A and B repeat a small, still mark on the zap; C replaces it with the faceless bolt.</span></li>
+      <li><b>The words around it</b><span class="muted">The bearer warning, "Not claimed yet…" and the buttons stay the app's, below the zap. The QR code here is a placeholder, not a real zap.</span></li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(() => {
+  const P = 'M62 6L16 58H44L34 94L84 38H57L70 6Z';
+  // Faces from DESIGN.md: eye positions and the mouth's quadratic curve.
+  const faces = {
+    rest: { eyes: [[41, 47], [58, 45]], mouth: [44, 55.5, 51, 61.5, 58, 53.5] },
+    waiting: { eyes: [[43, 45.5], [60, 43.5]], mouth: [46, 56, 51, 58.5, 56, 55.5] },
+  };
+  let n = 0;
+  document.querySelectorAll('.mk').forEach(el => {
+    const face = faces[el.dataset.face];
+    const color = el.classList.contains('bolt') && !('ink' in el.dataset) ? 'var(--spark)' : 'currentColor';
+    const id = 'zf' + (n++);
+    const cut = face ? `<mask id="${id}" maskUnits="userSpaceOnUse" x="-20" y="-20" width="140" height="140">
+        <rect x="-20" y="-20" width="140" height="140" fill="#fff"/>
+        ${face.eyes.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.8" fill="#000"/>`).join('')}
+        <path d="M${face.mouth[0]} ${face.mouth[1]}Q${face.mouth[2]} ${face.mouth[3]} ${face.mouth[4]} ${face.mouth[5]}" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/>
+      </mask>` : '';
+    el.innerHTML = `<svg viewBox="-10 -10 120 120" aria-hidden="true"><defs>${cut}</defs>
+      <path d="${P}" fill="${color}" stroke="${color}" stroke-width="12" stroke-linejoin="round" ${face ? `mask="url(#${id})"` : ''}/></svg>`;
+  });
+
+  // A placeholder QR code: finder patterns and seeded modules, drawn the way the app draws it (black on white).
+  const N = 29, seed0 = 2100;
+  let s = seed0;
+  const rnd = () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  const grid = Array.from({ length: N }, () => Array.from({ length: N }, () => rnd() < 0.5));
+  const finder = (r0, c0) => { for (let r = -1; r < 8; r++) for (let c = -1; c < 8; c++) {
+    const y = r0 + r, x = c0 + c; if (y < 0 || x < 0 || y >= N || x >= N) continue;
+    const ring = Math.max(Math.abs(r - 3), Math.abs(c - 3));
+    grid[y][x] = r >= 0 && r < 7 && c >= 0 && c < 7 && ring !== 2; } };
+  finder(0, 0); finder(0, N - 7); finder(N - 7, 0);
+  for (let i = 8; i < N - 8; i++) { grid[6][i] = i % 2 === 0; grid[i][6] = i % 2 === 0; }
+  document.querySelectorAll('canvas.qr').forEach(cv => {
+    const m = 2, size = N + m * 2; cv.width = size; cv.height = size;
+    const g = cv.getContext('2d'); g.fillStyle = '#FFFFFF'; g.fillRect(0, 0, size, size); g.fillStyle = '#000000';
+    grid.forEach((row, y) => row.forEach((on, x) => { if (on) g.fillRect(x + m, y + m, 1, 1); }));
+  });
+})();
+</script>
