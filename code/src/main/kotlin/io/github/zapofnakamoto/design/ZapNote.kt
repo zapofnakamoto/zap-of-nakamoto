@@ -30,6 +30,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.LocaleList
 import androidx.compose.ui.text.style.TextAlign
@@ -107,14 +108,18 @@ internal fun ZapNote(params: NoteFaceParams, modifier: Modifier) {
 
 /**
  * One zap in the Zaps tab: the card in small (a spark tile with the bolt, dashed while the zap is being paid or its
- * payment is unclear), the amount, what is unusual about it (or, handed out, its mint), and its age. The tap and, while
- * selecting, the checkbox's state are the app's.
+ * payment is unclear, turned over, ink with a spark bolt, once handed out), the amount, what is unusual about it (handed
+ * out: that it waits to be claimed, and where), and its age. The tap and, while selecting, the checkbox's state are the
+ * app's.
  */
 @Composable
 private fun ZapRow(params: NoteFaceParams, modifier: Modifier) {
     val components = LocalBrandDesign.current.components
     val colors = MaterialTheme.colorScheme
     val busy = params.status == NoteStatus.Paying || params.status == NoteStatus.Unclear
+    val waiting = params.status == NoteStatus.Waiting
+    // Ink on paper; on ink (dark, never on paper) a raised ink, so the tile still stands out.
+    val turned = if (colors.surface.luminance() < 0.5f) colors.surfaceContainerHigh else colors.onSurface
     Row(
         modifier.fillMaxWidth().heightIn(min = 56.dp).padding(horizontal = 16.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -123,20 +128,39 @@ private fun ZapRow(params: NoteFaceParams, modifier: Modifier) {
         params.selected?.let { components.Toggle(ToggleParams(ToggleKind.Checkbox, it, onCheckedChange = null, enabled = params.enabled), Modifier) }
         Box(
             Modifier.size(32.dp).then(
-                if (busy) Modifier.dashedOutline(colors.onSurfaceVariant, 1.5.dp, 8.dp) else Modifier.background(colors.primaryContainer, TILE),
+                when {
+                    busy -> Modifier.dashedOutline(colors.onSurfaceVariant, 1.5.dp, 8.dp)
+                    waiting -> Modifier.background(turned, TILE)
+                    else -> Modifier.background(colors.primaryContainer, TILE)
+                },
             ),
             contentAlignment = Alignment.Center,
         ) {
-            ZapBolt(if (busy) colors.onSurfaceVariant else colors.onPrimaryContainer, 18.dp)
+            ZapBolt(
+                when {
+                    busy -> colors.onSurfaceVariant
+                    waiting -> colors.primaryContainer
+                    else -> colors.onPrimaryContainer
+                },
+                18.dp,
+            )
         }
         Column(Modifier.weight(1f)) {
             Text(params.amount, style = MaterialTheme.typography.titleMedium)
-            // A handed-out zap has no mint header above it, so its row names the mint.
-            (params.statusText ?: params.mint?.takeIf { params.place == NoteFacePlace.Shared })?.let { text ->
+            val small = MaterialTheme.typography.bodySmall
+            params.statusText?.let { text ->
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     params.statusIcon?.let { components.ListIcon(ListIconParams(it, size = ListIconSize.Inline), Modifier) }
-                    Text(text, style = MaterialTheme.typography.bodySmall, color = colors.onSurfaceVariant)
+                    Text(text, style = small, color = colors.onSurfaceVariant)
                 }
+            }
+            // A handed-out zap says so, like its card; it has no mint header above it, so it names the mint below.
+            if (waiting) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Box(Modifier.size(6.dp).background(colors.onSurfaceVariant, CircleShape))
+                    Text(stringResource(R.string.zap_card_waiting), style = small, color = colors.onSurfaceVariant)
+                }
+                params.mint?.let { Text(it, style = small, color = colors.onSurfaceVariant) }
             }
         }
         params.age?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = colors.onSurfaceVariant) }

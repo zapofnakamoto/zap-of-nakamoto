@@ -19,8 +19,8 @@ On White Wallet v0.3.0. From here on the version is the app's own (semver), no l
 - Settings → Services shows your Lightning service and any other the wallet knows; on Claim, which service a note is
   on and whether you trust it.
 - A Zaps tab next to Wallet and History lists your zaps one by one, each on a small spark tile (dashed while it is
-  being paid), the ones you handed out under their own heading, and the mark above the total, waiting while a zap is
-  out, curious when there are none. Tap one for its card and what you can do with it. In English and German (needs
+  being paid), the ones you handed out under their own heading, on a turned-over tile, ink with a spark bolt, saying
+  they wait to be claimed, and the mark above the total, waiting while a zap is out, curious when there are none. Tap one for its card and what you can do with it. In English and German (needs
   White Wallet after v0.4.0).
 
 ### Changed

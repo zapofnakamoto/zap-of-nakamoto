@@ -155,7 +155,8 @@ A zap opened later shows its state settled, without motion. With reduced motion 
 **The Zaps tab** (White Wallet's notes view). Each row starts with a 32 dp spark tile, 8 dp corners, holding the bolt
 without its face (18 dp, ink; faceless only below 24 dp), then the amount (`titleMedium`), what is unusual about the
 zap (with its icon), and its age. While a zap is being paid or its payment is unclear, the tile is a dashed outline
-and the bolt is muted. Handed-out zaps sit under their own heading and name their mint. Above the total the mark
+and the bolt is muted. Handed-out zaps sit under their own heading on a turned-over tile, ink with a spark bolt
+(raised ink in dark), with "Waiting to be claimed" and a dot under the amount and their mint below it. Above the total the mark
 (56 dp) waits while zaps are out and rests otherwise; an empty tab shows it once, 112 dp and Curious, above
 "No zaps yet." The mint headers are White Wallet's.
 
