@@ -11,11 +11,11 @@ pinned := trim(read("white-wallet.version"))
 default:
     @just --list --unsorted
 
-# Switch the White Wallet checkout to the pinned tag (it must have no local changes)
+# Switch the White Wallet checkout to the pinned tag, or to the pinned branch on white-wallet-next (no local changes)
 [group('white wallet')]
 checkout:
     git -C {{ ww }} fetch --tags --quiet
-    git -C {{ ww }} switch --detach {{ pinned }}
+    if [[ "{{ pinned }}" == v* ]]; then git -C {{ ww }} switch --detach {{ pinned }}; else git -C {{ ww }} switch {{ pinned }}; fi
 
 # Build the debug APK
 [group('build')]
@@ -62,8 +62,8 @@ check: pinned-check
 clean: pinned-check
     just -f {{ ww }}/justfile clean
 
-# Warn when the White Wallet checkout isn't at the pinned tag (a build from another version is fine for trying out)
+# Warn when the White Wallet checkout isn't at the pinned tag or branch (another version is fine for trying out)
 [private]
 pinned-check:
     @[[ -d "{{ ww }}" ]] || { echo "No White Wallet checkout at {{ ww }}; clone it there or set WHITE_WALLET." >&2; exit 1; }
-    @[[ "$(git -C {{ ww }} describe --tags --exact-match 2>/dev/null)" == "{{ pinned }}" ]] || echo "note: {{ ww }} is not at {{ pinned }} (just checkout)" >&2
+    @at="$(git -C {{ ww }} describe --tags --exact-match 2>/dev/null || git -C {{ ww }} branch --show-current)"; [[ "$at" == "{{ pinned }}" ]] || echo "note: {{ ww }} is not at {{ pinned }} (just checkout)" >&2

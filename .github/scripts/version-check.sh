@@ -4,8 +4,18 @@
 # app.version.name: a release, so app.version.code must be above the latest release's, app.version.name above its tag,
 # and CHANGELOG.md must have a section for it. Changes can wait on main until a commit raises the version. Needs the
 # tags (actions/checkout with fetch-depth: 0).
+#
+# main (and a pull request into it) must pin a White Wallet release tag; only white-wallet-next pins a branch, so
+# merging it into main without moving the pin to a release fails here instead of shipping an unreleased White Wallet.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
+
+pin="$(tr -d '[:space:]' < white-wallet.version)"
+target="${GITHUB_BASE_REF:-${GITHUB_REF_NAME:-$(git branch --show-current)}}"
+if [[ "$target" == main && ! "$pin" =~ ^v[0-9] ]]; then
+  echo "white-wallet.version is '$pin', but main must pin a White Wallet release tag (v…)." >&2
+  exit 1
+fi
 prop() { grep -E "^$1=" "${2:-brand.properties}" | head -1 | cut -d= -f2- | tr -d ' '; }
 # Releases before White Wallet grouped its keys called it versionCode.
 code_at() { git show "$1:brand.properties" | grep -E '^(app\.version\.code|versionCode)=' | head -1 | cut -d= -f2- | tr -d ' '; }
