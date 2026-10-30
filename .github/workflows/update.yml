@@ -51,6 +51,7 @@ jobs:
           # The app's own semver: a White Wallet patch raises the patch, anything bigger the minor. 1.0.0 is decided
           # by hand (README.md, "Updates and releases").
           IFS=. read -r major minor patch <<< "$(grep -E '^app.version.name=' brand.properties | cut -d= -f2- | tr -d ' ')"
+          # Pinned to White Wallet's main between releases: no old version to compare, so the minor goes up.
           IFS=. read -r old_major old_minor _ <<< "$(tr -d '[:space:]v' < white-wallet.version)"
           IFS=. read -r new_major new_minor _ <<< "${TAG#v}"
           if [[ "$old_major.$old_minor" == "$new_major.$new_minor" ]]; then

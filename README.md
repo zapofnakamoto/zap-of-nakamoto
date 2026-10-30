@@ -52,8 +52,8 @@ phrase, address, their service (and other services), security and About.
 ## Run it
 
 The builds need a White Wallet checkout next to this one (`../white-wallet`, or `WHITE_WALLET=<dir>`) at the pinned
-tag, or on `white-wallet-next` at the pinned branch: `just checkout` switches it there. Any other state of the checkout
-builds too, with a note, for trying Zap out against it.
+tag (or branch, see below): `just checkout` switches it there. Any other state of the checkout builds too, with a
+note, for trying Zap out against it.
 
 ```sh
 just phone      # build the debug APK, install it on the connected phone and open it
@@ -86,11 +86,10 @@ Everything that ships is decided here; CI only carries it out.
   section says which White Wallet it's on). Until 1.0.0 the app is a beta and any release may break things; 1.0.0
   is a decision made here, never a White Wallet update's.
 - **Changes that need an unreleased White Wallet** (a string key, a brand key or an extension point that isn't in a
-  release yet) go on the `white-wallet-next` branch, whose `white-wallet.version` is `main`: CI builds it against
-  White Wallet's main, and locally `just phone` does the same with `../white-wallet` on main. It is never released.
-  Once White Wallet tags the release and its update pull request is merged into main, merge `white-wallet-next` into
-  main, keep main's tag in `white-wallet.version`, and set the branch's back to `main`. The version check fails
-  while main, or a pull request into it, pins anything but a tag.
+  release yet) are made on main too: set `white-wallet.version` to `main`, and CI builds against White Wallet's main,
+  locally `just phone` with `../white-wallet` on main (`just checkout`). Nothing can be released meanwhile: the
+  version check refuses a new `app.version.name` while the pin isn't a tag. White Wallet's next release ends it: its
+  update pull request moves the pin to that tag (and raises the minor).
 - **CI** (`ci.yml`) builds and checks every pull request against the pinned White Wallet. Changes can wait on main
   unreleased: while `app.version.name` is a released one, a push is no release (and `app.version.code` must stay that
   release's). A new `app.version.name` needs a higher `app.version.code` and its `CHANGELOG.md` section.

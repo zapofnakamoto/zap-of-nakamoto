@@ -1,10 +1,10 @@
-# Every pull request and push (main and white-wallet-next): the brand check and the release build against the pinned
-# White Wallet, and the version check. Releasing is release.yml's job.
+# Every pull request and push: the brand check and the release build against the pinned White Wallet, and the version
+# check. Releasing is release.yml's job.
 name: CI
 
 on:
   push:
-    branches: [main, white-wallet-next]
+    branches: [main]
   pull_request:
 
 permissions:

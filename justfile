@@ -11,7 +11,7 @@ pinned := trim(read("white-wallet.version"))
 default:
     @just --list --unsorted
 
-# Switch the White Wallet checkout to the pinned tag, or to the pinned branch on white-wallet-next (no local changes)
+# Switch the White Wallet checkout to the pinned tag, or branch between releases (it must have no local changes)
 [group('white wallet')]
 checkout:
     git -C {{ ww }} fetch --tags --quiet
