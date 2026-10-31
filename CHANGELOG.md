@@ -9,19 +9,30 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
-On White Wallet v0.3.0. From here on the version is the app's own (semver), no longer White Wallet's.
+## [0.4.0]
+
+On White Wallet v0.6.3. From here on the version is the app's own (semver), no longer White Wallet's.
 
 ### Added
 
-- Setup and restore let you use another Lightning service: mint.lnurlcash.com stays preselected, "Custom…" takes the
-  address of any other.
-- Settings → Lightning addresses can add an address on another Lightning service, with the same recovery phrase.
-- Settings → Services shows your Lightning service and any other the wallet knows; on Claim, which service a note is
-  on and whether you trust it.
+- Setup and restore let you use another mint: mint.lnurlcash.com stays preselected, "Custom…" takes the address of
+  any other.
+- Setup lets you continue without a Lightning address: you receive by invoice and can pick an address later in
+  Settings.
+- Settings → Lightning addresses can add an address on another mint, with the same recovery phrase.
+- Settings → Mints shows your mint and any other the wallet knows; on Claim, which mint a zap is on and whether you
+  trust it.
 - A Zaps tab next to Wallet and History lists your zaps one by one, each on a small spark tile (dashed while it is
   being paid), the ones you handed out under their own heading, on a turned-over tile, ink with a spark bolt, saying
-  they wait to be claimed, and the mark above the total, waiting while a zap is out, curious when there are none. Tap one for its card and what you can do with it. In English and German (needs
-  White Wallet after v0.4.0).
+  they wait to be claimed, and the mark above the total, waiting while a zap is out, curious when there are none. Tap one for its card and what you can do with it. In English and German.
+- The wallet says what it did to your zaps by itself, and what that did to your balance ("Combined 2 zaps into one
+  of ₿63. You got ₿1 in fees back.").
+- While the wallet works on your zaps, the mark takes the place of the balance and says what it does ("Checking zap
+  3 of 5…"), instead of figures about to change.
+- An empty wallet shows a bigger mark and says how to get your first bitcoin.
+- A zap your mint no longer knows (a mint that lost its records, or misbehaves) no longer stops the wallet: it is set
+  aside, out of your balance, and the wallet asks the mint again by itself. The wallet shows a warning with "Check
+  again", and once the mint knows the zap again, it is back in your balance.
 
 ### Changed
 
@@ -30,7 +41,7 @@ On White Wallet v0.3.0. From here on the version is the app's own (semver), no l
   say "Sent!" and "Bitcoin arrived!", waiting for a payment says "Waiting for the payment…", so "zap" means one thing.
 - A zap is claimed, never redeemed: its page, the Zaps tab and History say "Not claimed yet" and "Claimed", and the
   zap's page says the recipient has the bitcoin, or that the bitcoin is back in your balance.
-- A zap is a spark card (needs White Wallet after v0.4.0): the mark, the amount and, on a handed-out zap's page,
+- A zap is a spark card: the mark, the amount and, on a handed-out zap's page,
   "Scan to claim" above its QR code. The card says where it stands: waiting to be claimed; claimed, a dashed
   outline once the money left, the mark rising out of the card when it happens; back in your wallet, a solid one.
   Claim shows the same card, "Ready to claim". On paper it is an ink outline. The QR code stays covered until you
@@ -42,6 +53,13 @@ On White Wallet v0.3.0. From here on the version is the app's own (semver), no l
   never changed your balance.
 - The beta notice at setup and in About says what beta means here: until 1.0.0, updates may change how the app
   works, and only tiny amounts belong in it.
+
+### Fixed
+
+- Splitting, renewing or receiving no longer fails with "already in use", as it could after a payment you asked for
+  by invoice never came.
+- Restoring from your recovery phrase no longer ends with an empty wallet when the mint refuses to look a zap up: it
+  says the mint can't be used instead.
 
 ## [0.3.0]
 
