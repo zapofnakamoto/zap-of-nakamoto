@@ -49,6 +49,22 @@
     <string name="note_reclaimed">Zurückgeholt. Die Bitcoin sind wieder in deinem Guthaben.</string>
     <string name="note_reclaim_body">Die Bitcoin kommen zurück in dein Guthaben und dieser Code funktioniert nicht mehr. Hat ihn schon jemand eingelöst, ändert sich nichts.</string>
     <string name="home_key_changed_body">Deine Wallet arbeitet nicht mehr damit, es wird also nichts dorthin gesendet. Deine Bitcoin dort sind unverändert. Öffne die Details, um den neuen Schlüssel zu sehen und zu entscheiden, ob du ihn verwendest.</string>
+    <plurals name="home_unknown_title">
+        <item quantity="one">%2$s kennt %1$d deiner Zaps nicht</item>
+        <item quantity="other">%2$s kennt %1$d deiner Zaps nicht</item>
+    </plurals>
+    <plurals name="home_unknown_title_unnamed">
+        <item quantity="one">Deine Mint kennt %1$d deiner Zaps nicht</item>
+        <item quantity="other">Deine Mint kennt %1$d deiner Zaps nicht</item>
+    </plurals>
+    <plurals name="home_unknown_body">
+        <item quantity="one">%1$s sind vorerst nicht in deinem Guthaben. Deine Wallet behält den Zap und fragt die Mint von selbst wieder; sobald die Mint ihn wieder kennt, ist er zurück.</item>
+        <item quantity="other">%1$s sind vorerst nicht in deinem Guthaben. Deine Wallet behält die Zaps und fragt die Mint von selbst wieder; sobald die Mint sie wieder kennt, sind sie zurück.</item>
+    </plurals>
+    <plurals name="home_unknown_body_hidden">
+        <item quantity="one">Er ist vorerst nicht in deinem Guthaben. Deine Wallet behält den Zap und fragt die Mint von selbst wieder; sobald die Mint ihn wieder kennt, ist er zurück.</item>
+        <item quantity="other">Sie sind vorerst nicht in deinem Guthaben. Deine Wallet behält die Zaps und fragt die Mint von selbst wieder; sobald die Mint sie wieder kennt, sind sie zurück.</item>
+    </plurals>
     <string name="about_body">Eine Lightning-Wallet, die deine Bitcoin bei einer Mint deiner Wahl verwahrt. Deine Wiederherstellungsphrase bleibt auf diesem Gerät.</string>
     <string name="settings_account_contents">Wiederherstellungsphrase, Adresse, Bitcoin</string>
     <string name="delete_what">Das entfernt dieses Konto von diesem Handy: seine Wiederherstellungsphrase, seine Bitcoin und seine Einstellungen. Andere Konten sind nicht betroffen.</string>
@@ -87,6 +103,11 @@
         <item quantity="other">%1$d Zaps sind nicht mehr da: Sie wurden woanders ausgegeben, zum Beispiel mit dieser Wiederherstellungsphrase auf einem anderen Handy.</item>
     </plurals>
     <string name="notes_already_spent">Dieser Zap war schon ausgegeben und wurde daher nicht verschickt. Er ist nicht mehr in deinem Guthaben.</string>
+    <plurals name="notes_checked_unknown">
+        <item quantity="one">Die Mint kennt %1$d Zap nicht. Er ist beiseitegelegt, nicht in deinem Guthaben, und deine Wallet fragt von selbst wieder.</item>
+        <item quantity="other">Die Mint kennt %1$d Zaps nicht. Sie sind beiseitegelegt, nicht in deinem Guthaben, und deine Wallet fragt von selbst wieder.</item>
+    </plurals>
+    <string name="notes_state_unknown_detail">Die Mint sagt, sie kennt diesen Zap nicht, daher ist er nicht in deinem Guthaben. Deine Wallet behält ihn und fragt die Mint von selbst wieder; sobald die Mint ihn wieder kennt, ist er zurück in deinem Guthaben.</string>
     <string name="notes_waiting_total">%1$s verschickt, noch nicht eingelöst</string>
     <string name="notes_shared_title">Verschickt, noch nicht eingelöst</string>
     <string name="notes_empty">Noch keine Zaps. Zaps erscheinen hier, sobald du Bitcoin empfängst.</string>

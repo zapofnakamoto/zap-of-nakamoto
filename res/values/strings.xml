@@ -53,6 +53,22 @@
     <string name="note_reclaimed">Taken back. The bitcoin is in your balance again.</string>
     <string name="note_reclaim_body">The bitcoin returns to your balance and this code stops working. If someone has claimed it already, nothing changes.</string>
     <string name="home_key_changed_body">Your wallet stopped working with it, so nothing is sent there. Your bitcoin there is unchanged. Open the details to see the new key and decide whether to use it.</string>
+    <plurals name="home_unknown_title">
+        <item quantity="one">%2$s doesn\'t know %1$d of your zaps</item>
+        <item quantity="other">%2$s doesn\'t know %1$d of your zaps</item>
+    </plurals>
+    <plurals name="home_unknown_title_unnamed">
+        <item quantity="one">Your mint doesn\'t know %1$d of your zaps</item>
+        <item quantity="other">Your mint doesn\'t know %1$d of your zaps</item>
+    </plurals>
+    <plurals name="home_unknown_body">
+        <item quantity="one">%1$s isn\'t in your balance for now. Your wallet keeps the zap and asks the mint again by itself; once the mint knows it again, it\'s back.</item>
+        <item quantity="other">%1$s isn\'t in your balance for now. Your wallet keeps the zaps and asks the mint again by itself; once the mint knows them again, they\'re back.</item>
+    </plurals>
+    <plurals name="home_unknown_body_hidden">
+        <item quantity="one">It isn\'t in your balance for now. Your wallet keeps the zap and asks the mint again by itself; once the mint knows it again, it\'s back.</item>
+        <item quantity="other">They aren\'t in your balance for now. Your wallet keeps the zaps and asks the mint again by itself; once the mint knows them again, they\'re back.</item>
+    </plurals>
     <string name="about_body">A Lightning wallet that keeps your bitcoin with a mint you choose. Your recovery phrase stays on this device.</string>
     <string name="settings_account_contents">Recovery phrase, address, bitcoin</string>
     <string name="delete_what">This removes this account from this phone: its recovery phrase, its bitcoin and its settings. Other accounts are not affected.</string>
@@ -91,6 +107,11 @@
         <item quantity="other">%1$d zaps are no longer there: they were spent elsewhere, for example with this recovery phrase on another phone.</item>
     </plurals>
     <string name="notes_already_spent">This zap was already spent, so it wasn\'t shared. It\'s no longer in your balance.</string>
+    <plurals name="notes_checked_unknown">
+        <item quantity="one">The mint doesn\'t know %1$d zap. It\'s set aside, out of your balance, and your wallet asks again by itself.</item>
+        <item quantity="other">The mint doesn\'t know %1$d zaps. They\'re set aside, out of your balance, and your wallet asks again by itself.</item>
+    </plurals>
+    <string name="notes_state_unknown_detail">The mint says it doesn\'t know this zap, so it isn\'t in your balance. Your wallet keeps it and asks the mint again by itself; once the mint knows it again, it\'s back in your balance.</string>
     <string name="notes_waiting_total">%1$s shared, not claimed yet</string>
     <string name="notes_shared_title">Shared, not claimed yet</string>
     <string name="notes_empty">No zaps yet. Zaps appear here once you receive bitcoin.</string>
