@@ -9,6 +9,13 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
+On White Wallet's main, until its next release.
+
+### Changed
+
+- A sent zap found spent no longer claims the recipient took it: usually they did, but another device with the same
+  recovery phrase may have.
+
 ## [0.4.0]
 
 On White Wallet v0.6.3. From here on the version is the app's own (semver), no longer White Wallet's.

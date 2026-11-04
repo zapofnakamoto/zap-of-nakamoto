@@ -71,7 +71,7 @@ internal fun ZapNote(params: NoteFaceParams, modifier: Modifier) {
     val colors = MaterialTheme.colorScheme
     val look = when {
         params.place == NoteFacePlace.Paper -> Look.Paper
-        params.status == NoteStatus.Redeemed -> Look.Claimed
+        params.status == NoteStatus.Spent -> Look.Claimed
         params.status == NoteStatus.TakenBack -> Look.TakenBack
         else -> Look.Spark
     }
@@ -172,7 +172,7 @@ private fun stateLine(params: NoteFaceParams): Int? = when (params.place) {
     NoteFacePlace.Claim -> R.string.zap_card_ready
     NoteFacePlace.Shared -> when (params.status) {
         NoteStatus.Waiting -> R.string.zap_card_waiting
-        NoteStatus.Redeemed -> R.string.zap_card_claimed
+        NoteStatus.Spent -> R.string.zap_card_claimed
         NoteStatus.TakenBack -> R.string.zap_card_taken_back
         else -> null
     }
@@ -187,7 +187,7 @@ private fun markStatus(params: NoteFaceParams): WalletStatus = when (params.plac
     NoteFacePlace.Claim -> WalletStatus.PaymentReceived(params.amountMsat)
     NoteFacePlace.Shared -> when (params.status) {
         NoteStatus.Waiting -> WalletStatus.WaitingForRecipient
-        NoteStatus.Redeemed -> WalletStatus.Sent(params.amountMsat)
+        NoteStatus.Spent -> WalletStatus.Sent(params.amountMsat)
         else -> WalletStatus.Idle
     }
     else -> WalletStatus.Idle

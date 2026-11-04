@@ -32,8 +32,6 @@
     <string name="note_uncertified">The amount of this zap isn\'t certified.</string>
     <string name="note_share_title">Share zap</string>
     <string name="note_reclaim_title">Take this zap back?</string>
-    <!-- Until White Wallet after v0.6.3: drop with the version bump -->
-    <string name="note_already_redeemed">Too late: someone already claimed this zap.</string>
     <string name="note_already_spent">Too late: this zap has already been spent.</string>
     <string name="note_not_found">This zap isn\'t in this account.</string>
     <string name="claim_title">Claim a zap</string>
@@ -53,15 +51,11 @@
     <string name="activity_sent_note">Sent a zap</string>
     <!-- A zap is claimed, never redeemed -->
     <string name="activity_note_waiting">Not claimed yet</string>
-    <!-- Until White Wallet after v0.6.3: drop with the version bump -->
-    <string name="activity_note_redeemed">Claimed</string>
     <string name="activity_note_spent">Spent</string>
     <string name="note_waiting">Not claimed yet. You can take it back until then.</string>
     <string name="note_unconfirmed">Its mint hasn\'t confirmed this zap yet. Your wallet checks once it\'s online.</string>
     <string name="note_unknown_to_mint">Its mint doesn\'t know this zap, so the link may not work.</string>
     <string name="scan_unknown">This QR code isn\'t a payment or a zap.</string>
-    <!-- Until White Wallet after v0.6.3: drop with the version bump -->
-    <string name="note_redeemed">Claimed. The recipient has the bitcoin.</string>
     <string name="note_spent">Spent, usually by the recipient. It could also have been another device with your recovery phrase.</string>
     <string name="note_reclaimed">Taken back. The bitcoin is in your balance again.</string>
     <string name="note_reclaim_body">The bitcoin returns to your balance and this code stops working. If it\'s already been spent, nothing changes.</string>
