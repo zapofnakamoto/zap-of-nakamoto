@@ -28,7 +28,9 @@
     <string name="note_uncertified">Der Betrag dieses Zaps ist nicht zertifiziert.</string>
     <string name="note_share_title">Zap teilen</string>
     <string name="note_reclaim_title">Diesen Zap zurückholen?</string>
+    <!-- Until White Wallet after v0.6.3: drop with the version bump -->
     <string name="note_already_redeemed">Zu spät: Jemand hat diesen Zap schon eingelöst.</string>
+    <string name="note_already_spent">Zu spät: Dieser Zap wurde schon ausgegeben.</string>
     <string name="note_not_found">Dieser Zap ist nicht in diesem Konto.</string>
     <string name="claim_title">Zap einlösen</string>
     <string name="claim_input">Link eines Zaps einfügen</string>
@@ -45,9 +47,15 @@
     <string name="activity_sent_note">Zap verschickt</string>
     <!-- Ein Zap wird eingelöst, wie bei White Wallet; was er ist, sind Bitcoin -->
     <string name="activity_note_waiting">Noch nicht eingelöst</string>
+    <!-- Until White Wallet after v0.6.3: drop with the version bump -->
     <string name="activity_note_redeemed">Eingelöst</string>
+    <string name="activity_note_spent">Ausgegeben</string>
     <string name="note_waiting">Noch nicht eingelöst. Bis dahin kannst du ihn zurückholen.</string>
+    <string name="note_unconfirmed">Offline weitergegeben, darum hat die Mint diesen Zap noch nicht bestätigt. Deine Wallet fragt nach, sobald sie online ist.</string>
+    <string name="note_unknown_to_mint">Die Mint kennt diesen Zap nicht. Der Link funktioniert vielleicht nicht.</string>
+    <!-- Until White Wallet after v0.6.3: drop with the version bump -->
     <string name="note_redeemed">Eingelöst. Der Empfänger hat die Bitcoin.</string>
+    <string name="note_spent">Ausgegeben. Meist heißt das: Der Empfänger hat die Bitcoin. Sie können auch auf einem anderen Gerät mit deiner Wiederherstellungsphrase ausgegeben worden sein.</string>
     <string name="note_reclaimed">Zurückgeholt. Die Bitcoin sind wieder in deinem Guthaben.</string>
     <string name="note_reclaim_body">Die Bitcoin kommen zurück in dein Guthaben und dieser Code funktioniert nicht mehr. Hat ihn schon jemand eingelöst, ändert sich nichts.</string>
     <string name="home_key_changed_body">Deine Wallet arbeitet nicht mehr damit, es wird also nichts dorthin gesendet. Deine Bitcoin dort sind unverändert. Öffne die Details, um den neuen Schlüssel zu sehen und zu entscheiden, ob du ihn verwendest.</string>
