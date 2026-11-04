@@ -172,4 +172,29 @@
     <string name="home_working_combining">Deine Zaps werden zusammengelegt …</string>
     <string name="home_working_splitting">Deine Zaps werden geteilt …</string>
     <string name="home_working_renewing">Deine Zaps werden erneuert …</string>
+    <!-- Zaps in Schuss halten: der Filter für die Pflege im Verlauf, der Umgang mit Zaps und das Verschieben -->
+    <string name="history_filter_maintenance">Pflege der Zaps</string>
+    <string name="history_only_maintenance">Bisher nur Pflege der Zaps.</string>
+    <string name="history_show_maintenance">Pflege der Zaps anzeigen</string>
+    <plurals name="activity_combined">
+        <item quantity="one">%1$d Zap zusammengelegt</item>
+        <item quantity="other">%1$d Zaps zusammengelegt</item>
+    </plurals>
+    <string name="activity_split">Einen Zap in zwei geteilt</string>
+    <string name="move_hint">Deine Bitcoin bleiben, wo sie liegen, und wechseln auf die Schlüssel des anderen Kontos. Einen Teil eines Zaps zu verschieben kann eine Teilungsgebühr kosten.</string>
+    <string name="onboarding_add_elsewhere_body">Ein Name für dieses Konto bei einer anderen Mint, mit derselben Wiederherstellungsphrase. Zahlungen daran kommen als Zaps bei dieser Mint an, in diesem Konto. Deine Hauptadresse bleibt, wo sie ist.</string>
+    <string name="settings_notes">Zap-Einstellungen</string>
+    <string name="settings_note_strategy">Umgang mit Zaps</string>
+    <string name="settings_strategy_single">Nur einen Zap behalten</string>
+    <string name="settings_strategy_single_hint">Alle Zaps zu einem pro Mint zusammenlegen. Kostenlos.</string>
+    <string name="settings_strategy_manual_hint">Zaps so behalten, wie sie ankommen.</string>
+    <string name="settings_auto_renew">Eingehende Zaps automatisch erneuern</string>
+    <string name="settings_auto_renew_hint">Verschiebt jeden empfangenen Zap auf einen neuen Schlüssel dieser Wallet.</string>
+    <plurals name="mint_balance">
+        <item quantity="one">%1$s in %2$d Zap</item>
+        <item quantity="other">%1$s in %2$d Zaps</item>
+    </plurals>
+    <string name="notes_collect_hint">Zaps, die du anderswo bekommst, werden automatisch hierher verschoben, wenn die Gebühren in deinem Limit bleiben. Danach gilt für sie „Umgang mit Zaps“ oben.</string>
+    <string name="notes_collect_pending">Die Zaps von %1$s werden verschoben; sie kommen gleich an.</string>
+    <string name="settings_notices_hint">Eine kurze Nachricht, wenn die Wallet deine Zaps von selbst zusammengelegt, geteilt, erneuert oder verschoben hat.</string>
 </resources>

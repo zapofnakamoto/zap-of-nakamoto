@@ -176,4 +176,29 @@
     <string name="home_working_combining">Combining your zaps…</string>
     <string name="home_working_splitting">Splitting your zaps…</string>
     <string name="home_working_renewing">Renewing your zaps…</string>
+    <!-- Keeping zaps in shape: History's maintenance filter, the zap strategy and moving zaps -->
+    <string name="history_filter_maintenance">Zap maintenance</string>
+    <string name="history_only_maintenance">So far only zap maintenance.</string>
+    <string name="history_show_maintenance">Show zap maintenance</string>
+    <plurals name="activity_combined">
+        <item quantity="one">Combined %1$d zap</item>
+        <item quantity="other">Combined %1$d zaps</item>
+    </plurals>
+    <string name="activity_split">Split a zap in two</string>
+    <string name="move_hint">Your bitcoin stays where it is held and moves to the other account\'s keys. Moving part of a zap may cost a split fee.</string>
+    <string name="onboarding_add_elsewhere_body">A name for this account on another mint, with the same recovery phrase. Payments to it arrive as zaps on that mint, in this account. Your primary address stays where it is.</string>
+    <string name="settings_notes">Zap settings</string>
+    <string name="settings_note_strategy">Zap strategy</string>
+    <string name="settings_strategy_single">Keep only one zap</string>
+    <string name="settings_strategy_single_hint">Combine all zaps into one per mint. Free.</string>
+    <string name="settings_strategy_manual_hint">Keep zaps as they arrive.</string>
+    <string name="settings_auto_renew">Auto-renew incoming zaps</string>
+    <string name="settings_auto_renew_hint">Moves each received zap to a fresh key of this wallet.</string>
+    <plurals name="mint_balance">
+        <item quantity="one">%1$s in %2$d zap</item>
+        <item quantity="other">%1$s in %2$d zaps</item>
+    </plurals>
+    <string name="notes_collect_hint">Zaps you get elsewhere are moved here automatically, when the fees stay within your limit. Then the zap strategy above applies to them too.</string>
+    <string name="notes_collect_pending">Moving the zaps from %1$s; they arrive shortly.</string>
+    <string name="settings_notices_hint">A short message when the wallet combined, split, renewed or moved your zaps by itself.</string>
 </resources>
