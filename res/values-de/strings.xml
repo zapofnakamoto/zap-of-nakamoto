@@ -182,8 +182,8 @@
     <string name="settings_strategy_single">Nur einen Zap behalten</string>
     <string name="settings_strategy_single_hint">Alle Zaps zu einem pro Mint zusammenlegen. Kostenlos.</string>
     <string name="settings_strategy_manual_hint">Zaps so behalten, wie sie ankommen.</string>
-    <string name="settings_auto_renew">Eingehende Zaps automatisch erneuern</string>
-    <string name="settings_auto_renew_hint">Verschiebt jeden empfangenen Zap auf einen neuen Schlüssel dieser Wallet.</string>
+    <string name="settings_auto_renew">Zaps an deine Adresse automatisch erneuern</string>
+    <string name="settings_auto_renew_hint">Verschiebt jeden Zap, der an deine Adresse gezahlt wurde, auf einen neuen Schlüssel dieser Wallet. Andere Zaps bleiben, wo sie sind.</string>
     <plurals name="mint_balance">
         <item quantity="one">%1$s in %2$d Zap</item>
         <item quantity="other">%1$s in %2$d Zaps</item>

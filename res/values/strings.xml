@@ -186,8 +186,8 @@
     <string name="settings_strategy_single">Keep only one zap</string>
     <string name="settings_strategy_single_hint">Combine all zaps into one per mint. Free.</string>
     <string name="settings_strategy_manual_hint">Keep zaps as they arrive.</string>
-    <string name="settings_auto_renew">Auto-renew incoming zaps</string>
-    <string name="settings_auto_renew_hint">Moves each received zap to a fresh key of this wallet.</string>
+    <string name="settings_auto_renew">Auto-renew zaps to your address</string>
+    <string name="settings_auto_renew_hint">Moves each zap paid to your address to a fresh key of this wallet. Other zaps stay where they are.</string>
     <plurals name="mint_balance">
         <item quantity="one">%1$s in %2$d zap</item>
         <item quantity="other">%1$s in %2$d zaps</item>
