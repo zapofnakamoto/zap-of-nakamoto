@@ -51,13 +51,13 @@
     <string name="activity_note_redeemed">Eingelöst</string>
     <string name="activity_note_spent">Ausgegeben</string>
     <string name="note_waiting">Noch nicht eingelöst. Bis dahin kannst du ihn zurückholen.</string>
-    <string name="note_unconfirmed">Offline weitergegeben, darum hat die Mint diesen Zap noch nicht bestätigt. Deine Wallet fragt nach, sobald sie online ist.</string>
-    <string name="note_unknown_to_mint">Die Mint kennt diesen Zap nicht. Der Link funktioniert vielleicht nicht.</string>
+    <string name="note_unconfirmed">Die Mint hat diesen Zap noch nicht bestätigt. Deine Wallet prüft, sobald sie online ist.</string>
+    <string name="note_unknown_to_mint">Die Mint kennt diesen Zap nicht, deshalb funktioniert der Link vielleicht nicht.</string>
     <!-- Until White Wallet after v0.6.3: drop with the version bump -->
     <string name="note_redeemed">Eingelöst. Der Empfänger hat die Bitcoin.</string>
-    <string name="note_spent">Ausgegeben. Meist heißt das: Der Empfänger hat die Bitcoin. Sie können auch auf einem anderen Gerät mit deiner Wiederherstellungsphrase ausgegeben worden sein.</string>
+    <string name="note_spent">Ausgegeben, meist vom Empfänger. Es kann auch ein anderes Gerät mit deiner Wiederherstellungsphrase gewesen sein.</string>
     <string name="note_reclaimed">Zurückgeholt. Die Bitcoin sind wieder in deinem Guthaben.</string>
-    <string name="note_reclaim_body">Die Bitcoin kommen zurück in dein Guthaben und dieser Code funktioniert nicht mehr. Hat ihn schon jemand eingelöst, ändert sich nichts.</string>
+    <string name="note_reclaim_body">Die Bitcoin kommen zurück in dein Guthaben und dieser Code funktioniert nicht mehr. Wurde er schon ausgegeben, ändert sich nichts.</string>
     <string name="home_key_changed_body">Deine Wallet arbeitet nicht mehr damit, es wird also nichts dorthin gesendet. Deine Bitcoin dort sind unverändert. Öffne die Details, um den neuen Schlüssel zu sehen und zu entscheiden, ob du ihn verwendest.</string>
     <plurals name="home_unknown_title">
         <item quantity="one">%2$s kennt %1$d deiner Zaps nicht</item>
