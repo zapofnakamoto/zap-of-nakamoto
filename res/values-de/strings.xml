@@ -39,6 +39,8 @@
     <string name="claim_invalid">Kein gültiger Zap: %1$s</string>
     <string name="claim_spent">Dieser Zap wurde bereits eingelöst.</string>
     <string name="claim_in_wallet">Dieser Zap ist bereits in deiner Wallet.</string>
+    <string name="claim_own_shared">Du hast diesen Zap geteilt, und niemand hat ihn bisher eingelöst.</string>
+    <string name="claim_own_offline">Du hast diesen Zap geteilt. Die Mint ist gerade nicht erreichbar, darum lässt er sich noch nicht zurückholen.</string>
     <string name="claim_other_mint">Dieser Zap liegt bei %1$s und bleibt dort.</string>
     <string name="claim_not_spendable">Dieser Link öffnet den Zap nicht, den er nennt; er lässt sich nicht einlösen.</string>
     <string name="claim_other_paths">Dieser Zap lässt sich auch auf anderem Weg ausgeben; jemand anderes kann ihn also nehmen, bevor du ihn einlöst.</string>
