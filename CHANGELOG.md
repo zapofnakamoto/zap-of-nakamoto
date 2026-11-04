@@ -13,6 +13,8 @@ On White Wallet's main, until its next release.
 
 ### Changed
 
+- Zaps are kept as they arrive: the zap strategy starts on "Manual", and "Keep only one zap" is a choice
+  under Zap settings. Wallets that never picked one switch too, so their zaps are no longer combined on their own.
 - A sent zap found spent no longer claims the recipient took it: usually they did, but another device with the same
   recovery phrase may have.
 

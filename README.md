@@ -20,7 +20,7 @@ app for experts and power users would be a different brand.)
 | One trusted service | the home mint, whichever it is, is trusted by default; Settings → Services (`mints.visible=true`) shows it, and others can be trusted by hand |
 | One account | `accounts.max=1`: no switcher, no "Add account" |
 | One Lightning address, asked for at setup | `addresses.lightning=optional`, `addresses.max=1` |
-| One note per service, kept automatically | `notes.strategies=single`, `notes.strategy.default=single` (it also renews the address's notes) |
+| Zaps kept as they arrive; one zap per mint on request | `notes.strategies=single,manual`, `notes.strategy.default=manual` ("Keep only one zap" also renews the address's zaps) |
 | Notes from elsewhere come home by themselves | `notes.collect.atHomeMint=always` (fee cap 2 %) |
 | Told what the wallet did by itself | `notes.maintenance.notices=always`: "Combined 2 zaps into one of ₿63. You got ₿1 in fees back.", no switch |
 | Nothing to manage by hand | `notes.view=hidden` (no Notes tab or page); Note settings disappear by themselves, as there is nothing to choose. Services are there to look at and change (`mints.visible=true`), never needed |
