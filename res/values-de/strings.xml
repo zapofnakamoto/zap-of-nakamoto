@@ -55,6 +55,7 @@
     <string name="note_waiting">Noch nicht eingelöst. Bis dahin kannst du ihn zurückholen.</string>
     <string name="note_unconfirmed">Die Mint hat diesen Zap noch nicht bestätigt. Deine Wallet prüft, sobald sie online ist.</string>
     <string name="note_unknown_to_mint">Die Mint kennt diesen Zap nicht, deshalb funktioniert der Link vielleicht nicht.</string>
+    <string name="scan_unknown">Dieser QR-Code ist weder eine Zahlung noch ein Zap.</string>
     <!-- Until White Wallet after v0.6.3: drop with the version bump -->
     <string name="note_redeemed">Eingelöst. Der Empfänger hat die Bitcoin.</string>
     <string name="note_spent">Ausgegeben, meist vom Empfänger. Es kann auch ein anderes Gerät mit deiner Wiederherstellungsphrase gewesen sein.</string>
