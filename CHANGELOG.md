@@ -11,12 +11,30 @@ only to try it out, with tiny amounts you could lose.
 
 On White Wallet's main, until its next release.
 
+### Added
+
+- The newer version of the LNURLcash protocol (LUD-25/26): your wallet asks each mint which version it speaks. New
+  zaps use new keys. Zaps and addresses from before move to them by themselves on a refresh, for free, and a mint
+  upgraded later is noticed. A restore finds both.
+- Address fees: a mint may charge for an address. Setup shows the fee and lets you reserve the name, pay later or go
+  on without one. A reserved name is on the addresses screen until it is paid or runs out.
+- Payments to someone on the same mint are free, with nothing pending.
+
 ### Changed
 
 - Zaps are kept as they arrive: the zap strategy starts on "Manual", and "Keep only one zap" is a choice
   under Zap settings. Wallets that never picked one switch too, so their zaps are no longer combined on their own.
 - A sent zap found spent no longer claims the recipient took it: usually they did, but another device with the same
   recovery phrase may have.
+- The watch-only key moved from the mint's page to each address: a key only ever shows what was paid to its own
+  address.
+
+### Fixed
+
+- A refused payment says why: an invoice of your own mint, one already used, or else the mint's own words. A bare
+  invoice whose payment failed no longer offers "Try again", which a mint always refuses.
+- After a restore, new payments to your address were only found once its name was entered again.
+- A payment, a move or a combine of more than 100 zaps was refused by the mint. They now go through 10 at a time.
 
 ## [0.4.0]
 
