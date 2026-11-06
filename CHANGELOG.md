@@ -35,6 +35,8 @@ On White Wallet's main, until its next release.
   invoice whose payment failed no longer offers "Try again", which a mint always refuses.
 - After a restore, new payments to your address were only found once its name was entered again.
 - A payment, a move or a combine of more than 100 zaps was refused by the mint. They now go through 10 at a time.
+- Adding a mint finds the bitcoin you already have there, as a restore does, and payments to your addresses there
+  keep arriving.
 
 ## [0.4.0]
 
