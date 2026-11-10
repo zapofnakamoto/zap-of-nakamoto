@@ -22,6 +22,10 @@ On White Wallet's main, until its next release.
 
 ### Changed
 
+- Simpler setup: create a wallet or restore one with its recovery phrase, nothing else on the first screen. Then your
+  mint: see its fees and limits before you add it; a restored wallet shows what it finds there. Then your Lightning
+  address on it, which a restore gets back by itself where it can, and which you can always skip. If the app closes
+  during setup, it goes on where you were.
 - Zaps are kept as they arrive: the zap strategy starts on "Manual", and "Keep only one zap" is a choice
   under Zap settings. Wallets that never picked one switch too, so their zaps are no longer combined on their own.
 - A sent zap found spent no longer claims the recipient took it: usually they did, but another device with the same
