@@ -77,7 +77,6 @@
         <item quantity="other">They aren\'t in your balance for now. Your wallet keeps the zaps and asks the mint again by itself; once the mint knows them again, they\'re back.</item>
     </plurals>
     <string name="about_body">A Lightning wallet that keeps your bitcoin with a mint you choose. Your recovery phrase stays on this device.</string>
-    <string name="settings_account_contents">Recovery phrase, address, bitcoin</string>
     <string name="delete_what">This removes this account from this phone: its recovery phrase, its bitcoin and its settings. Other accounts are not affected.</string>
     <string name="mints_intro">Trust a mint by its signing key: zaps from trusted mints are marked with a check. If a mint ever signs with a different key, it is no longer trusted.</string>
     <string name="mint_key_changed">%1$s now signs with a different key than when you first connected. Until you accept the new key, your wallet doesn\'t send or receive there. Your bitcoin there is unchanged.</string>
@@ -194,4 +193,8 @@
     <string name="notes_collect_hint">Zaps you get elsewhere are moved here automatically, when the fees stay within your limit. Then the zap strategy above applies to them too.</string>
     <string name="notes_collect_pending">Moving the zaps from %1$s; they arrive shortly.</string>
     <string name="settings_notices_hint">A short message when the wallet combined, split, renewed or moved your zaps by itself.</string>
+    <string name="settings_scan">Scan for zaps</string>
+    <string name="notes_pay_from_others_first_hint">Payments use zaps on your other mints before those at %1$s, so your money gathers at your home mint.</string>
+    <string name="notes_collect_confirm_body">Turning this on moves your zaps on other mints there now:</string>
+    <string name="money_change_body">Pick the new home mint. Invoices are made there, and moving everything to it collects your zaps there. Your addresses stay where they are.</string>
 </resources>

@@ -73,7 +73,6 @@
         <item quantity="other">Sie sind vorerst nicht in deinem Guthaben. Deine Wallet behält die Zaps und fragt die Mint von selbst wieder; sobald die Mint sie wieder kennt, sind sie zurück.</item>
     </plurals>
     <string name="about_body">Eine Lightning-Wallet, die deine Bitcoin bei einer Mint deiner Wahl verwahrt. Deine Wiederherstellungsphrase bleibt auf diesem Gerät.</string>
-    <string name="settings_account_contents">Wiederherstellungsphrase, Adresse, Bitcoin</string>
     <string name="delete_what">Das entfernt dieses Konto von diesem Handy: seine Wiederherstellungsphrase, seine Bitcoin und seine Einstellungen. Andere Konten sind nicht betroffen.</string>
     <string name="mints_intro">Vertraue einer Mint anhand ihres Signaturschlüssels: Zaps von vertrauten Mints sind mit einem Haken markiert. Signiert eine Mint einmal mit einem anderen Schlüssel, ist sie nicht mehr vertraut.</string>
     <string name="mint_key_changed">%1$s signiert jetzt mit einem anderen Schlüssel als bei deiner ersten Verbindung. Bis du den neuen Schlüssel annimmst, sendet und empfängt deine Wallet dort nichts. Deine Bitcoin dort sind unverändert.</string>
@@ -190,4 +189,8 @@
     <string name="notes_collect_hint">Zaps, die du anderswo bekommst, werden automatisch hierher verschoben, wenn die Gebühren in deinem Limit bleiben. Danach gilt für sie „Umgang mit Zaps“ oben.</string>
     <string name="notes_collect_pending">Die Zaps von %1$s werden verschoben; sie kommen gleich an.</string>
     <string name="settings_notices_hint">Eine kurze Nachricht, wenn die Wallet deine Zaps von selbst zusammengelegt, geteilt, erneuert oder verschoben hat.</string>
+    <string name="settings_scan">Nach Zaps suchen</string>
+    <string name="notes_pay_from_others_first_hint">Zahlungen nehmen zuerst Zaps deiner anderen Mints, dann die von %1$s; so sammelt sich dein Geld bei deiner Haupt-Mint.</string>
+    <string name="notes_collect_confirm_body">Wenn du das einschaltest, werden deine Zaps anderer Mints jetzt dorthin verschoben:</string>
+    <string name="money_change_body">Wähle die neue Haupt-Mint. Rechnungen werden dort erstellt, und „Alles verschieben“ sammelt deine Zaps dort. Deine Adressen bleiben, wo sie sind.</string>
 </resources>
