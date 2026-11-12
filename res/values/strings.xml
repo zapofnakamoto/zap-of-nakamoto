@@ -26,7 +26,7 @@
     <string name="note_create_body">Make a zap worth an amount and hand it over as a QR code or link. Whoever gets it can claim the bitcoin in a compatible wallet.</string>
     <string name="note_available">You can make a zap of up to %1$s.</string>
     <string name="note_create">Create zap</string>
-    <string name="note_create_pending">The zap couldn\'t be confirmed yet, so nothing was handed out. Try again in a moment.</string>
+    <string name="note_create_pending">No answer about the zap yet, so nothing was handed out. Try again in a moment.</string>
     <string name="note_title">Zap</string>
     <string name="note_qr_description">QR code of the zap</string>
     <string name="note_uncertified">The amount of this zap isn\'t certified.</string>
@@ -53,7 +53,7 @@
     <string name="activity_note_waiting">Not claimed yet</string>
     <string name="activity_note_spent">Spent</string>
     <string name="note_waiting">Not claimed yet. You can take it back until then.</string>
-    <string name="note_unconfirmed">Its mint hasn\'t confirmed this zap yet. Your wallet checks once it\'s online.</string>
+    <string name="note_unconfirmed">Its mint hasn\'t been asked about this zap yet. Your wallet asks once it\'s online.</string>
     <string name="note_unknown_to_mint">Its mint doesn\'t know this zap, so the link may not work.</string>
     <string name="scan_unknown">This QR code isn\'t a payment or a zap.</string>
     <string name="note_spent">Spent, usually by the recipient. It could also have been another device with your recovery phrase.</string>

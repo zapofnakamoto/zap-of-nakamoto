@@ -22,7 +22,7 @@
     <string name="note_create_body">Erstelle einen Zap über einen Betrag und gib ihn als QR-Code oder Link weiter. Wer ihn bekommt, kann die Bitcoin in einer kompatiblen Wallet einlösen.</string>
     <string name="note_available">Du kannst einen Zap über bis zu %1$s erstellen.</string>
     <string name="note_create">Zap erstellen</string>
-    <string name="note_create_pending">Der Zap ließ sich noch nicht bestätigen, deshalb wurde nichts weitergegeben. Versuche es gleich noch einmal.</string>
+    <string name="note_create_pending">Noch keine Antwort zum Zap, deshalb wurde nichts weitergegeben. Versuche es gleich noch einmal.</string>
     <string name="note_title">Zap</string>
     <string name="note_qr_description">QR-Code des Zaps</string>
     <string name="note_uncertified">Der Betrag dieses Zaps ist nicht zertifiziert.</string>
@@ -49,7 +49,7 @@
     <string name="activity_note_waiting">Noch nicht eingelöst</string>
     <string name="activity_note_spent">Ausgegeben</string>
     <string name="note_waiting">Noch nicht eingelöst. Bis dahin kannst du ihn zurückholen.</string>
-    <string name="note_unconfirmed">Die Mint hat diesen Zap noch nicht bestätigt. Deine Wallet prüft, sobald sie online ist.</string>
+    <string name="note_unconfirmed">Die Mint wurde zu diesem Zap noch nicht gefragt. Deine Wallet fragt, sobald sie online ist.</string>
     <string name="note_unknown_to_mint">Die Mint kennt diesen Zap nicht, deshalb funktioniert der Link vielleicht nicht.</string>
     <string name="scan_unknown">Dieser QR-Code ist weder eine Zahlung noch ein Zap.</string>
     <string name="note_spent">Ausgegeben, meist vom Empfänger. Es kann auch ein anderes Gerät mit deiner Wiederherstellungsphrase gewesen sein.</string>
