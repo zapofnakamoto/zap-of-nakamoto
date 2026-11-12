@@ -189,6 +189,7 @@
     <string name="notes_collect_hint">Zaps, die du anderswo bekommst, werden automatisch hierher verschoben, wenn die Gebühren in deinem Limit bleiben. Danach gilt für sie „Umgang mit Zaps“ oben.</string>
     <string name="notes_collect_pending">Die Zaps von %1$s werden verschoben; sie kommen gleich an.</string>
     <string name="settings_notices_hint">Eine kurze Nachricht, wenn die Wallet deine Zaps von selbst zusammengelegt, geteilt, erneuert oder verschoben hat.</string>
+    <string name="scan_notes_title">Nach Zaps suchen</string>
     <string name="settings_scan">Nach Zaps suchen</string>
     <string name="notes_pay_from_others_first_hint">Zahlungen nehmen zuerst Zaps deiner anderen Mints, dann die von %1$s; so sammelt sich dein Geld bei deiner Haupt-Mint.</string>
     <string name="notes_collect_confirm_body">Wenn du das einschaltest, werden deine Zaps anderer Mints jetzt dorthin verschoben:</string>

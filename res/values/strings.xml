@@ -193,6 +193,7 @@
     <string name="notes_collect_hint">Zaps you get elsewhere are moved here automatically, when the fees stay within your limit. Then the zap strategy above applies to them too.</string>
     <string name="notes_collect_pending">Moving the zaps from %1$s; they arrive shortly.</string>
     <string name="settings_notices_hint">A short message when the wallet combined, split, renewed or moved your zaps by itself.</string>
+    <string name="scan_notes_title">Scan for zaps</string>
     <string name="settings_scan">Scan for zaps</string>
     <string name="notes_pay_from_others_first_hint">Payments use zaps on your other mints before those at %1$s, so your money gathers at your home mint.</string>
     <string name="notes_collect_confirm_body">Turning this on moves your zaps on other mints there now:</string>
