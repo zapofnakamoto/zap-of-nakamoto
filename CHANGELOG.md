@@ -19,6 +19,17 @@ On White Wallet's main, until its next release.
 - Address fees: a mint may charge for an address. Setup shows the fee and lets you reserve the name, pay later or go
   on without one. A reserved name is on the addresses screen until it is paid or runs out.
 - Payments to someone on the same mint are free, with nothing pending.
+- Settings → Wallets: your wallet's page, with its name, recovery phrase, mints and account. Both can be renamed.
+- "Scan for zaps" on the wallet's page looks through everything your recovery phrase holds at each of your mints
+  again, as a restore does, and adds what it finds. Each mint says when it was last scanned, and the main screen says
+  so when a scan didn't get through.
+- A zap you get as a link is kept from the moment you claim it, so a bad connection no longer loses it: your wallet
+  goes on trying by itself.
+- A zap on a mint that now signs with another key than the one your wallet knows can be kept until you decide about
+  the key.
+- Zaps whose link carries a script can be claimed.
+- A whole zap can be handed out without a connection (Zaps → Share as QR).
+- A shared zap's screen says when its mint last answered for it.
 
 ### Changed
 
@@ -26,6 +37,12 @@ On White Wallet's main, until its next release.
   mint: see its fees and limits before you add it; a restored wallet shows what it finds there. Then your Lightning
   address on it, which a restore gets back by itself where it can, and which you can always skip. If the app closes
   during setup, it goes on where you were.
+- The main screen is quieter: "Scan a QR code" is an icon in the top bar, and one scanner does for both: a zap
+  scanned under Send opens Claim, and an invoice or address scanned under Claim opens Send.
+- Your own shared zap, scanned or pasted on Claim, is not claimed: the screen says you shared it and offers to take
+  it back.
+- A page that takes more than a moment to load says so, and no screen shows something else first.
+- Settings has no search any more.
 - Zaps are kept as they arrive: the zap strategy starts on "Manual", and "Keep only one zap" is a choice
   under Zap settings. Wallets that never picked one switch too, so their zaps are no longer combined on their own.
 - A sent zap found spent no longer claims the recipient took it: usually they did, but another device with the same
@@ -35,6 +52,8 @@ On White Wallet's main, until its next release.
 
 ### Fixed
 
+- Looking at a zap's link no longer sends its secret to the mint; it only goes out when you claim it.
+- A claim that never reached the mint is tried again, instead of ending as failed.
 - A refused payment says why: an invoice of your own mint, one already used, or else the mint's own words. A bare
   invoice whose payment failed no longer offers "Try again", which a mint always refuses.
 - After a restore, new payments to your address were only found once its name was entered again.
