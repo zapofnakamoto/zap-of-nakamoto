@@ -76,6 +76,18 @@
         <item quantity="one">It isn\'t in your balance for now. Your wallet keeps the zap and asks the mint again by itself; once the mint knows it again, it\'s back.</item>
         <item quantity="other">They aren\'t in your balance for now. Your wallet keeps the zaps and asks the mint again by itself; once the mint knows them again, they\'re back.</item>
     </plurals>
+    <plurals name="home_unknown_show">
+        <item quantity="one">Show zap</item>
+        <item quantity="other">Show zaps</item>
+    </plurals>
+    <plurals name="notice_unknown_back">
+        <item quantity="one">A zap is back in your balance: the mint knows it again.</item>
+        <item quantity="other">%1$d zaps are back in your balance: the mint knows them again.</item>
+    </plurals>
+    <plurals name="notice_unknown_still">
+        <item quantity="one">Asked just now: the mint still doesn\'t know your zap.</item>
+        <item quantity="other">Asked just now: the mint still doesn\'t know your zaps.</item>
+    </plurals>
     <string name="about_body">A Lightning wallet that keeps your bitcoin with a mint you choose. Your recovery phrase stays on this device.</string>
     <string name="delete_what">This removes this account from this phone: its recovery phrase, its bitcoin and its settings. Other accounts are not affected.</string>
     <string name="mints_intro">Trust a mint by its signing key: zaps from trusted mints are marked with a check. If a mint ever signs with a different key, it is no longer trusted.</string>

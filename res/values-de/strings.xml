@@ -72,6 +72,18 @@
         <item quantity="one">Er ist vorerst nicht in deinem Guthaben. Deine Wallet behält den Zap und fragt die Mint von selbst wieder; sobald die Mint ihn wieder kennt, ist er zurück.</item>
         <item quantity="other">Sie sind vorerst nicht in deinem Guthaben. Deine Wallet behält die Zaps und fragt die Mint von selbst wieder; sobald die Mint sie wieder kennt, sind sie zurück.</item>
     </plurals>
+    <plurals name="home_unknown_show">
+        <item quantity="one">Zap anzeigen</item>
+        <item quantity="other">Zaps anzeigen</item>
+    </plurals>
+    <plurals name="notice_unknown_back">
+        <item quantity="one">Ein Zap ist zurück in deinem Guthaben: Die Mint kennt ihn wieder.</item>
+        <item quantity="other">%1$d Zaps sind zurück in deinem Guthaben: Die Mint kennt sie wieder.</item>
+    </plurals>
+    <plurals name="notice_unknown_still">
+        <item quantity="one">Gerade gefragt: Die Mint kennt deinen Zap noch immer nicht.</item>
+        <item quantity="other">Gerade gefragt: Die Mint kennt deine Zaps noch immer nicht.</item>
+    </plurals>
     <string name="about_body">Eine Lightning-Wallet, die deine Bitcoin bei einer Mint deiner Wahl verwahrt. Deine Wiederherstellungsphrase bleibt auf diesem Gerät.</string>
     <string name="delete_what">Das entfernt dieses Konto von diesem Handy: seine Wiederherstellungsphrase, seine Bitcoin und seine Einstellungen. Andere Konten sind nicht betroffen.</string>
     <string name="mints_intro">Vertraue einer Mint anhand ihres Signaturschlüssels: Zaps von vertrauten Mints sind mit einem Haken markiert. Signiert eine Mint einmal mit einem anderen Schlüssel, ist sie nicht mehr vertraut.</string>
