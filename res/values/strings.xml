@@ -17,10 +17,10 @@
     <!-- Zap's voice (design/DESIGN.md): short, warm, no protocol words -->
     <string name="receive_hint">Anyone can send you bitcoin at this address, from any Lightning wallet.</string>
     <string name="receive_invoice_waiting">Waiting for the payment…</string>
-    <string name="send_paid_title">Sent!</string>
-    <string name="receive_success_title">Bitcoin arrived!</string>
+    <string name="send_paid_title">Zapped!</string>
+    <string name="receive_success_title">You got zapped!</string>
 
-    <!-- Notes are zaps: what you hand over or claim. What you hold is bitcoin (design/DESIGN.md) -->
+    <!-- Notes are zaps: what arrives, what you hand over or claim. Your balance is bitcoin (design/DESIGN.md) -->
     <string name="send_create_note">Create a zap</string>
     <string name="note_create_title">Send as a zap</string>
     <string name="note_create_body">Make a zap worth an amount and hand it over as a QR code or link. Whoever gets it can claim the bitcoin in a compatible wallet.</string>

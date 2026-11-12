@@ -9,6 +9,11 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
+### Changed
+
+- The success screens say "Zapped!" and "You got zapped!" again (German "Gezappt!" and "Du wurdest gezappt!"), where
+  they said "Sent!" and "Bitcoin arrived!": what arrives is a zap, and it is in the Zaps tab.
+
 ## [0.5.0]
 
 On White Wallet v0.8.1.

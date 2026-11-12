@@ -180,7 +180,7 @@ and the bolt is muted. Handed-out zaps sit under their own heading on a turned-o
 
 ## Voice
 
-- Short and warm, written in second person. "Waiting for a zap…", "Your first bitcoin!", "Zapped!"
+- Short and warm, written in second person. "Waiting for the payment…", "Your first bitcoin!", "Zapped!", "You got zapped!"
 - Amounts are shown as `₿1,000`.
 - **Slogan:** **"Just zap it."** (German: "Einfach zappen.")
 

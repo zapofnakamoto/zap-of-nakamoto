@@ -13,10 +13,10 @@
     <!-- Zaps Ton (design/DESIGN.md): kurz, freundlich, ohne Protokollwörter -->
     <string name="receive_hint">Jeder kann dir an diese Adresse Bitcoin schicken, aus jeder Lightning-Wallet.</string>
     <string name="receive_invoice_waiting">Warte auf die Zahlung …</string>
-    <string name="send_paid_title">Gesendet!</string>
-    <string name="receive_success_title">Bitcoin sind da!</string>
+    <string name="send_paid_title">Gezappt!</string>
+    <string name="receive_success_title">Du wurdest gezappt!</string>
 
-    <!-- Scheine sind Zaps: was man weitergibt oder einlöst. Was man hat, sind Bitcoin (design/DESIGN.md) -->
+    <!-- Scheine sind Zaps: was ankommt, was man weitergibt oder einlöst. Das Guthaben sind Bitcoin (design/DESIGN.md) -->
     <string name="send_create_note">Zap erstellen</string>
     <string name="note_create_title">Als Zap senden</string>
     <string name="note_create_body">Erstelle einen Zap über einen Betrag und gib ihn als QR-Code oder Link weiter. Wer ihn bekommt, kann die Bitcoin in einer kompatiblen Wallet einlösen.</string>
