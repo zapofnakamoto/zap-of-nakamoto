@@ -9,7 +9,9 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
-On White Wallet's main, until its next release.
+## [0.5.0]
+
+On White Wallet v0.8.1.
 
 ### Added
 
