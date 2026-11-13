@@ -9,18 +9,43 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
+## [0.6.0]
+
+On White Wallet v0.9.0.
+
 ### Added
 
-- With the next White Wallet: mints that publish no signing key are never added, and a zap from one is received into
-  your home mint over Lightning once you agree to the fee; if that payment fails, it waits under received zaps to be
-  tried again. The new messages about such zaps, and about links a mint doesn't answer for as a zap, say "zap".
+- Withdraw links of other services (vouchers, ATMs, faucets: `lnurlw://`, or an `LNURL1…` that is one) open in Claim,
+  also from other apps, and are received into your home mint over Lightning: one confirm, which says what the link
+  pays and what arrives after the mint's fee.
+- Mints that publish no signing key are never added, and a zap from one is received into your home mint over
+  Lightning once you agree to the fee; if that payment fails, it waits under received zaps to be tried again.
+- An archive for received zaps your wallet no longer tries (Zaps → "Archived"): a link goes there a week after its
+  claim first failed, or when you archive it. From there it can be tried again, or removed for good after a warning
+  that your recovery phrase can't bring it back.
+- Zapstore shows Zap's icon: the APK now carries it as PNGs too.
+- A link from another app that the wallet can't use says so on the main screen, where before nothing happened.
+- Links in capitals (`LIGHTNING:`, `LNURLW:`, `LNURLP:`), as QR codes write them, open the app too.
 
 ### Changed
 
-- With the next White Wallet: a mint whose signing key doesn't match the one your wallet knows (another key, or none
-  at all) says so in those words, everywhere it comes up.
+- The main screen shows your balance per mint once some of it is outside your home mint, as one payment is made from
+  one mint's money. Send says how much one payment can be when that is less than your balance.
+- The main screen says what your zaps shared as links and not claimed yet are worth, under the balance.
+- The card about zaps a mint doesn't know answers "Check again", says when the mint was last asked, and "Show zaps"
+  opens the Zaps tab.
+- An `LNURL1…` link first shows "Opening link" while its service says what it is.
+- A mint whose signing key doesn't match the one your wallet knows (another key, or none at all) says so in those
+  words, everywhere it comes up.
 - The success screens say "Zapped!" and "You got zapped!" again (German "Gezappt!" and "Du wurdest gezappt!"), where
   they said "Sent!" and "Bitcoin arrived!": what arrives is a zap, and it is in the Zaps tab.
+
+### Fixed
+
+- A mint whose signing key doesn't match stopped the whole refresh when a payment to one of its addresses came in.
+  Now only that mint waits.
+- Paying, sharing a zap, splitting, combining, renewing and moving zaps said "couldn't connect" at a mint whose
+  signing key doesn't match; they now say the key doesn't match.
 
 ## [0.5.0]
 
