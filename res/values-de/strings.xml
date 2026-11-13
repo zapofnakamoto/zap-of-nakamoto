@@ -211,4 +211,8 @@
     <string name="claim_melt_not_a_note">%1$s antwortet darauf nicht wie auf einen Zap; vielleicht ist es ein Auszahlungslink anderer Art. Er lässt sich stattdessen über Lightning empfangen, gegen eine Gebühr.</string>
     <string name="received_lightning_not_a_note">Seine Mint antwortet darauf nicht wie auf einen Zap, daher lässt er sich nur über Lightning empfangen, gegen eine Gebühr.</string>
     <string name="onboarding_error_mint_without_key">Diese Mint veröffentlicht keinen Signaturschlüssel, daher kann deine Wallet nicht prüfen, ob ihre Zaps echt sind, oder bemerken, wenn sie ausgetauscht wird. Wähle eine andere Mint.</string>
+
+    <!-- Was ist neu, seit White Wallet die älteren Schlüssel nicht mehr kennt: Zaps eigene Versionsnummern -->
+    <string name="release_note_old_keys_title">Zaps von vor Version 0.5</string>
+    <string name="release_note_old_keys_body">Diese Version findet keine Zaps und Lightning-Adressen mehr, die so angelegt wurden wie vor Version 0.5. Seitdem hat die App sie bei jedem Öffnen von selbst umgezogen. Fehlen Bitcoin, öffne deine Wiederherstellungsphrase einmal in Version 0.6.0, die sie noch umzieht, und nutze dann hier „Nach Zaps suchen“.</string>
 </resources>

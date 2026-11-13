@@ -215,4 +215,8 @@
     <string name="claim_melt_not_a_note">%1$s doesn\'t answer for this as a zap: it may be a withdraw link of another kind. It can be received over Lightning instead, for a fee.</string>
     <string name="received_lightning_not_a_note">Its mint doesn\'t answer for it as a zap, so it can only be received over Lightning, for a fee.</string>
     <string name="onboarding_error_mint_without_key">This mint publishes no signing key, so your wallet can\'t check that its zaps are real or notice if it is swapped. Choose another mint.</string>
+
+    <!-- What's new once White Wallet dropped its older keys: Zap's own version numbers (0.5.0 brought the new keys, 0.6.0 is the last that moves the old ones) -->
+    <string name="release_note_old_keys_title">Zaps from before version 0.5</string>
+    <string name="release_note_old_keys_body">This version no longer finds zaps and Lightning addresses made the way the app made them before version 0.5. Since then, the app moved them over by itself whenever it was opened. If bitcoin is missing, open your recovery phrase once in version 0.6.0, which still moves them, then use “Scan for zaps” here.</string>
 </resources>

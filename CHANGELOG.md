@@ -9,6 +9,13 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
+### Removed
+
+- The older version of the LNURLcash protocol (LUD-25/26 draft `2f17578`) and the keys zaps used before 0.5.0: since
+  0.5.0 they moved to the new keys by themselves, and this version no longer finds or moves them. If bitcoin is
+  missing, open your recovery phrase once in 0.6.0, then use "Scan for zaps". Updated users see this once under
+  "What's new", in Zap's words and version numbers.
+
 ## [0.6.0]
 
 On White Wallet v0.9.0.
