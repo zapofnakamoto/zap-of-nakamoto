@@ -88,6 +88,7 @@
     <string name="delete_what">Das entfernt dieses Konto von diesem Handy: seine Wiederherstellungsphrase, seine Bitcoin und seine Einstellungen. Andere Konten sind nicht betroffen.</string>
     <string name="mints_intro">Vertraue einer Mint anhand ihres Signaturschlüssels: Zaps von vertrauten Mints sind mit einem Haken markiert. Signiert eine Mint einmal mit einem anderen Schlüssel, ist sie nicht mehr vertraut.</string>
     <string name="mint_key_changed">%1$s signiert jetzt mit einem anderen Schlüssel als bei deiner ersten Verbindung. Bis du den neuen Schlüssel annimmst, sendet und empfängt deine Wallet dort nichts. Deine Bitcoin dort sind unverändert.</string>
+    <string name="mint_key_missing">%1$s zeigt keinen Signaturschlüssel mehr, daher kann deine Wallet nicht erkennen, ob es dieselbe Mint ist. Bis sie wieder den bekannten Schlüssel zeigt, sendet und empfängt deine Wallet dort nichts. Deine Bitcoin dort sind unverändert.</string>
     <string name="mint_key_accept_body">Tu das nur, wenn du weißt, warum %1$s den Schlüssel geändert hat, etwa weil der Betreiber es angekündigt hat. Antwortet jemand anderes an ihrer Stelle, können deine Bitcoin dort und alles, was du dorthin sendest, verloren gehen.</string>
     <string name="addresses_watch_only_hint">Damit kann eine andere App die Bitcoin sehen, die an diese Adresse gezahlt wurden, aber nie ausgeben.</string>
     <string name="mint_invalid">Antwortet, kann aber keine Bitcoin verwahren</string>
