@@ -17,6 +17,8 @@ only to try it out, with tiny amounts you could lose.
 
 ### Changed
 
+- With the next White Wallet: a mint whose signing key doesn't match the one your wallet knows (another key, or none
+  at all) says so in those words, everywhere it comes up.
 - The success screens say "Zapped!" and "You got zapped!" again (German "Gezappt!" and "Du wurdest gezappt!"), where
   they said "Sent!" and "Bitcoin arrived!": what arrives is a zap, and it is in the Zaps tab.
 
