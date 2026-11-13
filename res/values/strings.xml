@@ -22,6 +22,7 @@
 
     <!-- Notes are zaps: what arrives, what you hand over or claim. Your balance is bitcoin (design/DESIGN.md) -->
     <string name="send_create_note">Create a zap</string>
+    <string name="send_problem_key_changed">The signing key of the mint doesn\'t match the one your wallet knows. Nothing is sent there until it matches again, or you accept a new key in the mint\'s details. Your bitcoin there is unchanged.</string>
     <string name="note_create_title">Send as a zap</string>
     <string name="note_create_body">Make a zap worth an amount and hand it over as a QR code or link. Whoever gets it can claim the bitcoin in a compatible wallet.</string>
     <string name="note_available">You can make a zap of up to %1$s.</string>
@@ -146,6 +147,7 @@
     <string name="notes_problem_invalid_amount">This zap is too small to split, or the amount doesn\'t fit.</string>
     <string name="notes_problem_same_mint">The zaps are already there.</string>
     <string name="notes_problem_mint_invalid">That address can\'t hold bitcoin.</string>
+    <string name="notes_problem_key_changed">The signing key of the mint doesn\'t match the one your wallet knows. Nothing is sent there until it matches again, or you accept a new key in the mint\'s details. Your bitcoin there is unchanged.</string>
 
     <!-- Beta until 1.0.0 (README.md) -->
     <string name="release_notice_beta">This app is a beta until version 1.0.0: updates may change how it works, and bugs can cost you what\'s in it. Only try it out, with tiny amounts you could lose.</string>
