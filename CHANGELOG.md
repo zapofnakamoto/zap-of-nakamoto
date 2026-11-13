@@ -12,9 +12,8 @@ only to try it out, with tiny amounts you could lose.
 ### Added
 
 - With the next White Wallet: mints that publish no signing key are never added, and a zap from one is received into
-  your home mint over Lightning once you agree to the fee (`mints.withoutSigningKey.setting=false`, so the setting
-  that would allow such mints is hidden; `mints.withoutSigningKey.home=false`). The new messages about such zaps,
-  and about links a mint doesn't answer for as a zap, say "zap".
+  your home mint over Lightning once you agree to the fee; if that payment fails, it waits under received zaps to be
+  tried again. The new messages about such zaps, and about links a mint doesn't answer for as a zap, say "zap".
 
 ### Changed
 

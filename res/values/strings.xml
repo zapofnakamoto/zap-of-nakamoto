@@ -222,5 +222,4 @@
     </plurals>
     <string name="received_lightning_not_a_note">Its mint doesn\'t answer for it as a zap, so it can only be received over Lightning, for a fee.</string>
     <string name="onboarding_error_mint_without_key">This mint publishes no signing key, so your wallet can\'t check that its zaps are real or notice if it is swapped. Choose another mint.</string>
-    <string name="mint_signing_key_none_hint">Without one, your wallet can\'t check this mint\'s zaps are real, nor notice if it is swapped, and it can\'t be trusted.</string>
 </resources>
