@@ -207,15 +207,6 @@
     <string name="notes_collect_confirm_body">Wenn du das einschaltest, werden deine Zaps anderer Mints jetzt dorthin verschoben:</string>
     <string name="money_change_body">Wähle die neue Haupt-Mint. Rechnungen werden dort erstellt, und „Alles verschieben“ sammelt deine Zaps dort. Deine Adressen bleiben, wo sie sind.</string>
     <string name="claim_melt_not_a_note">%1$s antwortet darauf nicht wie auf einen Zap; vielleicht ist es ein Auszahlungslink anderer Art. Er lässt sich stattdessen über Lightning empfangen, gegen eine Gebühr.</string>
-    <string name="received_not_a_note">Seine Mint hat nicht wie für einen Zap geantwortet, deshalb versucht deine Wallet es nicht mehr.</string>
-    <plurals name="received_not_a_note_hours">
-        <item quantity="one">Seine Mint hat %d Stunde lang nicht wie für einen Zap geantwortet, deshalb versucht deine Wallet es nicht mehr.</item>
-        <item quantity="other">Seine Mint hat %d Stunden lang nicht wie für einen Zap geantwortet, deshalb versucht deine Wallet es nicht mehr.</item>
-    </plurals>
-    <plurals name="received_not_a_note_days">
-        <item quantity="one">Seine Mint hat %d Tag lang nicht wie für einen Zap geantwortet, deshalb versucht deine Wallet es nicht mehr.</item>
-        <item quantity="other">Seine Mint hat %d Tage lang nicht wie für einen Zap geantwortet, deshalb versucht deine Wallet es nicht mehr.</item>
-    </plurals>
     <string name="received_lightning_not_a_note">Seine Mint antwortet darauf nicht wie auf einen Zap, daher lässt er sich nur über Lightning empfangen, gegen eine Gebühr.</string>
     <string name="onboarding_error_mint_without_key">Diese Mint veröffentlicht keinen Signaturschlüssel, daher kann deine Wallet nicht prüfen, ob ihre Zaps echt sind, oder bemerken, wenn sie ausgetauscht wird. Wähle eine andere Mint.</string>
 </resources>

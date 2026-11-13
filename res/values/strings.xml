@@ -211,15 +211,6 @@
     <string name="notes_collect_confirm_body">Turning this on moves your zaps on other mints there now:</string>
     <string name="money_change_body">Pick the new home mint. Invoices are made there, and moving everything to it collects your zaps there. Your addresses stay where they are.</string>
     <string name="claim_melt_not_a_note">%1$s doesn\'t answer for this as a zap: it may be a withdraw link of another kind. It can be received over Lightning instead, for a fee.</string>
-    <string name="received_not_a_note">Its mint didn\'t answer as it does for a zap, so your wallet stopped trying.</string>
-    <plurals name="received_not_a_note_hours">
-        <item quantity="one">For %d hour its mint didn\'t answer as it does for a zap, so your wallet stopped trying.</item>
-        <item quantity="other">For %d hours its mint didn\'t answer as it does for a zap, so your wallet stopped trying.</item>
-    </plurals>
-    <plurals name="received_not_a_note_days">
-        <item quantity="one">For %d day its mint didn\'t answer as it does for a zap, so your wallet stopped trying.</item>
-        <item quantity="other">For %d days its mint didn\'t answer as it does for a zap, so your wallet stopped trying.</item>
-    </plurals>
     <string name="received_lightning_not_a_note">Its mint doesn\'t answer for it as a zap, so it can only be received over Lightning, for a fee.</string>
     <string name="onboarding_error_mint_without_key">This mint publishes no signing key, so your wallet can\'t check that its zaps are real or notice if it is swapped. Choose another mint.</string>
 </resources>
