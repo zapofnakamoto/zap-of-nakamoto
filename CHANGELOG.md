@@ -9,6 +9,13 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
+### Added
+
+- With the next White Wallet: mints that publish no signing key are never added, and a zap from one is received into
+  your home mint over Lightning once you agree to the fee (`mints.withoutSigningKey.setting=false`, so the setting
+  that would allow such mints is hidden; `mints.withoutSigningKey.home=false`). The new messages about such zaps,
+  and about links a mint doesn't answer for as a zap, say "zap".
+
 ### Changed
 
 - The success screens say "Zapped!" and "You got zapped!" again (German "Gezappt!" and "Du wurdest gezappt!"), where
