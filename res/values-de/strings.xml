@@ -7,7 +7,7 @@
     <string name="onboarding_tagline">Einfach zappen.</string>
     <string name="onboarding_username">Wähle deinen Namen</string>
     <string name="claimed_body">Das ist deine Lightning-Adresse. Damit kann dir jeder Bitcoin schicken, auch wenn dein Handy aus ist.</string>
-    <string name="home_empty">Noch nichts hier. Teile deine Adresse, um deine ersten Bitcoin zu empfangen.</string>
+    <string name="home_empty">Noch keine Zahlungen. Bitcoin, die du empfängst und sendest, erscheinen hier.</string>
     <string name="home_wallet_empty">Noch nichts hier. Teile deine Adresse, um deine ersten Bitcoin zu bekommen, oder löse einen Zap ein.</string>
 
     <!-- Zaps Ton (design/DESIGN.md): kurz, freundlich, ohne Protokollwörter -->
@@ -128,7 +128,7 @@
     <string name="notes_state_unknown_detail">Die Mint sagt, sie kennt diesen Zap nicht, daher ist er nicht in deinem Guthaben. Deine Wallet behält ihn und fragt die Mint von selbst wieder; sobald die Mint ihn wieder kennt, ist er zurück in deinem Guthaben.</string>
     <string name="notes_waiting_total">%1$s verschickt, noch nicht eingelöst</string>
     <string name="notes_shared_title">Verschickt, noch nicht eingelöst</string>
-    <string name="notes_empty">Noch keine Zaps. Zaps erscheinen hier, sobald du Bitcoin empfängst.</string>
+    <string name="notes_empty">Noch keine Zaps. Bitcoin, die du empfängst, werden als Zaps gehalten und erscheinen hier.</string>
     <string name="notes_strategy_warning">„%1$s“ ist an und ordnet deine Zaps bei jedem Aktualisieren neu.</string>
     <string name="notes_combined">Zu einem Zap über %1$s zusammengelegt.</string>
     <string name="notes_split_title">Zap teilen</string>

@@ -9,6 +9,11 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
+### Changed
+
+- Empty screens say what shows up there and offer the way forward: the empty history and zaps lead to Receive, a
+  screen without a mint to adding one.
+
 ### Removed
 
 - The older version of the LNURLcash protocol (LUD-25/26 draft `2f17578`) and the keys zaps used before 0.5.0: since

@@ -11,7 +11,7 @@
     <string name="onboarding_tagline">Just zap it.</string>
     <string name="onboarding_username">Pick your name</string>
     <string name="claimed_body">This is your Lightning address. Anyone can send you bitcoin with it, even while your phone is off.</string>
-    <string name="home_empty">Nothing here yet. Share your address to receive your first bitcoin.</string>
+    <string name="home_empty">No payments yet. Bitcoin you receive and send shows up here.</string>
     <string name="home_wallet_empty">Nothing here yet. Share your address to get your first bitcoin, or claim a zap.</string>
 
     <!-- Zap's voice (design/DESIGN.md): short, warm, no protocol words -->
@@ -132,7 +132,7 @@
     <string name="notes_state_unknown_detail">The mint says it doesn\'t know this zap, so it isn\'t in your balance. Your wallet keeps it and asks the mint again by itself; once the mint knows it again, it\'s back in your balance.</string>
     <string name="notes_waiting_total">%1$s shared, not claimed yet</string>
     <string name="notes_shared_title">Shared, not claimed yet</string>
-    <string name="notes_empty">No zaps yet. Zaps appear here once you receive bitcoin.</string>
+    <string name="notes_empty">No zaps yet. Bitcoin you receive is held as zaps, and they show up here.</string>
     <string name="notes_strategy_warning">\"%1$s\" is on: it rearranges your zaps again on every refresh.</string>
     <string name="notes_combined">Combined into one zap of %1$s.</string>
     <string name="notes_split_title">Split zap</string>
