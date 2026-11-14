@@ -23,7 +23,7 @@ app for experts and power users would be a different brand.)
 | Zaps kept as they arrive; one zap per mint on request | `notes.strategies=single,manual`, `notes.strategy.default=manual` ("Keep only one zap" also renews the address's zaps) |
 | Notes from elsewhere come home by themselves | `notes.collect.atHomeMint=always` (fee cap 2 %) |
 | Told what the wallet did by itself | `notes.maintenance.notices=always`: "Combined 2 zaps into one of ₿63. You got ₿1 in fees back.", no switch |
-| Zaps in sight, nothing to manage by hand | `notes.view=tab`: the Zaps tab lists them one by one, in Zap's look, and the wallet looks after them by itself. Mints are there to look at and change (`mints.visible=true`), never needed |
+| Zaps in sight, nothing that needs managing | `notes.view=tab`: the Zaps tab lists them one by one, in Zap's look; sharing, splitting or combining them there is up to the user, as the wallet looks after them by itself. Mints are there to look at and change (`mints.visible=true`), never needed |
 | A plain history | `history.filter=none`: no filters, and nothing about the wallet's own upkeep of the zaps |
 | One unit, no choice | `amounts.unit.default=bitcoin` (₿1,000; texts say "bitcoin", never "BTC" or "sats"), `amounts.unit.changeable=false` (no Amounts page) |
 | No developer tools in sight | `developer.options=hidden`: never in release builds (debug builds unlock them by tapping the version in About seven times) |
@@ -46,7 +46,7 @@ and Settings with their recovery phrase, address, their mint (and other mints), 
 | `code/` | `ZapDesign`: the living mark (it reacts to the wallet's status and payments), the celebrations on the success screens, the wordmark, spark pill buttons |
 | `dev/mark.py` | writes the mark's drawables above; run it after changing the mark |
 | `design/` | the brand design: `DESIGN.md` (palette, type, the mark, its states and motion, voice), the reference SVGs and their generator (`assets/`), the interactive prototype (`prototype/zap-states.html`, open it in a browser), the earlier rounds (`explorations/`) and the GitHub social preview (`social/`, rendered by `render.sh`) |
-| `white-wallet.version` | the White Wallet release this app is built from (a tag, e.g. `v0.1.0`) |
+| `white-wallet.version` | the White Wallet release this app is built from (a tag, e.g. `v0.1.0`), or `main` between releases (see below) |
 | `zapstore.yaml`, `zapstore/` | the store listing, its icon (`icon.png`) and screenshots; `profile.png` is the publisher's Nostr profile picture |
 | `CHANGELOG.md` | release notes, one section per version; Zapstore shows the released one |
 

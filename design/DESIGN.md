@@ -22,9 +22,10 @@ bitcoin for the first time. The app in this repository applies it through White 
 
 1. **Zap is the focus.** The name, the mark and the motion are all built around one zap.
 2. **Safe and calm.** A first-timer should feel looked after, not excited or rushed.
-3. **Bold and graphic.** Use flat shapes, strong contrast, a single accent colour and no gradients.
-4. **Friendly, not cute.** The character shows how things are going with its face, but it
-   doesn't perform. No hops, winks or nods.
+3. **Bold and graphic.** Use flat shapes, strong contrast, a single accent colour (spark, with gold as its deeper
+   shade) and no gradients.
+4. **Friendly and lively.** The character shows how things are going with its face, and it may hop, wink or nod
+   to show it.
 5. **Words over jargon.** Say "bitcoin", never "BTC" or "sats". The custodian is
    "a mint", as in White Wallet, and a note is "a zap".
 
@@ -65,7 +66,7 @@ lettering; it was dropped.
 | `spark` | `#FFD23F` | The brand colour: app icon, key surfaces, the mark on dark |
 | `ink` | `#16182B` | The mark, text, dark surfaces |
 | `paper` | `#FFF6D6` | Warm light background |
-| `gold` | `#F2B705` | The second accent (`tertiary`): the cover over a zap's code, the celebration's bolts |
+| `gold` | `#F2B705` | Spark's deeper shade (`tertiary`): the cover over a zap's code, the celebration's bolts |
 
 Spark is never used for text on light backgrounds because the contrast is too low. Use ink on spark.
 
@@ -116,7 +117,8 @@ limited to the bolt's position, squash and one flash ring. Nothing gets added on
 3. After 260 ms the bolt squashes and rises out of the top: rest → squash at 35 % → `translateY(-70%)`, opacity 0.
    650 ms, `cubic-bezier(.5, 0, .7, .4)`.
 4. After a 220 ms pause it fades back in place: scale .94 → 1, 420 ms ease-out. The face settles to Rest.
-   So sending stays calmer than receiving; only a success screen or a claimed zap ends it Happy.
+   On the wallet, sending stays calmer than receiving; the success screen celebrates both alike (Celebration),
+   and a claimed zap's card ends it Happy.
 
 **Oops:** the face becomes Oops, then shakes on the x axis (−6 %, 6 %, −4 %, 0) over 420 ms.
 
