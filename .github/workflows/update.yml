@@ -35,6 +35,13 @@ jobs:
           GH_TOKEN: ${{ steps.token.outputs.token }}
         run: |
           pinned="$(tr -d '[:space:]' < white-wallet.version)"
+          # Pinned to White Wallet's main between releases (README.md): only a release after the one the app's last
+          # release was built from ends it.
+          if [[ "$pinned" != v* ]]; then
+            released="v$(grep -E '^app.version.name=' brand.properties | cut -d= -f2- | tr -d ' ')"
+            git fetch -q --depth=1 origin tag "$released"
+            pinned="$(git show "$released:white-wallet.version" | tr -d '[:space:]')"
+          fi
           tag="$(gh release view -R zapofnakamoto/white-wallet --json tagName --jq .tagName)"
           if [[ "$tag" == "$pinned" || "$(printf '%s\n%s\n' "$pinned" "$tag" | sort -V | tail -1)" != "$tag" ]]; then
             echo "Up to date at $pinned (latest release: $tag)."
@@ -67,9 +74,16 @@ jobs:
           echo "$TAG" > white-wallet.version
           git commit -qam "chore(deps): white-wallet $TAG"
           sed -i -E "s/^app.version.code=.*/app.version.code=$code/; s/^app.version.name=.*/app.version.name=$name/" brand.properties
-          { printf '## [%s]\n\nOn White Wallet %s.\n\n' "$name" "$TAG"; cat "$RUNNER_TEMP/notes.md"; printf '\n\n'; } > "$RUNNER_TEMP/section.md"
-          awk -v f="$RUNNER_TEMP/section.md" '!done && /^## \[/ { while ((getline l < f) > 0) print l; done = 1 } { print }' \
-            CHANGELOG.md > "$RUNNER_TEMP/CHANGELOG.md"
+          # The new section takes over what ## [Unreleased] holds, White Wallet's release notes after it; Unreleased
+          # stays, empty.
+          printf '## [%s]\n\nOn White Wallet %s.\n' "$name" "$TAG" > "$RUNNER_TEMP/head.md"
+          awk -v head="$RUNNER_TEMP/head.md" -v notes="$RUNNER_TEMP/notes.md" '
+            function put(f,  l) { while ((getline l < f) > 0) print l; close(f) }
+            state == 1 && /^## \[/ { put(notes); print ""; state = 2 }
+            { print }
+            state == 0 && /^## \[Unreleased\]/ { print ""; put(head); state = 1 }
+            END { if (state == 1) put(notes); if (!state) { print "CHANGELOG.md has no ## [Unreleased]" > "/dev/stderr"; exit 1 } }
+          ' CHANGELOG.md > "$RUNNER_TEMP/CHANGELOG.md"
           mv "$RUNNER_TEMP/CHANGELOG.md" CHANGELOG.md
 
           git commit -qam "chore(release): v$name"
