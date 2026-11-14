@@ -16,20 +16,21 @@ app for experts and power users would be a different brand.)
 
 | Rule | How (brand.properties) |
 |---|---|
-| One service, chosen for the user, another if they want | `defaultServiceHost=mint.lnurlcash.com` is preselected at setup and restore; `allowServiceChange=true` lets users pick a custom one there instead (no suggestions) |
-| One trusted service | the home mint, whichever it is, is trusted by default; Settings → Services (`mints.visible=true`) shows it, and others can be trusted by hand |
-| One account | `accounts.max=1`: no switcher, no "Add account" |
+| One mint, chosen for the user, another if they want | `mints.suggestions=mint.lnurlcash.com` is preselected at setup and restore; `mints.custom=true` lets users type another one there ("Custom…"), and `mints.changeable=true` lets them change it later |
+| One trusted mint | the home mint, whichever it is, is trusted by default; Settings → Mints (`mints.visible=true`) shows it, and others can be trusted by hand |
+| One account | `wallets.max=1`, `accounts.max=1`: one recovery phrase with one account, no switcher, no "Add account" |
 | One Lightning address, asked for at setup | `addresses.lightning=optional`, `addresses.max=1` |
 | Zaps kept as they arrive; one zap per mint on request | `notes.strategies=single,manual`, `notes.strategy.default=manual` ("Keep only one zap" also renews the address's zaps) |
 | Notes from elsewhere come home by themselves | `notes.collect.atHomeMint=always` (fee cap 2 %) |
 | Told what the wallet did by itself | `notes.maintenance.notices=always`: "Combined 2 zaps into one of ₿63. You got ₿1 in fees back.", no switch |
-| Nothing to manage by hand | `notes.view=hidden` (no Notes tab or page); Note settings disappear by themselves, as there is nothing to choose. Services are there to look at and change (`mints.visible=true`), never needed |
+| Zaps in sight, nothing to manage by hand | `notes.view=tab`: the Zaps tab lists them one by one, in Zap's look, and the wallet looks after them by itself. Mints are there to look at and change (`mints.visible=true`), never needed |
+| A plain history | `history.filter=none`: no filters, and nothing about the wallet's own upkeep of the zaps |
 | One unit, no choice | `amounts.unit.default=bitcoin` (₿1,000; texts say "bitcoin", never "BTC" or "sats"), `amounts.unit.changeable=false` (no Amounts page) |
 | No developer tools in sight | `developer.options=hidden`: never in release builds (debug builds unlock them by tapping the version in About seven times) |
-| Plain words | the custodian is "a Lightning service" (`res/values*/strings.xml`), slogan "Just zap it." |
+| Plain words | the custodian is "a mint", as in White Wallet, and notes are "zaps" (`res/values*/strings.xml`); slogan "Just zap it." |
 
-What users see: setup (pick a name), the wallet (balance, Send, Receive), History, and Settings with their recovery
-phrase, address, their service (and other services), security and About.
+What users see: setup (the mint preselected, then pick a name), the wallet (balance, Send, Receive), Zaps, History,
+and Settings with their recovery phrase, address, their mint (and other mints), security and About.
 
 ## Files
 
@@ -46,7 +47,7 @@ phrase, address, their service (and other services), security and About.
 | `dev/mark.py` | writes the mark's drawables above; run it after changing the mark |
 | `design/` | the brand design: `DESIGN.md` (palette, type, the mark, its states and motion, voice), the reference SVGs and their generator (`assets/`), the interactive prototype (`prototype/zap-states.html`, open it in a browser) and the earlier rounds (`explorations/`) |
 | `white-wallet.version` | the White Wallet release this app is built from (a tag, e.g. `v0.1.0`) |
-| `zapstore.yaml`, `zapstore/` | the store listing and its screenshots |
+| `zapstore.yaml`, `zapstore/` | the store listing, its icon (`icon.png`) and screenshots; `profile.png` is the publisher's Nostr profile picture |
 | `CHANGELOG.md` | release notes, one section per version; Zapstore shows the released one |
 
 ## Run it
@@ -113,12 +114,9 @@ Everything that ships is decided here; CI only carries it out.
    - secrets `ZAP_KEYSTORE_BASE64` (`base64 -w0 zap-release.jks`), `ZAP_KEYSTORE_PASSWORD`, `ZAP_KEY_ALIAS`,
      `ZAP_KEY_PASSWORD`;
    - variable `ZAP_CERT_SHA256` (the fingerprint, colons optional).
-
-   Repository variable `UPDATE_APP_ID`, with the secret
-   `UPDATE_APP_KEY`: a GitHub App allowed to write contents and pull requests here, so the update pull requests run
-   CI (pull requests opened with the workflow's own token don't).
-
-   Until then nothing fails: `update.yml` skips without `UPDATE_APP_ID`.
+4. **The update pull requests**: the repository variable `UPDATE_APP_ID` and the secret `UPDATE_APP_KEY`, for a GitHub
+   App allowed to write contents and pull requests here, so the update pull requests run CI (pull requests opened with
+   the workflow's own token don't). Until then nothing fails: `update.yml` skips without `UPDATE_APP_ID`.
 
 ### First release
 
