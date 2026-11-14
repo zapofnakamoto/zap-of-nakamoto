@@ -13,6 +13,8 @@ only to try it out, with tiny amounts you could lose.
 
 - Empty screens say what shows up there and offer the way forward: the empty history and zaps lead to Receive, a
   screen without a mint to adding one.
+- Being offline is told as it happens, before you try what needs a connection, and the wallet updates by itself
+  once you're back. A zap you shared and open again offline says you're offline, not that the mint isn't answering.
 
 ### Removed
 
