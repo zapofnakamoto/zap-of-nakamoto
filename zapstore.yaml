@@ -35,4 +35,7 @@ images:
   - ./zapstore/2-wallet.png
   - ./zapstore/3-receive.png
   - ./zapstore/4-send.png
+  - ./zapstore/5-zap.png
+  - ./zapstore/6-history.png
+  - ./zapstore/7-settings.png
 metadata_sources: [github]
