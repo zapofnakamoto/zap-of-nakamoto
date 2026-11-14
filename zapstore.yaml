@@ -29,7 +29,7 @@ tags:
   - lnurlcash
 license: MIT
 website: https://github.com/zapofnakamoto/zap-of-nakamoto
-icon: ./zapstore/profile.png
+icon: ./zapstore/icon.png
 images:
   - ./zapstore/1-setup.png
   - ./zapstore/2-wallet.png
