@@ -1,6 +1,6 @@
 # Zap of Nakamoto — Design
 
-Status: **draft, round 11** · Last updated 2026-10-26
+Status: **draft, round 14** · Last updated 2026-11-14
 
 Brand and character design for **Zap of Nakamoto**, a mobile wallet for people who use
 bitcoin for the first time. The app in this repository applies it through White Wallet's design API:
@@ -26,7 +26,7 @@ bitcoin for the first time. The app in this repository applies it through White 
 4. **Friendly, not cute.** The character shows how things are going with its face, but it
    doesn't perform. No hops, winks or nods.
 5. **Words over jargon.** Say "bitcoin", never "BTC" or "sats". The custodian is
-   "a Lightning service".
+   "a mint", as in White Wallet, and a note is "a zap".
 
 ## The mark: Zap
 
@@ -50,7 +50,7 @@ Files: [`assets/mark-ink.svg`](assets/mark-ink.svg), [`assets/mark-spark.svg`](a
 - Use one colour per mark: ink on light or spark backgrounds, spark on ink.
 - Never draw the face in a second colour; it is always a cut-out.
 - Never outline, add a gradient or add a drop shadow.
-- Proposed, not yet tested: the minimum size is 24 px. Below that, use the bolt without the face.
+- The minimum size is 24 dp. Below that, use the bolt without the face (as on the Zaps tab's tiles).
 
 ## Wordmark
 
@@ -65,7 +65,7 @@ lettering; it was dropped.
 | `spark` | `#FFD23F` | The brand colour: app icon, key surfaces, the mark on dark |
 | `ink` | `#16182B` | The mark, text, dark surfaces |
 | `paper` | `#FFF6D6` | Warm light background |
-| `gold` | `#F2B705` | Pressed and active states on spark |
+| `gold` | `#F2B705` | The second accent (`tertiary`): the cover over a zap's code, the celebration's bolts |
 
 Spark is never used for text on light backgrounds because the contrast is too low. Use ink on spark.
 
@@ -83,7 +83,7 @@ morphs between its 6 numbers, so every transition is smooth.
 |---|---|---|---|---|
 | **Rest** | Has a balance, idle | dots | smile `44,55.5,51,61.5,58,53.5` | Floats and glances around while idle |
 | **Curious** | Empty wallet (₿0) | dots | small `47.5,56.5,51,59,54.5,56` | Head tilt −9° |
-| **Waiting** | Receive screen open | dots looking up-right (+2, −1.5) | focus `46,56,51,58.5,56,55.5` | Slow breathing, scale 1.04, 1.4 s |
+| **Waiting** | Receive screen open, or a zap you handed out waits to be claimed | dots looking up-right (+2, −1.5) | focus `46,56,51,58.5,56,55.5` | Slow breathing, scale 1.04, 1.4 s |
 | **Focus** | Payment going out | dots | focus | — |
 | **Working** | The loading screen: the wallet updates, checks the zaps or looks after them | dots | focus | The ring pulses, the bolt bobs |
 | **Happy** | Payment arrived | arcs `M36.5 48.5Q41 43 45.5 48.5` and `M53.5 46.5Q58 41 62.5 46.5` | big `42.5,54,51,66,60,52` | — |
@@ -116,13 +116,13 @@ limited to the bolt's position, squash and one flash ring. Nothing gets added on
 3. After 260 ms the bolt squashes and rises out of the top: rest → squash at 35 % → `translateY(-70%)`, opacity 0.
    650 ms, `cubic-bezier(.5, 0, .7, .4)`.
 4. After a 220 ms pause it fades back in place: scale .94 → 1, 420 ms ease-out. The face settles to Rest.
-   Send never ends on Happy, so sending stays calmer than receiving.
+   So sending stays calmer than receiving; only a success screen or a claimed zap ends it Happy.
 
-**Oops:** the face becomes Worry, then shakes on the x axis (−6 %, 6 %, −4 %, 0) over 420 ms.
+**Oops:** the face becomes Oops, then shakes on the x axis (−6 %, 6 %, −4 %, 0) over 420 ms.
 
 **Empty:** the head tilts −9° over 400 ms and the face shows the small smile. On the wallet the mark grows from
-88 to 128 dp over the same 400 ms, above "Nothing here yet. Share your address to get your first zap." under the
-balance; it shrinks back once money arrives.
+88 to 128 dp over the same 400 ms, above the hint on how to get the first bitcoin; it shrinks back once money
+arrives.
 
 **Working** (while the loading screen is up): the face becomes Focus over 200 ms. Then, again and again, the
 receive's flash ring goes out (scale .7 → 1.35, opacity .8 → 0, 1.2 s ease-out) while the bolt bobs up 4 % and back
@@ -131,11 +131,15 @@ with it. It stops when the work is done and the balance shows again.
 **Idle:** while nothing happens, the bolt floats up 3 % and back down, 4 s a round, ease-in-out sine. It eases into
 and out of the float, so it never jumps when something else starts.
 
+**Celebration** (the success screens): bigger than Receive and Send, and the same on both. The mark (150 dp) ends
+Happy and hops twice. Twelve little bolts in spark, gold and the mark's colour burst out all around as it lands from a
+receive, or shoot up in a fan after it as it rises out on a send.
+
 **Reduced motion:** all movement is skipped and only the face changes, instantly.
 
-Implementation: Web Animations API on nested groups `.tilt > .mv` with
-`transform-box: fill-box`. The mouth is tweened with `requestAnimationFrame` using ease-out cubic.
-See [`prototype/zap-states.html`](prototype/zap-states.html).
+The app draws all this in Compose (`code/`, `ZapMark.kt` and `ZapDesign.kt`). The prototype
+([`prototype/zap-states.html`](prototype/zap-states.html)) uses the Web Animations API on nested groups
+`.tilt > .mv` with `transform-box: fill-box`, and tweens the mouth with `requestAnimationFrame` (ease-out cubic).
 
 ## The zap
 
@@ -180,7 +184,7 @@ and the bolt is muted. Handed-out zaps sit under their own heading on a turned-o
 
 ## Voice
 
-- Short and warm, written in second person. "Waiting for the payment…", "Your first bitcoin!", "Zapped!", "You got zapped!"
+- Short and warm, written in second person. "Waiting for the payment…", "Zapped!", "You got zapped!"
 - Amounts are shown as `₿1,000`.
 - **Slogan:** **"Just zap it."** (German: "Einfach zappen.")
 
@@ -215,7 +219,7 @@ Published copy: https://claude.ai/artifact/M3Xwh5fyDxxXe7Fn4Cvm7A
 | 10 | Send moves hop, wink, press, watch; empty states | Send moves too cute; **Curious** chosen for empty |
 | 11 | Send = receive backwards | Current; awaiting feedback |
 | 12 | The zap you hand over: spark card, ticket, bolt frame ([`r12-zap-note.html`](explorations/r12-zap-note.html), https://claude.ai/artifact/QW19svj7NfsVxMmiuU58Jm) | **Spark card** chosen, to refine |
-| 13 | Spark card refined: its own state, "Scan to claim", covered code, same card on Claim ([`r13-spark-card.html`](explorations/r13-spark-card.html), https://claude.ai/artifact/PtsQxM7orGN7ut8BR9GFYF) | **Chosen**: one mark, on the card; the state line kept; Zap draws the cover; the claim motion. Built on `white-wallet-next` |
-| 14 | The Zaps tab: rows as small spark tiles, the mark above the total and on an empty tab | Built straight in code on `white-wallet-next`, without an exploration page ("The zap") |
+| 13 | Spark card refined: its own state, "Scan to claim", covered code, same card on Claim ([`r13-spark-card.html`](explorations/r13-spark-card.html), https://claude.ai/artifact/PtsQxM7orGN7ut8BR9GFYF) | **Chosen**: one mark, on the card; the state line kept; Zap draws the cover; the claim motion. Built |
+| 14 | The Zaps tab: rows as small spark tiles, the mark above the total and on an empty tab | Built straight in code, without an exploration page ("The zap") |
 
 Earlier rounds are in [`explorations/`](explorations), named by round number.

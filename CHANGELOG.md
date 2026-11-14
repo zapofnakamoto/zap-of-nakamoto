@@ -123,7 +123,8 @@ On White Wallet v0.6.3. From here on the version is the app's own (semver), no l
   trust it.
 - A Zaps tab next to Wallet and History lists your zaps one by one, each on a small spark tile (dashed while it is
   being paid), the ones you handed out under their own heading, on a turned-over tile, ink with a spark bolt, saying
-  they wait to be claimed, and the mark above the total, waiting while a zap is out, curious when there are none. Tap one for its card and what you can do with it. In English and German.
+  they wait to be claimed, and the mark above the total, waiting while a zap is out, curious when there are none. Tap
+  one for its card and what you can do with it. In English and German.
 - The wallet says what it did to your zaps by itself, and what that did to your balance ("Combined 2 zaps into one
   of ₿63. You got ₿1 in fees back.").
 - While the wallet works on your zaps, the mark takes the place of the balance and says what it does ("Checking zap
@@ -147,7 +148,6 @@ On White Wallet v0.6.3. From here on the version is the app's own (semver), no l
   tap, behind a gold cover, and is covered again when you leave the app. In English and German.
 - While nothing happens, the mark on the wallet floats gently up and down and now and then glances aside, and
   sometimes blinks twice (not with reduced motion).
-
 - History has no filters any more: the "Note maintenance" chip is gone, and so are the entries it showed, which
   never changed your balance.
 - The beta notice at setup and in About says what beta means here: until 1.0.0, updates may change how the app

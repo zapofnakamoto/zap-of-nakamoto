@@ -45,7 +45,7 @@ and Settings with their recovery phrase, address, their mint (and other mints), 
 | `res/values*/strings.xml` | slogan, first-run texts, the brand term and Zap's voice, in English and German |
 | `code/` | `ZapDesign`: the living mark (it reacts to the wallet's status and payments), the celebrations on the success screens, the wordmark, spark pill buttons |
 | `dev/mark.py` | writes the mark's drawables above; run it after changing the mark |
-| `design/` | the brand design: `DESIGN.md` (palette, type, the mark, its states and motion, voice), the reference SVGs and their generator (`assets/`), the interactive prototype (`prototype/zap-states.html`, open it in a browser) and the earlier rounds (`explorations/`) |
+| `design/` | the brand design: `DESIGN.md` (palette, type, the mark, its states and motion, voice), the reference SVGs and their generator (`assets/`), the interactive prototype (`prototype/zap-states.html`, open it in a browser), the earlier rounds (`explorations/`) and the GitHub social preview (`social/`, rendered by `render.sh`) |
 | `white-wallet.version` | the White Wallet release this app is built from (a tag, e.g. `v0.1.0`) |
 | `zapstore.yaml`, `zapstore/` | the store listing, its icon (`icon.png`) and screenshots; `profile.png` is the publisher's Nostr profile picture |
 | `CHANGELOG.md` | release notes, one section per version; Zapstore shows the released one |
