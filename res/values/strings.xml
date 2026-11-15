@@ -95,7 +95,7 @@
     <string name="about_body">A Lightning wallet that keeps your bitcoin with a mint you choose. Your recovery phrase stays on this device.</string>
     <string name="delete_what">This removes this account from this phone: its recovery phrase, its bitcoin and its settings. Other accounts are not affected.</string>
     <string name="mints_intro">Trust a mint by its signing key: zaps from trusted mints are marked with a check. If a mint ever signs with a different key, it is no longer trusted.</string>
-    <string name="mint_key_changed">The signing key of %1$s doesn\'t match the one your wallet knows. Nothing is sent or received there until it matches again, or you accept a new key. Your bitcoin there is unchanged.</string>
+    <string name="mint_key_changed">The signing key of %1$s doesn\'t match the one your wallet knows. Nothing is sent there and no invoice is created there until it matches again, or you accept a new key. Payments to your addresses there wait until then. Your bitcoin there is unchanged.</string>
     <string name="mint_key_accept_body">Only do this if you know why %1$s changed its key, for example because its operator announced it. If someone else is answering in its place, your bitcoin there and anything you send can be lost.</string>
     <string name="addresses_watch_only_hint">Lets another app see the bitcoin paid to this address, but never spend it.</string>
     <string name="mint_invalid">Answers, but can\'t hold bitcoin</string>

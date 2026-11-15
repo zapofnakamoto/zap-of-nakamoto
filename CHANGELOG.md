@@ -9,6 +9,15 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
+### Added
+
+- Sending and receiving on a mint you pick. With bitcoin on more than one mint, tap a mint on Home for Send, Receive
+  and Details; its page has Send and Receive too. Receive says which mint it receives on, Send and "Send as a zap"
+  which mint pays, each with "Change". The choice is for that one payment: left alone, Zap still receives on your
+  home mint and pays as before.
+- A mint that doesn't answer is told before you find out by paying: Home shows a card naming it and what that stops,
+  with "Check again", and its row says "Not answering"; several mints share one card. Payments go around it.
+
 ### Changed
 
 - Empty screens say what shows up there and offer the way forward: the empty history and zaps lead to Receive, a
@@ -22,6 +31,13 @@ only to try it out, with tiny amounts you could lose.
   0.5.0 they moved to the new keys by themselves, and this version no longer finds or moves them. If bitcoin is
   missing, open your recovery phrase once in 0.6.0, then use "Scan for zaps". Updated users see this once under
   "What's new", in Zap's words and version numbers.
+
+### Fixed
+
+- A mint whose signing key no longer matches the one your wallet knows could still make invoices, so a payment
+  became bitcoin you couldn't spend there. Zap now checks the key when Receive opens and says so before you try,
+  with the way to the mint's details. Payments pass over such a mint and use another one. Home knows from the start:
+  the bitcoin there stays in your balance, and a line under it says how much can't be spent right now.
 
 ## [0.6.0]
 
