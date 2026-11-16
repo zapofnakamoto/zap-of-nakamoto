@@ -84,6 +84,7 @@
         <item quantity="one">Show zap</item>
         <item quantity="other">Show zaps</item>
     </plurals>
+    <string name="home_unknown_help_late">If the mint still doesn\'t know them, ask its operator, or archive them under Zaps.</string>
     <plurals name="notice_unknown_back">
         <item quantity="one">A zap is back in your balance: the mint knows it again.</item>
         <item quantity="other">%1$d zaps are back in your balance: the mint knows them again.</item>
@@ -133,6 +134,18 @@
         <item quantity="other">The mint doesn\'t know %1$d zaps. They\'re set aside, out of your balance, and your wallet asks again by itself.</item>
     </plurals>
     <string name="notes_state_unknown_detail">The mint says it doesn\'t know this zap, so it isn\'t in your balance. Your wallet keeps it and asks the mint again by itself; once the mint knows it again, it\'s back in your balance.</string>
+    <plurals name="notes_archived_notes">
+        <item quantity="one">%d zap its mint doesn\'t know</item>
+        <item quantity="other">%d zaps their mint doesn\'t know</item>
+    </plurals>
+    <plurals name="notes_archived_done">
+        <item quantity="one">Moved %d zap to the archive.</item>
+        <item quantity="other">Moved %d zaps to the archive.</item>
+    </plurals>
+    <string name="archive_notes_title">Zaps</string>
+    <string name="archive_notes_hint">Their mint doesn\'t know these zaps. Your wallet still asks about them now and then; once the mint knows one again, it\'s back in your balance.</string>
+    <string name="archive_note_remove_title">Remove this zap for good?</string>
+    <string name="archive_note_remove_body">Its mint doesn\'t know it now. If the mint ever knows it again, “Scan for zaps” finds it with your recovery phrase.</string>
     <string name="notes_waiting_total">%1$s shared, not claimed yet</string>
     <string name="notes_shared_title">Shared, not claimed yet</string>
     <string name="notes_empty">No zaps yet. Bitcoin you receive is held as zaps, and they show up here.</string>

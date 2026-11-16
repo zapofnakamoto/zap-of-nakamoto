@@ -17,6 +17,10 @@ only to try it out, with tiny amounts you could lose.
   home mint and pays as before.
 - A mint that doesn't answer is told before you find out by paying: Home shows a card naming it and what that stops,
   with "Check again", and its row says "Not answering"; several mints share one card. Payments go around it.
+- Zaps a mint doesn't know can be archived, so Home's warning about them ends: "Archive" on the zap, or on several
+  such zaps selected under Zaps. Archived zaps stay out of your balance and Zap still asks about them once a day; one
+  the mint knows again is back. Zaps → Archive lists them, to check again or remove for good ("Scan for zaps" finds
+  one again should the mint ever know it).
 
 ### Changed
 
