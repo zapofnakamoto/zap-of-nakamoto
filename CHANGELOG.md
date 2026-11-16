@@ -40,6 +40,9 @@ only to try it out, with tiny amounts you could lose.
 
 ### Fixed
 
+- Checking your zaps asked a mint whose signing key no longer matches about them, and its answer that a zap was
+  already in use took it out of your balance, whoever answered in the mint's place. Zap now compares the key first and
+  leaves the zaps on such a mint as they are.
 - "Scan for zaps" stopped with an error when a mint whose signing key changed held one of your zaps. That mint is now
   listed as one the scan didn't get through, and the other mints are scanned.
 - A mint whose signing key no longer matches the one your wallet knows could still make invoices, so a payment
