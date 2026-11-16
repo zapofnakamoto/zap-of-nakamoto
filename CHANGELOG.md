@@ -20,6 +20,12 @@ only to try it out, with tiny amounts you could lose.
 
 ### Changed
 
+- Updating is faster: Zap asks your mints at the same time, and each one for several keys at once.
+- "Scan for zaps" also checks the zaps you already hold on each mint, counting them as it goes ("Checking zap 3 of
+  10…"): a zap another phone with your recovery phrase spent leaves your balance. Your recovery phrase is meant for
+  one phone at a time; Zap only finds what another phone did when you scan.
+- A mint whose signing key no longer matches gets none of your wallet's keys while updating; it is asked for its key
+  on each update and used again once it matches.
 - Empty screens say what shows up there and offer the way forward: the empty history and zaps lead to Receive, a
   screen without a mint to adding one.
 - Being offline is told as it happens, before you try what needs a connection, and the wallet updates by itself
@@ -34,6 +40,8 @@ only to try it out, with tiny amounts you could lose.
 
 ### Fixed
 
+- "Scan for zaps" stopped with an error when a mint whose signing key changed held one of your zaps. That mint is now
+  listed as one the scan didn't get through, and the other mints are scanned.
 - A mint whose signing key no longer matches the one your wallet knows could still make invoices, so a payment
   became bitcoin you couldn't spend there. Zap now checks the key when Receive opens and says so before you try,
   with the way to the mint's details. Payments pass over such a mint and use another one. Home knows from the start:
