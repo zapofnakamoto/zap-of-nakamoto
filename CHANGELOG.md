@@ -55,6 +55,21 @@ only to try it out, with tiny amounts you could lose.
   became bitcoin you couldn't spend there. Zap now checks the key when Receive opens and says so before you try,
   with the way to the mint's details. Payments pass over such a mint and use another one. Home knows from the start:
   the bitcoin there stays in your balance, and a line under it says how much can't be spent right now.
+- A payment answered "busy, try again now" could reach the mint twice, so an invoice could be paid twice. Every
+  request now reaches a mint at most once.
+- An error page from something in front of a mint (a proxy's) counted as the mint's answer: a payment could show as
+  failed while the mint was still paying it, a zap could be marked spent, and checking your Lightning address could
+  call it yours. Only the mint's own answer counts now; anything else waits and is settled by asking the mint.
+- A mint's refusal that only mentioned "spent" or "unknown" counted as a fact, so a zap you received could lose its
+  link for good. Only a mint that says a zap is already in use ends it now; Claim says when a mint doesn't accept a
+  zap right now, with the mint's answer.
+- A mint on the next version of the protocol answers 0 for a zap it has just paid out, which looked like a failed
+  payment and brought the zap back into your balance. Zap now reads it as spent or being paid, and settles the
+  payment through the mint.
+- The app could close while adding a mint after a dropped connection.
+- A home mint removed under Settings → Mints came back at once. Removing a mint while Zap was updating did nothing
+  visible; it now shows that it is working and goes through even if you leave the page.
+- Links to a host that only looked like your phone's own address were fetched without encryption.
 
 ## [0.6.0]
 
