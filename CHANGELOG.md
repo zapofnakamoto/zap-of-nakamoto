@@ -9,6 +9,10 @@ only to try it out, with tiny amounts you could lose.
 
 ## [Unreleased]
 
+## [0.7.0]
+
+On White Wallet v0.10.0.
+
 ### Added
 
 - Sending and receiving on a mint you pick. With bitcoin on more than one mint, tap a mint on Home for Send, Receive
